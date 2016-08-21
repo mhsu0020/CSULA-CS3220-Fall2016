@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 1: Introduction</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section>
+					<h2>Who Am I?</h2>
+					<div style="text-align: left; float: left;">
+						<ul>
+							<li>Teaching part-time</li>
+							<li>Full time software engineer (Associate Member of the Technical Staff) at the Aerospace Corporation</li>
+							<li>LinkedIn profile: <a href="www.linkedin.com/pub/michael-hsu/64/a41/a0/en">www.linkedin.com/pub/michael-hsu/64/a41/a0/en</a>
+							<li>email: mhsu0020@gmail.com</li>
+							<li>Office hours: Mondays Wednesdays after class</li>
+						</ul>
+				  </div>
+				  <div style="text-align: right; float: right;">
+						<img src="images/myprofile.png">
+				  </div>
+				</section>
+				<section>
+					<h2>What is CS3220?</h2>
+					<ul>
+						<li>
+							Your first CS class that combines knowledge from multiple classes you took:
+							<ul>
+								<li>HTML/CSS (CS120)</li>
+								<li>General Programming (CS200 series)</li>
+								<li>Databases (CS122)</li>
+							</ul>
+						</li>
+						<li>Goal of the class: <b>Understand the "full-stack" web development process and able to learn new web technologies/paradigms on your own.</b></li>
+						<li>Lecture and Lab Component
+							<ul><li><b>Some labs are due at the end of the lab session</b></li></ul>
+						</li>
+
+					</ul>
+					<img style="float:right" src="images/full-stack.jpg">
+				</section>
+        <section>
+          <h2>Course Webpage</h2>
+          <ul>
+           <li><a href="http://csns.calstatela.edu/site/f16/cs3220-3">http://csns.calstatela.edu/site/f16/cs3220-3</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
