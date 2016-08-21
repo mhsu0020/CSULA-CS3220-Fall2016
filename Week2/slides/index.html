@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CS3220 Lecture 2</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 2: Web Development Introduction</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section>
+          <h2>What happens when you type in an URL in your browser?</h2>
+          <img src="images/trello.gif">
+        </section>
+        <section>
+          <section>
+            <h3>Step 1: The URL</h3>
+            <p>You started your web browser (Chrome, Firefox, etc), and you typed in the web address, or <b>URL</b>, in the address bar.</p>
+            <ul>
+              <li>URL stands for <i>Uniform Resource Locator</i>, commonly known as web address</li>
+              <li>A Reference to a web resource and how to retrieve it</li>
+              <li>Parts of a URL: </li>
+              <img src="images/url.png">
+            </ul>
+            <p>More slide below, use down arrow key to view :)</p>
+          </section>
+          <section>
+            <h3></h3>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
