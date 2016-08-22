@@ -42,7 +42,7 @@
         </section>
         <section>
           <section>
-            <h3>Step 1: The URL</h3>
+            <h3>The URL</h3>
             <p>You started your web browser (Chrome, Firefox, etc), and you typed in the web address, or <b>URL</b>, in the address bar.</p>
             <ul>
               <li>URL stands for <i>Uniform Resource Locator</i>, commonly known as web address</li>
@@ -53,8 +53,72 @@
             <p>More slide below, use down arrow key to view :)</p>
           </section>
           <section>
-            <h3></h3>
+            <h3>The Protocol</h3>
+            <ul>
+              <li>Called a Uniform Resource Identifier (URI) Scheme</li>
+              <li>Describes what protol to retrieve the web resource (how to get your stuff)</li>
+              <li>Common Web Protocols:
+              <ul>
+                <li>http://</li>
+                <li>https:// (encrypted version of http)</li>
+              </ul>
+              </li>
+              <li>Other protocols you will use in this class:
+                <ul>
+                  <li>ssh</li>
+                  <li>ftp/sftp</li>
+                  <li>file</li>
+                </ul>
+              </li>
+            </ul>
           </section>
+          <section>
+            <h3>The Domain Name</h3>
+            <ul>
+              <li>String identifier used to identify <i>ip addresses</i></li>
+              <li>The suffix indicates the <i>top level domain</i>(TLD) it belongs to:
+                <ul>
+                  <li>.org, .com, .edu, .io, etc</li>
+                </ul>
+              </li>
+              <li>An <i>IP address</i> is a unique string that identifies devices over a network to allow communication</li>
+              <li>A <i>Domain Name System</i>(DNS) server translates domain names to IP addresses</li>
+              <li>For example, Google offers public DNS servers at 8.8.8.8 and 8.8.4.4</li>
+              <li>The DNS resolutions are cached on your computer for faster access</li>
+              <li>Domains are public information. Example: <a href="https://whois.icann.org/en/lookup?name=calstatela.edu">https://whois.icann.org/en/lookup?name=calstatela.edu</a></li>
+            </ul>
+          </section>
+          <section>
+            <h3>The Resource Path</h3>
+            <li>Similar to how folders/directories work on your computer</li>
+            <li>Can be pointed to an actual directory or simply a software defined path</li>
+          </section>
+          <section>
+            <h3>The Query Parameter</h3>
+            <li>Extra parameters provided to the web server (more on that later)</li>
+            <li>We will use them more and more as the semester goes on.</li>
+          </section>
+          <section>
+            <h3>Further Reading:</h3>
+            <p><a href="https://developer.mozilla.org/en-US/Learn/Common_questions/What_is_a_URL">https://developer.mozilla.org/en-US/Learn/Common_questions/What_is_a_URL</a></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>The Request and Response</h3>
+            <p>So you typed in the URL in the browser address bar, press enter. The domain is resolved to an IP address, what happens now?</p>
+            <img src="images/request-reponse-comic-03.png">
+          </section>
+          <section>
+            <h3>The Request-Respond Model</h3>
+            <p>Your browser, running on your computer, creates a connection with the server (can be a physical computer or a software), and makes a HTTP request.</p>
+            <p>The server returns a HTTP response. your browser interprets the response renders the response.</p>
+            <img src="images/requestresponse1.jpg">
+          </section>
+        </section>
+        <section>
+          <h3>Very Basic Diagram of the Model We've Learned So Far:</h3>
+          <img src="images/clientserver.png">
         </section>
       </div>
     </div>
