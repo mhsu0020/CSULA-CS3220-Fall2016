@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CS3220 Lecture 2</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 2: Overview of Web Development</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section>
+          <h2>What happens when you type in an URL in your browser?</h2>
+          <img data-src="images/trello.gif">
+        </section>
+        <section>
+          <section>
+            <h3>The URL</h3>
+            <p>You started your web browser (Chrome, Firefox, etc), and you typed in the web address, or <b>URL</b>, in the address bar.</p>
+            <ul>
+              <li>URL stands for <i>Uniform Resource Locator</i>, commonly known as web address</li>
+              <li>A Reference to a web resource and how to retrieve it</li>
+              <li>Parts of a URL: </li>
+              <img data-src="images/url.png">
+            </ul>
+            <p>More slide below, use down arrow key to view :)</p>
+          </section>
+          <section>
+            <h3>The Protocol</h3>
+            <ul>
+              <li>Called a Uniform Resource Identifier (URI) Scheme</li>
+              <li>Describes what protol to retrieve the web resource (how to get your stuff)</li>
+              <li>Common Web Protocols:
+              <ul>
+                <li>http://</li>
+                <li>https:// (encrypted version of http)</li>
+              </ul>
+              </li>
+              <li>Other protocols you will use in this class:
+                <ul>
+                  <li>ssh</li>
+                  <li>ftp/sftp</li>
+                  <li>file</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>The Domain Name</h3>
+            <ul>
+              <li>String identifier used to identify <i>ip addresses</i></li>
+              <li>The suffix indicates the <i>top level domain</i>(TLD) it belongs to:
+                <ul>
+                  <li>.org, .com, .edu, .io, etc</li>
+                </ul>
+              </li>
+              <li>An <i>IP address</i> is a unique string that identifies devices over a network to allow communication</li>
+              <li>A <i>Domain Name System</i>(DNS) server translates domain names to IP addresses</li>
+              <li>For example, Google offers public DNS servers at 8.8.8.8 and 8.8.4.4</li>
+              <li>The DNS resolutions are cached on your computer for faster access</li>
+              <li>Domains are public information. Example: <a href="https://whois.icann.org/en/lookup?name=calstatela.edu">https://whois.icann.org/en/lookup?name=calstatela.edu</a></li>
+            </ul>
+          </section>
+          <section>
+            <h3>The Resource Path</h3>
+            <li>Similar to how folders/directories work on your computer</li>
+            <li>Can be pointed to an actual directory or simply a software defined path</li>
+          </section>
+          <section>
+            <h3>The Query Parameter</h3>
+            <li>Extra parameters provided to the web server (more on that later)</li>
+            <li>We will use them more and more as the semester goes on.</li>
+          </section>
+          <section>
+            <h3>Further Reading:</h3>
+            <p><a href="https://developer.mozilla.org/en-US/Learn/Common_questions/What_is_a_URL">https://developer.mozilla.org/en-US/Learn/Common_questions/What_is_a_URL</a></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>The Request and Response</h3>
+            <p>So you typed in the URL in the browser address bar, press enter. The domain is resolved to an IP address, what happens now?</p>
+            <img data-src="images/request-reponse-comic-03.png">
+          </section>
+          <section>
+            <h3>The Request-Respond Model</h3>
+            <p>Your browser, running on your computer, creates a connection with the server (can be a physical computer or a software), and makes a HTTP request.</p>
+            <p>The server returns a HTTP response. your browser interprets the response renders the response.</p>
+            <img data-src="images/requestresponse1.jpg">
+          </section>
+        </section>
+        <section>
+          <h3>Diagram of what We've Learned So Far:</h3>
+          <img data-src="images/clientserver.png">
+        </section>
+        <section>
+          <section>
+            <h3>What Happens After the Initial Page Load?</h3>
+            <p>After the initial pageload, additional requests are made for the page resources such as CSS/JavaScript and image files.</p>
+            <img data-src="images/timeline.png">
+          </section>
+          <section>
+          <h2>A Basic HTML Document</h2>
+          <pre class="stretch"><code class="hljs html-code" data-trim>
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+  &lt;head&gt;
+
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+
+    &lt;title&gt;Webpage Title&lt;/title&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+
+    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+    &lt;!-- page content --&gt;
+
+  &lt;/body&gt;
+
+&lt;/html&gt;
+          </code></pre>
+        </section>
+        </section>
+        <section>
+          <h3>Updated Digram: Retrieving a Static Webpage</h3>
+          <img data-src="images/clientserver2.png">
+        </section>
+        <section>
+          <section>
+            <h3>Static vs Dynamic Websites: Static</h3>
+            <ul>
+              <li>Static Websites:
+                <ul>
+                  <li>Consists of a series of HTML files</li>
+                  <li>Each page is a separate HTML file</li>
+                  <li>When you're viewing the page, you're viewing the actual file</li>
+                  <li>If you want to display new information to the user, you have to create a <b>new page</b></li>
+                  <li>Example:
+                    <ul>
+                      <li>All the lecture slides are actually static HTML files:<br> <a target="_blank" href="view-source:https://mhsu0020.github.io/CSULA-CS3220-Fall2016/week1/index.html#/">view-source:https://mhsu0020.github.io/CSULA-CS3220-Fall2016/week1/index.html</a><br> <a target="_blank" href="view-source:https://mhsu0020.github.io/CSULA-CS3220-Fall2016/week2/index.html#/">view-source:https://mhsu0020.github.io/CSULA-CS3220-Fall2016/week2/index.html</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Static vs Dynamic Websites: Dynamic</h3>
+            <ul>
+              <li>Dynamic Websites:
+                <ul>
+                  <li>Uses server-side technologies to <b>dynamically</b> build webpages on user visit</li>
+                  <li>A web application running on the server pulls information from sources, such as databases, and build the page</li>
+                  <li>The web application contains methods mapped to different request paths/patterns</li>
+                  <li>Example:
+                    <ul>
+                      <li>Github repository views. There are tens of millions of repositories, it's impossible to write a new HTML page for each repository.</li>
+                      <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016">https://github.com/mhsu0020/CSULA-CS3220-Fall2016</a></li>
+                      <li><a href="https://github.com/mhsu0020/Pokemon-Go-Watson">https://github.com/mhsu0020/Pokemon-Go-Watson</a></li>
+                      <li><a href="https://github.com/mhsu0020/CSULA-CS202-Winter2016">https://github.com/mhsu0020/CSULA-CS202-Winter2016</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+      </section>
+      <section>
+        <h3>Dynamic Website Request-Response</h3>
+        <img data-src="images/clientserver4.png">
+      </section>
+      <section>
+        <section>
+          <h3>Web Development: Many Career Paths</h3>
+          <img data-src="images/frontback.png">
+        </section>
+        <section>
+          <h3>Career Paths:</h3>
+          <ul>
+            <li>Making websites look good and easy to use: <br>web designer, UX/UI designer (not really developer jobs)</li>
+            <li>Frontend programming (HTML/CSS/JavaScript):<br> - frontend developer</li>
+            <li>How to get the content from servers to browsers?<br> - network engineers</li>
+            <li>Designing, managing, maintaining, and backing up databases:<br> - database admin/engineer </li>
+            <li>How to update websites when somebody modifies the code? How to scale applications to handle millions of users?<br> - devops engineer</li>
+            <li>Full-Stack: both frontend and backend development, a little bit of everything</li>
+          </ul>
+        </section>
+      </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
