@@ -15,6 +15,7 @@
 
     <style type="text/css">
        section { text-align: left; }
+       .html-code { font-size: 40px !important;}
     </style>
 
     <!-- Printing and PDF exports -->
@@ -38,7 +39,7 @@
 				</section>
         <section>
           <h2>What happens when you type in an URL in your browser?</h2>
-          <img src="images/trello.gif">
+          <img data-src="images/trello.gif">
         </section>
         <section>
           <section>
@@ -48,7 +49,7 @@
               <li>URL stands for <i>Uniform Resource Locator</i>, commonly known as web address</li>
               <li>A Reference to a web resource and how to retrieve it</li>
               <li>Parts of a URL: </li>
-              <img src="images/url.png">
+              <img data-src="images/url.png">
             </ul>
             <p>More slide below, use down arrow key to view :)</p>
           </section>
@@ -107,18 +108,53 @@
           <section>
             <h3>The Request and Response</h3>
             <p>So you typed in the URL in the browser address bar, press enter. The domain is resolved to an IP address, what happens now?</p>
-            <img src="images/request-reponse-comic-03.png">
+            <img data-src="images/request-reponse-comic-03.png">
           </section>
           <section>
             <h3>The Request-Respond Model</h3>
             <p>Your browser, running on your computer, creates a connection with the server (can be a physical computer or a software), and makes a HTTP request.</p>
             <p>The server returns a HTTP response. your browser interprets the response renders the response.</p>
-            <img src="images/requestresponse1.jpg">
+            <img data-src="images/requestresponse1.jpg">
           </section>
         </section>
         <section>
-          <h3>Very Basic Diagram of the Model We've Learned So Far:</h3>
-          <img src="images/clientserver.png">
+          <h3>Diagram of what We've Learned So Far:</h3>
+          <img data-src="images/clientserver.png">
+        </section>
+        <section>
+          <section>
+          <h2>A Basic HTML Document</h2>
+          <pre class="stretch"><code class="hljs html-code" data-trim>
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+  &lt;head&gt;
+
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+
+    &lt;title&gt;Webpage Title&lt;/title&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+
+    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+    &lt;!-- page content --&gt;
+
+  &lt;/body&gt;
+
+&lt;/html&gt;
+          </code></pre>
+        </section>
+          <section>
+            <h3>What Happens After the Initial Page Load?</h3>
+            <p>After the initial pageload, additional requests are made for the page resources such as CSS/JavaScript and image files.</p>
+            <img data-src="images/timeline.png">
+          </section>
         </section>
       </div>
     </div>
@@ -139,7 +175,8 @@
           { src: 'plugin/markdown/marked.js' },
           { src: 'plugin/markdown/markdown.js' },
           { src: 'plugin/notes/notes.js', async: true },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true }
         ]
       });
     </script>
