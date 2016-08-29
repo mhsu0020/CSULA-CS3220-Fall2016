@@ -526,9 +526,75 @@ git pull
          <h4>Further Reading: <a target="_blank" href="https://www.w3.org/TR/2011/REC-CSS2-20110607/cascade.html#cascade">W3C documentation</a></h4>
        </section>
        <section id="css-box-model">
-         <h3>The Box Model</h3>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Boxes">The Box Model</a></h3>
+         <ul>
+          <li>Elements take up space when displayed</li>
+          <li>In the middle, the <strong><em>element</em></strong> occupies space to display content</li>
+          <li>Around the element is <strong><em>padding</em></strong></li>
+          <li>Around the padding is <strong><em>border</em></strong></li>
+          <li>Around the border and seperating the element with other elements is <strong><em>margin</em></strong></li>
+         </ul>
+         <h4><strong>Adjusting the margin and padding allows you to adjust positions and create space around elements</strong></h4>
+         <table>
+           <tbody>
+            <tr>
+             <td style="width: 22em;">
+              <div style="background-color: #ff6666; padding: 0px 2em 2em 2em; width: 16em;">
+               <p style="text-align: center; margin: 0px;">margin</p>
+               <p style="text-align: center; margin: 0px 0px -.75em 0px;">border</p>
+               <div style="background-color: #fff; padding: 0px 2em 2em 2em; border: 10px solid #fd9;">
+                <p style="text-align: center;">padding</p>
+                <div style="background-color: #ff6666;">
+                 <p style="text-align: center; padding: 0px; margin: 0px; font-size: 200%; font-weight: bold; color: #999;">element</p>
+                </div>
+               </div>
+              </div>
+              <p><em>The light red shows parts of the layout.</em></p>
+             </td>
+             <td>
+              <div style="background-color: #fff; padding: 0px 2em 2em 2em; width: 16em;">
+               <p style="text-align: center; margin: 0px;">&nbsp;</p>
+               <p style="text-align: center; margin: 0px 0px -.75em 0px;">&nbsp;</p>
+               <div style="background-color: #fff; padding: 0px 2em 2em 2em; border: 10px solid #fd9;">
+                <p style="text-align: center;">&nbsp;</p>
+                <div style="background-color: #fff;">
+                 <p style="text-align: center; padding: 0px; margin: 0px; font-size: 200%; font-weight: bold; color: #999;">element</p>
+                </div>
+               </div>
+              </div>
+              <p><em>This is what you see in your browser.</em></p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
        </section>
-       <section id="css-arranging">
+       <section id="css-basic-layout">
+         <h3><a target="_blank" href="file:///D:/Github/CS3220-Fall2016/master/CSULA-CS3220-Fall2016/lecture3-html-css-javascript/slides/index.html#/css-basic-layout">Basic Layout</a></h3>
+         <ul>
+           <li>To better control layout, add <strong><em>layout elements</em></strong> to your HTML document</li>
+           <li>The &lt;div&gt; tag
+             <pre class="stretch"><code class="hljs html-code" data-trim>
+
+&lt;h3&gt;Food&lt;/h3&gt;
+
+  &lt;div id=&quot;food-block&quot;&gt;
+
+    &lt;p&gt;Food 1&lt;/p&gt;
+
+    &lt;p&gt;Food 2t&lt;/p&gt;
+
+    &lt;p&gt;Food 3&lt;/p&gt;
+
+    &lt;p&gt;Food 4&lt;/p&gt;
+
+    &lt;p&gt;Food 5&lt;/p&gt;
+
+  &lt;/div&gt;
+
+             </code></pre>
+           </li>
+         </ul>
+         <h4>More on layouts: <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout</a></h4>
        </section>
       </div>
     </div>
