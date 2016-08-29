@@ -40,7 +40,7 @@
 					<h4>Michael Hsu</h4>
 					<h4>CSULA</h4>
 				</section>
-        <section>
+        <section id="clone">
           <h3>Getting the Lecture Slides and Code Examples: </h3>
             <pre><code class="hljs html-code html-code-single-line" data-trim>
 git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
@@ -235,9 +235,9 @@ git pull
             </section>
          </section>
          <section>
-             <h3>Links (&lt;a&gt;)</h3>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">Links (&lt;a&gt;)</a></h3>
              <pre><code class="hljs html-code html-code-single-line" data-trim>
-               &lt;a href="http://www.calstatela.edu"&gt;school site&lt;/a&gt;
+&lt;a href="http://www.calstatela.edu"&gt;school site&lt;/a&gt;
              </code></pre>
              <h4>Redendered:</h4>
              <a href="http://www.calstatela.edu"> school site </a><br>
@@ -246,6 +246,11 @@ git pull
                <li>Creates links to other web pages</li>
                <li>Text between tags becomes clickable</li>
                <li>"href" attribute contains destination URL</li>
+               <li>"target": specifies where to display the linked resource</i>
+               <pre><code class="hljs html-code html-code-single-line" data-trim>
+    &lt;a href="http://www.calstatela.edu" target="_blank"&gt;school site&lt;/a&gt;
+              </code></pre>
+               <li>"_blank" value: opens resource in new tab/window. <a href="http://www.calstatela.edu" target="_blank"> school site external </a></li>
                <li><strong><em>Attributes</em></strong>: specifies additional information about an element</li>
                <li>Examples of Attibutes: "href" for &lt;a&gt;, "src" for &lt;img&gt;, "type" for &lt;style&gt;</li>
              </ul>
@@ -254,17 +259,23 @@ git pull
            <section>
              <h3>Relative Paths</h3>
              <ul>
-               <li>Useful for linking to pages/images/CSS/JavScript files that are in relative folders</li>
+               <li>Useful for linking to pages/images/CSS/JavaScript files that are in relative folders</li>
+               <li>In lab1, you use relative paths to link CSS and images in your index.html</li>
+               <li>Accessing sub-directory resources in current directory: <strong>SUBFOLER_NAME/SUBFOLER_NAME/ ... /RESOURCE</strong></li>
+               <li>Accessing resources further up from current directory: <strong>../../ (as many levels as you need )/RESOURCE</strong></li>
+               <li>MDN: <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#Examples_of_relative_URLs">https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#Examples_of_relative_URLs</a></li>
              </ul>
            </section>
            <section>
              <h3>Relative Path Example</h3>
-             <div style="text-align: left; float: left;">
-               <ul>
-                 <img data-src="images/relativepath.png">
+             <div style="text-align: left; float: left; width: 40%;">
+               <h4><a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/c91663fd8609e36d1a3fc7a51af6be731e49d040/lecture3-html-css-javascript/slides/examples/relativePath">Directory</a></h4>
+               <img data-src="images/relativepath.png">
+               <p style="width: 100%"><a href="#/clone">Clone the lecture repo</a>, navigate to the examples directory under examples in lecture3, and play around with paths</p>
              </div>
-             <div style="text-align: right; float: right; width: 50%">
-               <iframe data-src="examples/relativePath/main/main.html" width="100%"></iframe>
+             <div style="text-align: right; float: right; width: 60%;">
+               <h4 style="float:left"><a target="_blank" href="examples/relativePath/main/main.html">main.html</a> <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/c91663fd8609e36d1a3fc7a51af6be731e49d040/lecture3-html-css-javascript/slides/examples/relativePath/main/main.html">(source)</a></h4>
+               <iframe data-src="examples/relativePath/main/main.html" style="width:100%;min-height:600px"></iframe>
              </div>
            </section>
          </section>
