@@ -64,7 +64,7 @@ git pull
           <img data-src="images/clientserver2.png">
           <h3>Today we'll be focused on the Client side stuff: HTML/CSS/JavaScript</h3>
         </section>
-        <section>
+        <section id="required-readings">
           <h3>Required Readings</h3>
           <ul>
           	<li>Introduction to HTML: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction</a></li>
@@ -75,6 +75,7 @@ git pull
         <section>
           <h3>Table of Contents (Click to Jump to Section)</h3>
           <ul>
+            <li><a href="#/required-readings">Required Readings</a></li>
             <li><a href="#/HTML-intro">What is HTML?</a></li>
             <li>A Very Basic HTML5 Document</li>
             <li>Common HTML Elements</li>
@@ -396,9 +397,16 @@ git pull
        </section>
        <section>
          <section>
-           <h3>The "Cascading" Part of CSS</h3>
+           <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Cascading_and_inheritance">CSS: Cascading and Inheritance</a></h3>
            <pre class="stretch"><code class="hljs html-code" data-trim>
-  &lt;style type="text/css"&gt;
+
+  /* changes font color of entire body */
+
+  body {
+
+    color: purple;
+
+  }
 
   /* combining multiple selectors with commas */
 
@@ -420,14 +428,55 @@ git pull
 
   }
 
-  &lt;/style&gt;
              </code></pre>
          </section>
          <section>
            <h3>Rendered Result</h3>
            <iframe data-src="examples/cssexample1.html" width="100%" height="500px"></iframe>
            <h4>The second "h1" rule overrides the "color", and adds the "background-color"</h4>
-         </section>
+           <h4><strong>Inheritance</strong>: child elements inherit styles of parent. Example: setting the text color ("color") of &lt;body&gt;, &lt;p&gt; inherits text color
+        </section>
+       </section>
+       <section id="css-selectors">
+         <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">CSS: Selectors</a></h3>
+         <ul>
+           <li>We have already been using element tag names as selectors</li>
+           <li>We can also use attribute value as selectors</li>
+           <li>The <strong><em>id</em></strong> and <strong><em>class</em></strong> attributes are special for CSS:
+           <pre  style=""><code class="hljs" data-trim>
+&lt;ol id="food-list"&gt;
+  &lt;li id="ham" class="food-item"&gt;ham&lt;/li&gt;
+  &lt;li class="food-item"&gt;pizza&lt;/li&gt;
+  &lt;li class="food-item"&gt;burrito&lt;/li&gt;
+&lt;/ol&gt;
+           </code></pre>
+         </li>
+         <li>ID Selectors: use "id" attribute to assign ID. the ID name must be unique in the document<br><strong>Use the hash symbol(#) before the ID in a selector</strong></li>
+         <li>Class Selectors: use "class" attribute to assign element to named class. Multiple elements in a document can have the same class value<br><strong>Use the period symbol(.) before the class in a selector</strong></li>
+         </ul>
+       </section>
+       <section>
+         <h3>Selectors Example</h3>
+         <pre  style=""><code class="hljs" data-trim>
+#food-list {
+  list-style-type: square;
+  font-size: xx-large;
+}
+.food-item {
+  color: blue;
+}
+#ham {
+   color: red;
+}
+         </code></pre>
+         <h3>Rendered Result</h3>
+         <iframe data-src="examples/cssexample2.html" width="100%" height="250px"></iframe>
+       </section>
+       <section id="css-external-style">
+       </section>
+       <section id="css-box-model">
+       </section>
+       <section id="css-arranging">
        </section>
       </div>
     </div>
@@ -448,7 +497,8 @@ git pull
           { src: 'plugin/markdown/markdown.js' },
           { src: 'plugin/notes/notes.js', async: true },
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/zoom-js/zoom.js', async: true }
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
         ]
       });
     </script>
