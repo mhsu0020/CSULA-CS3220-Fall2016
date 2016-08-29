@@ -124,6 +124,7 @@
             </ul>
           </li>
           <li><strong>Content Element = Opening Tag + Content + Closing Tag</strong></li>
+          <li>Elements can be nested within each other (see code from previous slide)</li>
           <li>Some elements are <strong><em>void elements</em></strong>, which means they do not have closing tags
             <ul>
               <li>Images (img), line break (br), horizontal line (hr), input (input)...</li>
@@ -133,11 +134,67 @@
          </ul>
        </section>
        <section>
-         <h3>Basic Tags and Nested Nature</h3>
+         <h3>Basic Elements</h3>
+         <ul>
+           <li>&lt;html&gt; : Also known as the <strong>root element</strong>, wraps around your entire document</li>
+           <li>&lt;head&gt; : provides metadata information about the page
+             <ul>
+               <li>Common Nested Elements: &lt;title&gt;, &lt;style&gt; (internal CSS), &lt;script&gt; (internal javascript)
+             </ul>
+           </li>
+           <li>&lt;body&gt; : represents the content of an HTML document
+          </ul>
        </section>
+       <section>
+         <section>
+           <h3>Adding CSS: The &lt;style&gt; Element</h3>
+           <pre class="stretch"><code class="hljs html-code" data-trim>
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+
+ &lt;meta charset=&quot;utf-8&quot;&gt;
+
+ &lt;title&gt;CS3220 Rocks!&lt;/title&gt;
+
+ &lt;style type="text/css"&gt;
+
+   body {
+
+          background-color: #FFC0CB;
+
+  }
+
+ &lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+ &lt;h1&gt;CS3220 is Awesome!!!&lt;/h1&gt;
+
+ &lt;p&gt;
+
+   This class is lit
+
+ &lt;/p&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+             </code></pre>
+           </section>
+           <section>
+             <h3>Rendered Result</h3>
+             <iframe data-src="examples/basichtml2.html" width="100%" height="500px"></iframe>
+             <h4>Above is an example of an &lt;iframe&gt; element, allowing you to embed another HTML page into the current page with a <strong>seperate browsing context. (You have very little control of what goes on inside).</strong> Notice the CSS did not apply to the rest of the slides.</h4>
+           </section>
+        </section>
+
       </div>
     </div>
-
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.js"></script>
 
