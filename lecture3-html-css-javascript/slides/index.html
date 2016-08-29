@@ -16,6 +16,9 @@
     <style type="text/css">
        section { text-align: left; }
        .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
     </style>
 
     <!-- Printing and PDF exports -->
@@ -37,6 +40,16 @@
 					<h4>Michael Hsu</h4>
 					<h4>CSULA</h4>
 				</section>
+        <section>
+          <h3>Getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git pull
+            </code></pre>
+        </section>
         <section>
           <h3>Recall Static Web Diagram from Last Week</h3>
           <img data-src="images/clientserver2.png">
@@ -189,10 +202,54 @@
            <section>
              <h3>Rendered Result</h3>
              <iframe data-src="examples/basichtml2.html" width="100%" height="500px"></iframe>
-             <h4>Above is an example of an &lt;iframe&gt; element, allowing you to embed another HTML page into the current page with a <strong>seperate browsing context. (You have very little control of what goes on inside).</strong> Notice the CSS did not apply to the rest of the slides.</h4>
+             <h4>Above is an <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/8fe88643d94fbc574835c9d5b6312cbaebdd20bb/lecture3-html-css-javascript/slides/index.html#L191">example</a> of an &lt;iframe&gt; element, allowing you to embed another HTML page into the current page with a <strong>seperate browsing context. (You have very little control of what goes on inside).</strong> Notice the CSS did not apply to the rest of the slides.</h4>
            </section>
         </section>
+        <section>
+          <section>
+            <h3>More CSS</h3>
+            <pre><code class="hljs html-code" data-trim>
+&lt;style type="text/css"&gt;
 
+   p {
+
+           background-color: #FFC0CB;
+
+           margin-left: 10%;
+
+           margin-right: 10%;
+
+           padding: 5px 5px 20px 20px;
+
+           border: 5px dotted black;
+
+   }
+
+&lt;/style&gt;
+              </code></pre>
+            </section>
+            <section>
+              <h3>Rendered Result</h3>
+              <iframe data-src="examples/basichtml3.html" width="100%" height="500px"></iframe>
+              <h4>More on CSS later</h4>
+            </section>
+         </section>
+         <section>
+             <h3>Links (&lt;a&gt;)</h3>
+             <pre><code class="hljs html-code html-code-single-line" data-trim>
+               &lt;a href="http://www.calstatela.edu"&gt;school site&lt;/a&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <a href="http://www.calstatela.edu"> school site </a><br>
+             <hr>
+             <ul>
+               <li>Creates links to other web pages</li>
+               <li>Text between tags becomes clickable</li>
+               <li>"href" attribute contains destination URL</li>
+               <li><strong><em>Attributes</em></strong>: specifies additional information about an element</li>
+               <li>Examples of Attibutes: "href" for &lt;a&gt;, "src" for &lt;img&gt;, "type" for &lt;style&gt;</li>
+             </ul>
+         </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
