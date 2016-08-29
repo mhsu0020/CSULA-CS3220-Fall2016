@@ -260,6 +260,7 @@ git pull
              <h3>Relative Paths</h3>
              <ul>
                <li>Useful for linking to pages/images/CSS/JavaScript files that are in relative folders</li>
+               <li>Compared to <strong>absolute paths</strong>: absolute paths provide root context. Examples include full url (https://www.google.com) and full file paths (C:/ProgramFiles/Virus.exe)</li>
                <li>In lab1, you use relative paths to link CSS and images in your index.html</li>
                <li>Accessing sub-directory resources in current directory: <strong>SUBFOLER_NAME/SUBFOLER_NAME/ ... /RESOURCE</strong></li>
                <li>Accessing resources further up from current directory: <strong>../../ (as many levels as you need )/RESOURCE</strong></li>
@@ -308,54 +309,73 @@ git pull
            </section>
        </section>
        <section>
-           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">Lists: Unordered Lists (&lt;ul&gt;)</a></h3>
-           <pre><code class="hljs html-code" data-trim>
-&lt;ul&gt;
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">Lists: Unordered Lists (&lt;ul&gt;)</a></h3>
+             <pre><code class="hljs html-code" data-trim>
+  &lt;ul&gt;
 
-  &lt;li&gt;item 1&lt;/li&gt;
+    &lt;li&gt;item 1&lt;/li&gt;
 
-  &lt;li&gt;item 2&lt;/li&gt;
+    &lt;li&gt;item 2&lt;/li&gt;
 
-  &lt;li&gt;item 3&lt;/li&gt;
+    &lt;li&gt;item 3&lt;/li&gt;
 
-&lt;/ul&gt;
-           </code></pre>
-           <h4>Redendered:</h4>
-           <ul>
-             <li>item 1</li>
-             <li>item 2</li>
-             <li>item 3</li>
-           </ul>
-           <hr>
-           <ul>
-             <li>For "bullet point" unordered items</li>
-             <li>Each item in the list is wrapper in &lt;li&gt; tags, finally surrounded by a pair of &lt;ul&gt; tags</li>
-             <li>Notice the lack of &lt;br&gt; tags even though linebreaks are added. This means that both &lt;ul&gt; and &lt;li&gt; are block elements</li>
-           </ul>
+  &lt;/ul&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <ul>
+               <li>item 1</li>
+               <li>item 2</li>
+               <li>item 3</li>
+             </ul>
+             <hr>
+             <ul>
+               <li>For "bullet point" unordered items</li>
+               <li>Each item in the list is wrapper in &lt;li&gt; tags, finally surrounded by a pair of &lt;ul&gt; tags</li>
+               <li>Notice the lack of &lt;br&gt; tags even though linebreaks are added. This means that both &lt;ul&gt; and &lt;li&gt; are block elements</li>
+             </ul>
+         </section>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">Lists: Ordered Lists (&lt;ol&gt;)</a></h3>
+             <pre><code class="hljs html-code" data-trim>
+  &lt;ol&gt;
+
+    &lt;li&gt;item 1&lt;/li&gt;
+
+    &lt;li&gt;item 2&lt;/li&gt;
+
+    &lt;li&gt;item 3&lt;/li&gt;
+
+  &lt;/ol&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <ol>
+               <li>item 1</li>
+               <li>item 2</li>
+               <li>item 3</li>
+             </ol>
+             <hr>
+             <ul>
+               <li>For "numbered" ordered items</li>
+             </ul>
+         </section>
        </section>
        <section>
-           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">Lists: Ordered Lists (&lt;ol&gt;)</a></h3>
-           <pre><code class="hljs html-code" data-trim>
-&lt;ol&gt;
-
-  &lt;li&gt;item 1&lt;/li&gt;
-
-  &lt;li&gt;item 2&lt;/li&gt;
-
-  &lt;li&gt;item 3&lt;/li&gt;
-
-&lt;/ol&gt;
-           </code></pre>
-           <h4>Redendered:</h4>
-           <ol>
-             <li>item 1</li>
-             <li>item 2</li>
-             <li>item 3</li>
-           </ol>
-           <hr>
-           <ul>
-             <li>For "numbered" ordered items</li>
-           </ul>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">Images(&lt;img&gt;)</a></h3>
+             <pre><code class="hljs html-code html-code-single-line" data-trim>
+  &lt;img src="images/meme1.jpg" alt="memes"&gt;
+             </code></pre>
+             <img src="images/meme1.jpg">
+             <img src="images/meme3.jpg" alt="memes">
+             <hr>
+             <ul>
+               <li>Void element: no closing tag. The <strong>required</strong>"alt" attribute provides text if image cannot be displayed</li>
+               <li>Browser makes <strong>seperate request</strong> to server for image after page load</li>
+               <li>Common image formats: JPEG/JPG(usually smallest file size), PNG, GIF(large file size and slow), SVG...</li>
+               <li><strong>Note: even though you might resize the image via CSS, if the source file is large your browser still downloads the entire file. Edit and resize the image in a photo editing tool to actually reduce the image size</strong></li>
+             </ul>
+         </section>
        </section>
       </div>
     </div>
