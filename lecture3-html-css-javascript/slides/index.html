@@ -279,6 +279,84 @@ git pull
              </div>
            </section>
          </section>
+         <section id="block-inline">
+           <section>
+             <h3>Block vs Inline Elements</h3>
+             <ul>
+              <li><strog>Block Elements</strong>: occupies the entire space of its parent element (container).</li>
+              <li>Usually a newline is added before and after the element.</li>
+              <li>Examples of block elements:
+                <pre><code class="hljs" data-trim>
+                  &lt;p&gt;Each&lt;/p&gt;&lt;p&gt;paragraph&lt;/p&gt;&lt;p&gt;occupies entire blocks&lt;/p&gt;
+               </code></pre>
+                <p>Each</p><p>paragraph</p><p>occupies entire blocks</p>
+              </li>
+              <li>Examples of inline elements:
+                <pre><code class="hljs" data-trim>
+                  &lt;span&gt;This &lt;/span&gt;&lt;span&gt;span &lt;/span&gt;&lt;span&gt;element is &lt;/span&gt;&lt;span&gt;inline so no line breaks &lt;/span&gt;&lt;a href=&quot;#/block-inline&quot;&gt;and links are also inline&lt;/a&gt;
+               </code></pre>
+                <span>This </span><span>span </span><span>element is </span><span>inline so no line breaks </span><a href="#/block-inline">and links are also inline</a>
+                <br><br>
+              </li>
+              <li>Adding arbitrary linebreaks: &lt;br&gt; (Note: no closing tag)</li>
+              <li>Further Reading: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements</a></li>
+             </ul>
+           </section>
+           <section>
+             <h3>block Vs Inline Elements</h3>
+             <img data-src="images/example-blockinline.png">
+           </section>
+       </section>
+       <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">Lists: Unordered Lists (&lt;ul&gt;)</a></h3>
+           <pre><code class="hljs html-code" data-trim>
+&lt;ul&gt;
+
+  &lt;li&gt;item 1&lt;/li&gt;
+
+  &lt;li&gt;item 2&lt;/li&gt;
+
+  &lt;li&gt;item 3&lt;/li&gt;
+
+&lt;/ul&gt;
+           </code></pre>
+           <h4>Redendered:</h4>
+           <ul>
+             <li>item 1</li>
+             <li>item 2</li>
+             <li>item 3</li>
+           </ul>
+           <hr>
+           <ul>
+             <li>For "bullet point" unordered items</li>
+             <li>Each item in the list is wrapper in &lt;li&gt; tags, finally surrounded by a pair of &lt;ul&gt; tags</li>
+             <li>Notice the lack of &lt;br&gt; tags even though linebreaks are added. This means that both &lt;ul&gt; and &lt;li&gt; are block elements</li>
+           </ul>
+       </section>
+       <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">Lists: Ordered Lists (&lt;ol&gt;)</a></h3>
+           <pre><code class="hljs html-code" data-trim>
+&lt;ol&gt;
+
+  &lt;li&gt;item 1&lt;/li&gt;
+
+  &lt;li&gt;item 2&lt;/li&gt;
+
+  &lt;li&gt;item 3&lt;/li&gt;
+
+&lt;/ol&gt;
+           </code></pre>
+           <h4>Redendered:</h4>
+           <ol>
+             <li>item 1</li>
+             <li>item 2</li>
+             <li>item 3</li>
+           </ol>
+           <hr>
+           <ul>
+             <li>For "numbered" ordered items</li>
+           </ul>
+       </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
