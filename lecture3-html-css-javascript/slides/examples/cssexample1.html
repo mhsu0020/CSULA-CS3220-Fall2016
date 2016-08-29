@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <style type="text/css">
+   /* combining multiple selectors with commas */
+   h1, h2 {
+     color: red;
+   }
+   /*CSS is parsed from top to bottom,
+    each rules adds on/overrides the previous style*/
+   h1 {
+     color: blue;
+     background-color: green;
+   }
+   body {
+     background-color: white;
+   }
+   </style>
+   <title>CSS Example 1</title>
+ </head>
+ <body>
+   <h1>Header 1</h1>
+   <h2>Header 2</h2>
+ </body>
+</html>

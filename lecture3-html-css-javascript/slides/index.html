@@ -386,6 +386,49 @@ git pull
              </ul>
          </section>
        </section>
+       <section>
+         <h3>CSS: Layout and Styling of Web Pages</h3>
+         <ul>
+           <li>HTML provides the structuring of the page, while CSS (Cascading Style Sheets) provide styling and layout</li>
+           <li>Anatomy of CSS:</li>
+           <img src="images/css-rule.jpg">
+         </ul>
+       </section>
+       <section>
+         <section>
+           <h3>The "Cascading" Part of CSS</h3>
+           <pre class="stretch"><code class="hljs html-code" data-trim>
+  &lt;style type="text/css"&gt;
+
+  /* combining multiple selectors with commas */
+
+  h1, h2 {
+
+    color: red;
+
+  }
+
+  /*CSS is parsed from top to bottom,
+
+   each rules adds on/overrides the previous style*/
+
+  h1 {
+
+    color: blue;
+
+    background-color: green;
+
+  }
+
+  &lt;/style&gt;
+             </code></pre>
+         </section>
+         <section>
+           <h3>Rendered Result</h3>
+           <iframe data-src="examples/cssexample1.html" width="100%" height="500px"></iframe>
+           <h4>The second "h1" rule overrides the "color", and adds the "background-color"</h4>
+         </section>
+       </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
