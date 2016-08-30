@@ -715,6 +715,115 @@ git pull
 
           </code></pre>
        </section>
+       <section>
+         <section>
+           <h3>JavaScript Language Basics: Variables</h3>
+           <li>Syntax is almost identical to Java</li>
+           <li>Statements, identifiers, most of the keywords/reserved words are identical</li>
+           <li><strong>Unlike Java, JavaScript variables are loosely typed and can hold any kind of data</strong>.<br> Variables are declared using the var keyword:
+             <pre class="stretch"><code class="javascript hljs html-code" data-trim>
+
+var myVariable = "hahaha";
+
+//not recommended
+
+myVariable = 2;
+
+//not recommended
+
+myVariable = [1, 2, 3, 4, 5];
+
+//not recommended
+
+myVariable = false;
+
+
+             </code></pre>
+           </li>
+         </section>
+         <section>
+           <h3>JavaScript: Variable Scope</h3>
+           <p><strong>Unlike Java, JavaScript is <em>function scoped</em></strong>. Blocks do not have scope.</p>
+           <ul>
+             <li>if a variable is declared in a if statement, it will be visible to the entire function.</li>
+             <pre class="stretch"><code class="javascript hljs html-code" data-trim>
+
+function testExample(num){
+
+  for(var i = 0; i < 10; i += 1){
+
+  }
+
+  /*Actually prints out
+
+  i with changed value*/
+
+  alert("What is 'i'? " + i);
+
+}
+
+               </code></pre>
+             </li>
+             <li>Local vs Global: ommiting the "var" keyword creates a global variable. Avoid global variables as much as you can. Always use "var" when creating variables.</li>
+           </ul>
+       </section>
+     </section>
+     <section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects">JavaScript: Objects</a></h3>
+         <ul>
+           <li>A collection of name-value pairs</li>
+           <li>Similar to HashMap in Java/Dictionaries in Python</li>
+           <li>Two ways to create an object:</li>
+           <li>Using the new operator (don't use this)
+          <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+            var obj = new Object();
+          </code></pre>
+          </li>
+          <li>Using object literal syntax (use this always)
+            <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+              var obj = {};
+            </code></pre>
+          </li>
+          <li>Object literal syntax is very similar to <strong>JSON format</strong>, something we will be using all the time</li>
+         </ul>
+       </section>
+       <section>
+         <h3>JavaScript Objects: Accessing Attributes</h3>
+         <p>Given the following Objcet:</p>
+         <pre><code class="hljs javascript html-code" data-trim>
+var pizza = {
+
+  name: "MyPizza",
+
+  toppings: [{name: "greenPepper", price: 40}, {name: "cheese", price: 20}]
+
+};
+         </code></pre>
+         <ul>
+           <li>Accessing using dot notation (ObjectVariable.propertyName)
+           <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+var pizzaName = pizza.name;
+           </code></pre>
+           </li>
+           <li>Accessing using array notation (Useful if you're storing the property name in a variable)
+           <pre><code class="hljs javascript html-code" data-trim>
+
+var nameProperty = "name";
+
+var pizzaName = pizza[nameProperty];
+
+           </code></pre>
+           </li>
+           <li>Chaining them together:
+             <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+var firstToppingName = pizza.toppings[0]["name"];
+             </code></pre>
+           </li>
+           <li>You can dynamically assign/overwrite properties as you wish</li>
+         </ul>
+       </section>
+     </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
