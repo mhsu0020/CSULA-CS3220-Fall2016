@@ -1,0 +1,972 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CS3220 Lecture 3</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 3: A Crash Course on HTML/CSS/JavaScript</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>This is not a "Web Design" Class</h3>
+          <p>The basics of HTML/CSS will be covered. Web design is a discipline under Art/Design. However, it doesn't hurt to understand how it works since you will be working with web/UX/UI designers in the industry. As the semester goes on, we will be leveraging several open source UI frameworks that will more or less provide some modern designs for your website.</p>
+          <p>Here are some good resources to learn web design on your own:</p>
+          <ul>
+            <li><a href="https://www.udacity.com/course/responsive-web-design-fundamentals--ud893"> udacity web design course</a></li>
+            <li><a href="https://www.lynda.com/Web-Design-training-tutorials/1376-0.html">Lynda.com web design courses (log in through mycsula)</a>
+          </ul>
+        </section>
+        <section>
+          <h3>Recall Static Web Diagram from Last Week</h3>
+          <img data-src="images/clientserver2.png">
+          <h3>Today we'll be focused on the Client side stuff: HTML/CSS/JavaScript</h3>
+        </section>
+        <section id="required-readings">
+          <h3>Required Readings</h3>
+          <ul>
+          	<li>Introduction to HTML: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction</a></li>
+          	<li>Introduction to CSS: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started</a></li>
+          	<li>Browse through some of the elements: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">https://developer.mozilla.org/en-US/docs/Web/HTML/Element</a></li>
+            <li>JavaScript Tutorial: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Table of Contents (Click to Jump to Section)</h3>
+          <ul>
+            <li><a href="#/required-readings">Required Readings</a></li>
+            <li><a href="#/HTML-intro">What is HTML?</a></li>
+            <li>A Very Basic HTML5 Document</li>
+            <li>Common HTML Elements</li>
+            <li>What is CSS?</li>
+            <li>CSS Selectors</li>
+            <li>Different ways of using CSS</li>
+          </ul>
+        </section>
+        <section id="HTML-intro">
+          <h3>What is HTML?</h3>
+          <ul>
+            <li>Shorthand for <i>HyperText Markup Language</i></li>
+            <li>Describes the <b><i>content</i></b> and <b><i>structure</i></b> of a page</li>
+            <li>When you type in an URL in the address bar and press enter, your browser requests a web page from the web server</li>
+            <li>The server serves the web page and sends it to the browser</li>
+            <li>The browser displays the web page</li>
+            <li>How does the the browser know how to display a page? <b>HTML</b></li>
+          </ul>
+        </section>
+        <section>
+         <section>
+           <h2>A Basic HTML Document</h2>
+           <pre class="stretch"><code class="hljs html-code" data-trim>
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+ &lt;head&gt;
+
+   &lt;meta charset=&quot;utf-8&quot;&gt;
+
+   &lt;!-- text at top of brower tab --&gt;
+
+   &lt;title&gt;CS3220 Rocks!&lt;/title&gt;
+
+ &lt;/head&gt;
+
+ &lt;body&gt;
+
+   &lt;!-- page content --&gt;
+
+   &lt;h1&gt;CS3220 is Awesome!!!&lt;/h1&gt;
+
+   &lt;p&gt;
+
+     This class is lit
+
+   &lt;/p&gt;
+
+ &lt;/body&gt;
+
+&lt;/html&gt;
+           </code></pre>
+         </section>
+         <section>
+           <h3>Browser Rendered Result</h3>
+           <img data-src="images/rendered.png">
+           <h4>Note that browser didn't render indentations of elements. It makes it more readable for humans</h4>
+         </section>
+       </section>
+       <section>
+         <h3>HTML Elements</h3>
+         <ul>
+          <li>Building blocks of a web page</li>
+          <li>HTML elements consists of <strong><em>tags</em></strong></li>
+            <ul>
+              <li>Elements with content in between usually consists of a <strong><em>opening tag</em></strong> and a <strong><em>closing tag</em></strong> (tags with "/"). They come in pairs.
+              <li>Headers (h1, h2, h3), Paragraphs (p), links (a)....
+            </ul>
+          </li>
+          <li><strong>Content Element = Opening Tag + Content + Closing Tag</strong></li>
+          <li>Elements can be nested within each other (see code from previous slide)</li>
+          <li>Some elements are <strong><em>void elements</em></strong>, which means they do not have closing tags
+            <ul>
+              <li>Images (img), line break (br), horizontal line (hr), input (input)...</li>
+            </ul>
+          </li>
+          <li>Further Reading: <a href="https://www.w3.org/TR/html-markup/syntax.html#syntax-elements"> W3C docs on element syntax</a></li>
+         </ul>
+       </section>
+       <section>
+         <h3>Basic Elements</h3>
+         <ul>
+           <li>&lt;html&gt; : Also known as the <strong>root element</strong>, wraps around your entire document</li>
+           <li>&lt;head&gt; : provides metadata information about the page
+             <ul>
+               <li>Common Nested Elements: &lt;title&gt;, &lt;style&gt; (internal CSS), &lt;script&gt; (internal javascript)
+             </ul>
+           </li>
+           <li>&lt;body&gt; : represents the content of an HTML document
+          </ul>
+       </section>
+       <section>
+         <section>
+           <h3>Adding CSS: The &lt;style&gt; Element</h3>
+           <pre class="stretch"><code class="hljs html-code" data-trim>
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+
+ &lt;meta charset=&quot;utf-8&quot;&gt;
+
+ &lt;title&gt;CS3220 Rocks!&lt;/title&gt;
+
+ &lt;style type="text/css"&gt;
+
+   body {
+
+          background-color: #FFC0CB;
+
+  }
+
+ &lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+ &lt;h1&gt;CS3220 is Awesome!!!&lt;/h1&gt;
+
+ &lt;p&gt;
+
+   This class is lit
+
+ &lt;/p&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+             </code></pre>
+           </section>
+           <section>
+             <h3>Rendered Result</h3>
+             <iframe data-src="examples/basichtml2.html" width="100%" height="500px"></iframe>
+             <h4>Above is an <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/8fe88643d94fbc574835c9d5b6312cbaebdd20bb/lecture3-html-css-javascript/slides/index.html#L191">example</a> of an &lt;iframe&gt; element, allowing you to embed another HTML page into the current page with a <strong>seperate browsing context. (You have very little control of what goes on inside).</strong> Notice the CSS did not apply to the rest of the slides.</h4>
+           </section>
+        </section>
+        <section>
+          <section>
+            <h3>More CSS</h3>
+            <pre><code class="hljs html-code" data-trim>
+&lt;style type="text/css"&gt;
+
+   p {
+
+           background-color: #FFC0CB;
+
+           margin-left: 10%;
+
+           margin-right: 10%;
+
+           padding: 5px 5px 20px 20px;
+
+           border: 5px dotted black;
+
+   }
+
+&lt;/style&gt;
+              </code></pre>
+            </section>
+            <section>
+              <h3>Rendered Result</h3>
+              <iframe data-src="examples/basichtml3.html" width="100%" height="500px"></iframe>
+              <h4>More on CSS later</h4>
+            </section>
+         </section>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">Links (&lt;a&gt;)</a></h3>
+             <pre><code class="hljs html-code html-code-single-line" data-trim>
+&lt;a href="http://www.calstatela.edu"&gt;school site&lt;/a&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <a href="http://www.calstatela.edu"> school site </a><br>
+             <hr>
+             <ul>
+               <li>Creates links to other web pages</li>
+               <li>Text between tags becomes clickable</li>
+               <li>"href" attribute contains destination URL</li>
+               <li>"target": specifies where to display the linked resource</i>
+               <pre><code class="hljs html-code html-code-single-line" data-trim>
+    &lt;a href="http://www.calstatela.edu" target="_blank"&gt;school site&lt;/a&gt;
+              </code></pre>
+               <li>"_blank" value: opens resource in new tab/window. <a href="http://www.calstatela.edu" target="_blank"> school site external </a></li>
+               <li><strong><em>Attributes</em></strong>: specifies additional information about an element</li>
+               <li>Examples of Attibutes: "href" for &lt;a&gt;, "src" for &lt;img&gt;, "type" for &lt;style&gt;</li>
+             </ul>
+         </section>
+         <section>
+           <section>
+             <h3>Relative Paths</h3>
+             <ul>
+               <li>Useful for linking to pages/images/CSS/JavaScript files that are in relative folders</li>
+               <li>Compared to <strong>absolute paths</strong>: absolute paths provide root context. Examples include full url (https://www.google.com) and full file paths (C:/ProgramFiles/Virus.exe)</li>
+               <li>In lab1, you use relative paths to link CSS and images in your index.html</li>
+               <li>Accessing sub-directory resources in current directory: <strong>SUBFOLER_NAME/SUBFOLER_NAME/ ... /RESOURCE</strong></li>
+               <li>Accessing resources further up from current directory: <strong>../../ (as many levels as you need )/RESOURCE</strong></li>
+               <li>MDN: <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#Examples_of_relative_URLs">https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#Examples_of_relative_URLs</a></li>
+             </ul>
+           </section>
+           <section>
+             <h3>Relative Path Example</h3>
+             <div style="text-align: left; float: left; width: 40%;">
+               <h4><a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/c91663fd8609e36d1a3fc7a51af6be731e49d040/lecture3-html-css-javascript/slides/examples/relativePath">Directory</a></h4>
+               <img data-src="images/relativepath.png">
+               <p style="width: 100%"><a href="#/clone">Clone the lecture repo</a>, navigate to the examples directory under examples in lecture3, and play around with paths</p>
+             </div>
+             <div style="text-align: right; float: right; width: 60%;">
+               <h4 style="float:left"><a target="_blank" href="examples/relativePath/main/main.html">main.html</a> <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/c91663fd8609e36d1a3fc7a51af6be731e49d040/lecture3-html-css-javascript/slides/examples/relativePath/main/main.html">(source)</a></h4>
+               <iframe data-src="examples/relativePath/main/main.html" style="width:100%;min-height:600px"></iframe>
+             </div>
+           </section>
+         </section>
+         <section id="block-inline">
+           <section>
+             <h3>Block vs Inline Elements</h3>
+             <ul>
+              <li><strog>Block Elements</strong>: occupies the entire space of its parent element (container).</li>
+              <li>Usually a newline is added before and after the element.</li>
+              <li>Examples of block elements:
+                <pre><code class="hljs" data-trim>
+                  &lt;p&gt;Each&lt;/p&gt;&lt;p&gt;paragraph&lt;/p&gt;&lt;p&gt;occupies entire blocks&lt;/p&gt;
+               </code></pre>
+                <p>Each</p><p>paragraph</p><p>occupies entire blocks</p>
+              </li>
+              <li>Examples of inline elements:
+                <pre><code class="hljs" data-trim>
+                  &lt;span&gt;This &lt;/span&gt;&lt;span&gt;span &lt;/span&gt;&lt;span&gt;element is &lt;/span&gt;&lt;span&gt;inline so no line breaks &lt;/span&gt;&lt;a href=&quot;#/block-inline&quot;&gt;and links are also inline&lt;/a&gt;
+               </code></pre>
+                <span>This </span><span>span </span><span>element is </span><span>inline so no line breaks </span><a href="#/block-inline">and links are also inline</a>
+                <br><br>
+              </li>
+              <li>Adding arbitrary linebreaks: &lt;br&gt; (Note: no closing tag)</li>
+              <li>Further Reading: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements</a></li>
+             </ul>
+           </section>
+           <section>
+             <h3>block Vs Inline Elements</h3>
+             <img data-src="images/example-blockinline.png">
+           </section>
+       </section>
+       <section>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">Lists: Unordered Lists (&lt;ul&gt;)</a></h3>
+             <pre><code class="hljs html-code" data-trim>
+  &lt;ul&gt;
+
+    &lt;li&gt;item 1&lt;/li&gt;
+
+    &lt;li&gt;item 2&lt;/li&gt;
+
+    &lt;li&gt;item 3&lt;/li&gt;
+
+  &lt;/ul&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <ul>
+               <li>item 1</li>
+               <li>item 2</li>
+               <li>item 3</li>
+             </ul>
+             <hr>
+             <ul>
+               <li>For "bullet point" unordered items</li>
+               <li>Each item in the list is wrapper in &lt;li&gt; tags, finally surrounded by a pair of &lt;ul&gt; tags</li>
+               <li>Notice the lack of &lt;br&gt; tags even though linebreaks are added. This means that both &lt;ul&gt; and &lt;li&gt; are block elements</li>
+             </ul>
+         </section>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">Lists: Ordered Lists (&lt;ol&gt;)</a></h3>
+             <pre><code class="hljs html-code" data-trim>
+  &lt;ol&gt;
+
+    &lt;li&gt;item 1&lt;/li&gt;
+
+    &lt;li&gt;item 2&lt;/li&gt;
+
+    &lt;li&gt;item 3&lt;/li&gt;
+
+  &lt;/ol&gt;
+             </code></pre>
+             <h4>Redendered:</h4>
+             <ol>
+               <li>item 1</li>
+               <li>item 2</li>
+               <li>item 3</li>
+             </ol>
+             <hr>
+             <ul>
+               <li>For "numbered" ordered items</li>
+             </ul>
+         </section>
+       </section>
+       <section>
+         <section>
+             <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">Images(&lt;img&gt;)</a></h3>
+             <pre><code class="hljs html-code html-code-single-line" data-trim>
+  &lt;img src="images/meme1.jpg" alt="memes"&gt;
+             </code></pre>
+             <img src="images/meme1.jpg">
+             <img src="images/meme3.jpg" alt="memes">
+             <hr>
+             <ul>
+               <li>Void element: no closing tag. The <strong>required</strong>"alt" attribute provides text if image cannot be displayed</li>
+               <li>Browser makes <strong>seperate request</strong> to server for image after page load</li>
+               <li>Common image formats: JPEG/JPG(usually smallest file size), PNG, GIF(large file size and slow), SVG...</li>
+               <li><strong>Note: even though you might resize the image via CSS, if the source file is large your browser still downloads the entire file. Edit and resize the image in a photo editing tool to actually reduce the image size</strong></li>
+             </ul>
+         </section>
+       </section>
+       <section>
+         <h3>CSS: Layout and Styling of Web Pages</h3>
+         <ul>
+           <li>HTML provides the structuring of the page, while CSS (Cascading Style Sheets) provide styling and layout</li>
+           <li>Anatomy of CSS:</li>
+           <img src="images/css-rule.jpg">
+         </ul>
+       </section>
+       <section>
+         <section>
+           <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Cascading_and_inheritance">CSS: Cascading and Inheritance</a></h3>
+           <pre class="stretch"><code class="hljs html-code" data-trim>
+
+  /* changes font color of entire body */
+
+  body {
+
+    color: purple;
+
+  }
+
+  /* combining multiple selectors with commas */
+
+  h1, h2 {
+
+    color: red;
+
+  }
+
+  /*CSS is parsed from top to bottom,
+
+   each rules adds on/overrides the previous style*/
+
+  h1 {
+
+    color: blue;
+
+    background-color: green;
+
+  }
+
+             </code></pre>
+         </section>
+         <section>
+           <h3>Rendered Result</h3>
+           <iframe data-src="examples/cssexample1.html" width="100%" height="500px"></iframe>
+           <h4>The second "h1" rule overrides the "color", and adds the "background-color"</h4>
+           <h4><strong>Inheritance</strong>: child elements inherit styles of parent. Example: setting the text color ("color") of &lt;body&gt;, &lt;p&gt; inherits text color
+        </section>
+       </section>
+       <section id="css-selectors">
+         <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">CSS: Selectors</a></h3>
+         <ul>
+           <li>We have already been using element tag names as selectors</li>
+           <li>We can also use attribute value as selectors</li>
+           <li>The <strong><em>id</em></strong> and <strong><em>class</em></strong> attributes are special for CSS:
+           <pre  style=""><code class="hljs" data-trim>
+&lt;ol id="food-list"&gt;
+  &lt;li id="ham" class="food-item"&gt;ham&lt;/li&gt;
+  &lt;li class="food-item"&gt;pizza&lt;/li&gt;
+  &lt;li class="food-item"&gt;burrito&lt;/li&gt;
+&lt;/ol&gt;
+           </code></pre>
+         </li>
+         <li>ID Selectors: use "id" attribute to assign ID. the ID name must be unique in the document<br><strong>Use the hash symbol(#) before the ID in a selector</strong></li>
+         <li>Class Selectors: use "class" attribute to assign element to named class. Multiple elements in a document can have the same class value<br><strong>Use the period symbol(.) before the class in a selector</strong></li>
+         </ul>
+       </section>
+       <section>
+         <h3>Selectors Example</h3>
+         <pre  style=""><code class="hljs" data-trim>
+#food-list {
+  list-style-type: square;
+  font-size: xx-large;
+}
+.food-item {
+  color: blue;
+}
+#ham {
+   color: red;
+}
+         </code></pre>
+         <h3>Rendered Result</h3>
+         <iframe data-src="examples/cssexample2.html" width="100%" height="250px"></iframe>
+         <h4>More Selectors: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors</a></h4>
+       </section>
+       <section id="css-external-style">
+         <section>
+           <h3>Linking to External Style Sheets</h3>
+           <p>External style sheets are more maintainable during development</p>
+           <p>For the labs then on, please use external style sheets as much as possible.</p>
+           <pre  style=""><code class="hljs html-code" data-trim>
+&lt;head&gt;
+
+  ...
+
+    &lt;link type="text/css" rel="stylesheet" href="css/style.css"&gt;
+
+  ...
+
+&lt;/head&gt;
+           </code></pre>
+           <p>
+         </section>
+         <section>
+           <h3>Changing the Slide's External Style Sheet</h3>
+            <img data-src="images/slidetheme.png">
+         </section>
+       </section>
+       <section id="css-inline">
+         <h3>Inline Styling</h3>
+        <p>least maintainable, not recommended</p>
+        <pre  style=""><code class="hljs html-code" data-trim>
+&lt;body&gt;
+
+...
+
+  &lt;p style="width:400px; height:200px"&gt;
+
+...
+
+  &lt;/p&gt;
+
+&lt;/body&gt;
+        </code></pre>
+       </section>
+       <section id="css-order">
+         <h3>Resolving CSS Rules</h3>
+         <p>Order of Precedence (Applied In Order): </p>
+         <ol>
+           <li>Rules that are marked "!important" (sometimes useful, use with caution)</li>
+           <li>Inline CSS</li>
+           <li>More specific selectors over less specific ones (id selector is more sepecific than class, class selector is more specific than element name, etc)</li>
+           <li>Rules that appear later overrides earlier rules if both have same specificity</li>
+           <li>The browser's default style. Even if you don't specify any CSS, the web page would like slightly different in different browsers.</li>
+         </ol>
+         <h4>Further Reading: <a target="_blank" href="https://www.w3.org/TR/2011/REC-CSS2-20110607/cascade.html#cascade">W3C documentation</a></h4>
+       </section>
+       <section id="css-box-model">
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Boxes">The Box Model</a></h3>
+         <ul>
+          <li>Elements take up space when displayed</li>
+          <li>In the middle, the <strong><em>element</em></strong> occupies space to display content</li>
+          <li>Around the element is <strong><em>padding</em></strong></li>
+          <li>Around the padding is <strong><em>border</em></strong></li>
+          <li>Around the border and seperating the element with other elements is <strong><em>margin</em></strong></li>
+         </ul>
+         <h4><strong>Adjusting the margin and padding allows you to adjust positions and create space around elements</strong></h4>
+         <table>
+           <tbody>
+            <tr>
+             <td style="width: 22em;">
+              <div style="background-color: #ff6666; padding: 0px 2em 2em 2em; width: 16em;">
+               <p style="text-align: center; margin: 0px;">margin</p>
+               <p style="text-align: center; margin: 0px 0px -.75em 0px;">border</p>
+               <div style="background-color: #fff; padding: 0px 2em 2em 2em; border: 10px solid #fd9;">
+                <p style="text-align: center;">padding</p>
+                <div style="background-color: #ff6666;">
+                 <p style="text-align: center; padding: 0px; margin: 0px; font-size: 200%; font-weight: bold; color: #999;">element</p>
+                </div>
+               </div>
+              </div>
+              <p><em>The light red shows parts of the layout.</em></p>
+             </td>
+             <td>
+              <div style="background-color: #fff; padding: 0px 2em 2em 2em; width: 16em;">
+               <p style="text-align: center; margin: 0px;">&nbsp;</p>
+               <p style="text-align: center; margin: 0px 0px -.75em 0px;">&nbsp;</p>
+               <div style="background-color: #fff; padding: 0px 2em 2em 2em; border: 10px solid #fd9;">
+                <p style="text-align: center;">&nbsp;</p>
+                <div style="background-color: #fff;">
+                 <p style="text-align: center; padding: 0px; margin: 0px; font-size: 200%; font-weight: bold; color: #999;">element</p>
+                </div>
+               </div>
+              </div>
+              <p><em>This is what you see in your browser.</em></p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+       </section>
+       <section id="css-basic-layout">
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">Basic Layout</a></h3>
+           <ul>
+             <li>To better control layout, add <strong><em>layout elements</em></strong> to your HTML document</li>
+             <li>The &lt;div&gt; tag
+               <pre class="stretch"><code class="hljs html-code" data-trim>
+
+  &lt;h3&gt;Food&lt;/h3&gt;
+
+    &lt;div id=&quot;food-block&quot;&gt;
+
+      &lt;p&gt;Food 1&lt;/p&gt;
+
+      &lt;p&gt;Food 2t&lt;/p&gt;
+
+      &lt;p&gt;Food 3&lt;/p&gt;
+
+      &lt;p&gt;Food 4&lt;/p&gt;
+
+      &lt;p&gt;Food 5&lt;/p&gt;
+
+    &lt;/div&gt;
+
+               </code></pre>
+             </li>
+           </ul>
+           <h4>More on layouts: <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout</a></h4>
+         </section>
+         <section>
+           <h3>Size Units</h3>
+           <ul>
+             <li>W3C Reference: <a href="https://www.w3.org/Style/Examples/007/units.en.html">https://www.w3.org/Style/Examples/007/units.en.html</a></li>
+             <li>Most common units: <strong><em>em, px, and %</em></strong></li>
+             <li>em: <strong>relative</strong> to the font size of the element applied. Using em for font-size allows your layouts to be scaled with the font-size. <strong>You should be using this for styling fonts, and most of your margin/padding needs</strong></li>
+             <li>%: relative to the parent element. for example, "width: 80%" applied to an element means 80% of the parent's width</li>
+             <li>px: loosely correspond to pixels on screen. It is an <strong>absolute unit</strong>. px doesn't scale when you resize. Use with discretion </li>
+           </ul>
+         </section>
+         <section>
+           <h3>Text Layout</h3>
+           <ul>
+             <li>text-align: Aligns the content. Use one of these values: <strong>left, right, center, justify</strong></li>
+             <li>text-indent: Indents the content by an amount that you specify.</li>
+             <li>
+               Example:
+               <div style="background-color:green; text-align:center;">This text is centered</div><br>
+               <div style="background-color:red; text-indent: 5em;">This text is indented</div>
+             </li>
+           </ul>
+         </section>
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">Floats</a></h3>
+           <ul>
+             <li>Forces an element to the left or right.</li>
+             <li>Rest of document flows around the floated element</li>
+             <li>Apply the <strong><em>clear</em></strong> property (left, right, both) to clear an element from floats</li>
+           </ul>
+         </section>
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">Positioning</a></h3>
+           <p>The position proeprty can have one of the following four values:</p>
+           <ul>
+             <li><strong>relative</strong>: The element's position is shifted relative to its normal position. Use this to shift an element by a specified amount. You can sometimes use the element's margin to achieve the same effect.</li>
+             <li><strong>fixed</strong>: The element's position is fixed. Specify the element's position relative to the document window. Even if the rest of the document scrolls, the element remains fixed.</li>
+             <li><strong>aboslute</strong> (use with discretion): Try not to use itThe element's position is fixed relative to a parent element. Only a parent that is itself positioned with relative, fixed or absolute will do. You can make any parent element suitable by specifying position: relative; for it without specifying any shift.</li>
+             <li><strong>static</strong>: The default value</li>
+           </ul>
+         </section>
+       </section>
+       <section>
+         <h3>Debugging/Editing HTML/CSS On the Fly: Using Your Browser's developer console</h3>
+         <p>In this class, we will be using Google Chrome for class demoes/project testing</p>
+         <img data-src="images/devtools-window.png">
+       </section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">JavaScript: Introduction</a></h3>
+         <h4><strong><em>JavaScript !== JAVA</em></strong></h4>
+         <p>Brief History:</p>
+         <ul>
+           <li>Started out in NetScape in 1995 as LiveScript</li>
+           <li>Added "Java" to the name for "marketing" purposes</li>
+           <li>Microsoft created their own version of JavaScript called JScript</li>
+           <li>After much frustration, a standard is created: <a target="_blank" href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript</a></li>
+           <li>In the pre-IE9 era, cross-browser compatibility was a big issue</li>
+           <li>Modern browsers more or less implemented most of ECMAScript 5 (newest version is ECMAScript 6)</li>
+         </ul>
+         <img data-src="images/ripnetscape.png">
+       </section>
+       <section>
+         <section>
+           <h3>JavaScript: Overview</h3>
+           <ul>
+             <li>Object-oriented dynamic language</li>
+             <li>Many syntax similarities to Java/C</li>
+             <li>Hooray, you don't have to re-learn everything! But you also need to remember most of your programming skills</li>
+             <li>Made of three components: ECMASCript, Document Object Model (DOM), and Browser Object Model (BOM)</li>
+           </ul>
+           <img data-src="images/javascript-diagram.png">
+         </section>
+         <section>
+           <h3>ECMAScript</h3>
+           <p>A description of a language implementing the specs. Current version is 6. List of Components:</p>
+           <ul>
+             <li>Syntax</li>
+             <li>Types</li>
+             <li>Statements</li>
+             <li>Keywords</li>
+             <li>Reserved Words</li>
+             <li>Operators</li>
+             <li>Objects</li>
+           </ul>
+         </section>
+         <section>
+           <h3>The Document Object Model (DOM)</h3>
+           <ul>
+             <li>The DOM is an <strong>API (Application Programming Interface)</strong> that allows manipulation of elements in a web page</li>
+             <li>Allows nodes to be added/removed/modified/replaced. We will be using the DOM quite a bit this semester</li>
+             <li>The DOM creates a <strong>hierarchy of nodes of elements in the page</strong></li>
+             <img data-src="images/dom_tree.gif">
+           </ul>
+         </section>
+       </section>
+       <section>
+         <h3>JavaScript: Embedded and External</h3>
+          <p>Note: In both cases, place the &lt;script&gt; tags right before the &lt;/body&gt; tag in your document</p>
+          <p>Embedded:</p>
+          <pre><code class="hljs html-code" data-trim>
+
+&lt;script type="text/javascript"&gt;
+
+  function showPopup(){
+
+    alert("popups are annoying");
+
+  }
+
+&lt;/script&gt;
+
+          </code></pre>
+          <p>External:</p>
+          <pre style="width: 1400px;"><code class="hljs html-code html-code-single-line" data-trim>
+
+&lt;script type="text/javascript" soruce="js/main.js"&gt;&lt;/script&gt;
+
+          </code></pre>
+       </section>
+       <section>
+         <section>
+           <h3>JavaScript Language Basics: Variables</h3>
+           <li>Syntax is almost identical to Java</li>
+           <li>Statements, identifiers, most of the keywords/reserved words are identical</li>
+           <li><strong>Unlike Java, JavaScript variables are loosely typed and can hold any kind of data</strong>.<br> Variables are declared using the var keyword:
+             <pre class="stretch"><code class="javascript hljs html-code" data-trim>
+
+var myVariable = "hahaha";
+
+//not recommended
+
+myVariable = 2;
+
+//not recommended
+
+myVariable = [1, 2, 3, 4, 5];
+
+//not recommended
+
+myVariable = false;
+
+
+             </code></pre>
+           </li>
+         </section>
+         <section>
+           <h3>JavaScript: Variable Scope</h3>
+           <p><strong>Unlike Java, JavaScript is <em>function scoped</em></strong>. Blocks do not have scope.</p>
+           <ul>
+             <li>if a variable is declared in a if statement, it will be visible to the entire function.</li>
+             <pre class="stretch"><code class="javascript hljs html-code" data-trim>
+
+function testExample(num){
+
+  for(var i = 0; i < 10; i += 1){
+
+  }
+
+  /*Actually prints out
+
+  i with changed value*/
+
+  alert("What is 'i'? " + i);
+
+}
+
+               </code></pre>
+             </li>
+             <li>Local vs Global: ommiting the "var" keyword creates a global variable. Avoid global variables as much as you can. Always use "var" when creating variables.</li>
+           </ul>
+       </section>
+     </section>
+     <section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects">JavaScript: Objects</a></h3>
+         <ul>
+           <li>A collection of name-value pairs</li>
+           <li>Similar to HashMap in Java/Dictionaries in Python</li>
+           <li>Two ways to create an object:</li>
+           <li>Using the new operator (don't use this)
+          <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+            var obj = new Object();
+          </code></pre>
+          </li>
+          <li>Using object literal syntax (use this always)
+            <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+              var obj = {};
+            </code></pre>
+          </li>
+          <li>Object literal syntax is very similar to <strong>JSON format</strong>, something we will be using all the time</li>
+         </ul>
+       </section>
+       <section>
+         <h3>JavaScript Objects: Accessing Attributes</h3>
+         <p>Given the following Objcet:</p>
+         <pre><code class="hljs javascript html-code" data-trim>
+var pizza = {
+
+  name: "MyPizza",
+
+  toppings: [{name: "greenPepper", price: 40}, {name: "cheese", price: 20}]
+
+};
+         </code></pre>
+         <ul>
+           <li>Accessing using dot notation (ObjectVariable.propertyName)
+           <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+var pizzaName = pizza.name;
+           </code></pre>
+           </li>
+           <li>Accessing using array notation (Useful if you're storing the property name in a variable)
+           <pre><code class="hljs javascript html-code" data-trim>
+
+var nameProperty = "name";
+
+var pizzaName = pizza[nameProperty];
+
+           </code></pre>
+           </li>
+           <li>Chaining them together:
+             <pre><code class="hljs javascript html-code html-code-single-line" data-trim>
+var firstToppingName = pizza.toppings[0]["name"];
+             </code></pre>
+           </li>
+           <li>You can dynamically assign/overwrite properties as you wish</li>
+         </ul>
+       </section>
+     </section>
+     <section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">JavaScript Arrays</a></h3>
+         <li>Very similar to how ArrayLists work in Java</li>
+         <pre><code class="hljs javascript html-code">
+
+  var toppings = ["greenPepper", "cheese", "salami"];
+
+  toppings.length; //3
+
+  toppings[100] = "spam";
+
+  toppings.length; //101
+         </code></pre>
+       </section>
+       <section>
+         <h3>Array Operations</h3>
+         <p>Looping through arrays:</p>
+         <pre><code class="hljs javascript html-code">
+
+var toppings = ["greenPepper", "cheese", "salami"];
+
+toppings.forEach(function(currentTopping, index)){
+
+  console.log(currentTopping);
+
+}
+         </code></pre>
+       </section>
+       <section>
+        <table>
+         <thead>
+          <tr>
+           <th scope="col">Method name</th>
+           <th scope="col">Description</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr>
+           <td><code>a.toString()</code></td>
+           <td>Returns a string with the <code>toString()</code> of each element separated by commas.</td>
+          </tr>
+          <tr>
+           <td><code>a.concat(item1[, item2[, ...[, itemN]]])</code></td>
+           <td>Returns a new array with the items added on to it.</td>
+          </tr>
+          <tr>
+           <td><code>a.join(sep)</code></td>
+           <td>Converts the array to a string — with values delimited by the <code>sep</code> param</td>
+          </tr>
+          <tr>
+           <td><code>a.pop()</code></td>
+           <td>Removes and returns the last item.</td>
+          </tr>
+          <tr>
+           <td><code>a.push(item1, ..., itemN)</code></td>
+           <td>Adds one or more items to the end.</td>
+          </tr>
+          <tr>
+           <td><code>a.reverse()</code></td>
+           <td>Reverses the array.</td>
+          </tr>
+          <tr>
+           <td><code>a.shift()</code></td>
+           <td>Removes and returns the first item.</td>
+          </tr>
+          <tr>
+           <td><code>a.slice(start[, end])</code></td>
+           <td>Returns a sub-array.</td>
+          </tr>
+          <tr>
+           <td><code>a.sort([cmpfn])</code></td>
+           <td>Takes an optional comparison function.</td>
+          </tr>
+          <tr>
+           <td><code>a.splice(start, delcount[, item1[, ...[, itemN]]])</code></td>
+           <td>Lets you modify an array by deleting a section and replacing it with more items.</td>
+          </tr>
+          <tr>
+           <td><code>a.unshift(item1[, item2[, ...[, itemN]]])</code></td>
+           <td>Prepends items to the start of the array.</td>
+          </tr>
+         </tbody>
+        </table>
+       </section>
+      </section>
+      <section>
+        <h3>Functions</h3>
+        <p><strong>Functions are first class citizens in JavaScript: They are objects, and can be stored in variables and passed around</strong></p>
+        <pre class="stretch"><code class="hljs javascript html-code">
+
+function add(x, y){
+
+  var total = x + y;
+
+  return total;
+
+}
+
+var add2 = function(x, y){
+
+  var total = x + y;
+
+  return total;
+
+}
+
+var addThenMutiply = function(addFunction, x, y, z){
+
+  var total = addFunction(x, y);
+
+  return total * z;
+}
+
+add(1, 2); //3
+
+addThenMultiply(add2, 1, 2, 3); //9
+        </code></pre>
+      </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
