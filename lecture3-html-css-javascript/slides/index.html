@@ -569,32 +569,151 @@ git pull
           </table>
        </section>
        <section id="css-basic-layout">
-         <h3><a target="_blank" href="file:///D:/Github/CS3220-Fall2016/master/CSULA-CS3220-Fall2016/lecture3-html-css-javascript/slides/index.html#/css-basic-layout">Basic Layout</a></h3>
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">Basic Layout</a></h3>
+           <ul>
+             <li>To better control layout, add <strong><em>layout elements</em></strong> to your HTML document</li>
+             <li>The &lt;div&gt; tag
+               <pre class="stretch"><code class="hljs html-code" data-trim>
+
+  &lt;h3&gt;Food&lt;/h3&gt;
+
+    &lt;div id=&quot;food-block&quot;&gt;
+
+      &lt;p&gt;Food 1&lt;/p&gt;
+
+      &lt;p&gt;Food 2t&lt;/p&gt;
+
+      &lt;p&gt;Food 3&lt;/p&gt;
+
+      &lt;p&gt;Food 4&lt;/p&gt;
+
+      &lt;p&gt;Food 5&lt;/p&gt;
+
+    &lt;/div&gt;
+
+               </code></pre>
+             </li>
+           </ul>
+           <h4>More on layouts: <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout</a></h4>
+         </section>
+         <section>
+           <h3>Size Units</h3>
+           <ul>
+             <li>W3C Reference: <a href="https://www.w3.org/Style/Examples/007/units.en.html">https://www.w3.org/Style/Examples/007/units.en.html</a></li>
+             <li>Most common units: <strong><em>em, px, and %</em></strong></li>
+             <li>em: <strong>relative</strong> to the font size of the element applied. Using em for font-size allows your layouts to be scaled with the font-size. <strong>You should be using this for styling fonts, and most of your margin/padding needs</strong></li>
+             <li>%: relative to the parent element. for example, "width: 80%" applied to an element means 80% of the parent's width</li>
+             <li>px: loosely correspond to pixels on screen. It is an <strong>absolute unit</strong>. px doesn't scale when you resize. Use with discretion </li>
+           </ul>
+         </section>
+         <section>
+           <h3>Text Layout</h3>
+           <ul>
+             <li>text-align: Aligns the content. Use one of these values: <strong>left, right, center, justify</strong></li>
+             <li>text-indent: Indents the content by an amount that you specify.</li>
+             <li>
+               Example:
+               <div style="background-color:green; text-align:center;">This text is centered</div><br>
+               <div style="background-color:red; text-indent: 5em;">This text is indented</div>
+             </li>
+           </ul>
+         </section>
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">Floats</a></h3>
+           <ul>
+             <li>Forces an element to the left or right.</li>
+             <li>Rest of document flows around the floated element</li>
+             <li>Apply the <strong><em>clear</em></strong> property (left, right, both) to clear an element from floats</li>
+           </ul>
+         </section>
+         <section>
+           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">Positioning</a></h3>
+           <p>The position proeprty can have one of the following four values:</p>
+           <ul>
+             <li><strong>relative</strong>: The element's position is shifted relative to its normal position. Use this to shift an element by a specified amount. You can sometimes use the element's margin to achieve the same effect.</li>
+             <li><strong>fixed</strong>: The element's position is fixed. Specify the element's position relative to the document window. Even if the rest of the document scrolls, the element remains fixed.</li>
+             <li><strong>aboslute</strong> (use with discretion): Try not to use itThe element's position is fixed relative to a parent element. Only a parent that is itself positioned with relative, fixed or absolute will do. You can make any parent element suitable by specifying position: relative; for it without specifying any shift.</li>
+             <li><strong>static</strong>: The default value</li>
+           </ul>
+         </section>
+       </section>
+       <section>
+         <h3>Debugging/Editing HTML/CSS On the Fly: Using Your Browser's developer console</h3>
+         <p>In this class, we will be using Google Chrome for class demoes/project testing</p>
+         <img data-src="images/devtools-window.png">
+       </section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">JavaScript: Introduction</a></h3>
+         <h4><strong><em>JavaScript !== JAVA</em></strong></h4>
+         <p>Brief History:</p>
          <ul>
-           <li>To better control layout, add <strong><em>layout elements</em></strong> to your HTML document</li>
-           <li>The &lt;div&gt; tag
-             <pre class="stretch"><code class="hljs html-code" data-trim>
-
-&lt;h3&gt;Food&lt;/h3&gt;
-
-  &lt;div id=&quot;food-block&quot;&gt;
-
-    &lt;p&gt;Food 1&lt;/p&gt;
-
-    &lt;p&gt;Food 2t&lt;/p&gt;
-
-    &lt;p&gt;Food 3&lt;/p&gt;
-
-    &lt;p&gt;Food 4&lt;/p&gt;
-
-    &lt;p&gt;Food 5&lt;/p&gt;
-
-  &lt;/div&gt;
-
-             </code></pre>
-           </li>
+           <li>Started out in NetScape in 1995 as LiveScript</li>
+           <li>Added "Java" to the name for "marketing" purposes</li>
+           <li>Microsoft created their own version of JavaScript called JScript</li>
+           <li>After much frustration, a standard is created: <a target="_blank" href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript</a></li>
+           <li>In the pre-IE9 era, cross-browser compatibility was a big issue</li>
+           <li>Modern browsers more or less implemented most of ECMAScript 5 (newest version is ECMAScript 6)</li>
          </ul>
-         <h4>More on layouts: <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Layout</a></h4>
+         <img data-src="images/ripnetscape.png">
+       </section>
+       <section>
+         <section>
+           <h3>JavaScript: Overview</h3>
+           <ul>
+             <li>Object-oriented dynamic language</li>
+             <li>Many syntax similarities to Java/C</li>
+             <li>Hooray, you don't have to re-learn everything! But you also need to remember most of your programming skills</li>
+             <li>Made of three components: ECMASCript, Document Object Model (DOM), and Browser Object Model (BOM)</li>
+           </ul>
+           <img data-src="images/javascript-diagram.png">
+         </section>
+         <section>
+           <h3>ECMAScript</h3>
+           <p>A description of a language implementing the specs. Current version is 6. List of Components:</p>
+           <ul>
+             <li>Syntax</li>
+             <li>Types</li>
+             <li>Statements</li>
+             <li>Keywords</li>
+             <li>Reserved Words</li>
+             <li>Operators</li>
+             <li>Objects</li>
+           </ul>
+         </section>
+         <section>
+           <h3>The Document Object Model (DOM)</h3>
+           <ul>
+             <li>The DOM is an <strong>API (Application Programming Interface)</strong> that allows manipulation of elements in a web page</li>
+             <li>Allows nodes to be added/removed/modified/replaced. We will be using the DOM quite a bit this semester</li>
+             <li>The DOM creates a <strong>hierarchy of nodes of elements in the page</strong></li>
+             <img data-src="images/dom_tree.gif">
+           </ul>
+         </section>
+       </section>
+       <section>
+         <h3>JavaScript: Embedded and External</h3>
+          <p>Note: In both cases, place the &lt;script&gt; tags right before the &lt;/body&gt; tag in your document</p>
+          <p>Embedded:</p>
+          <pre><code class="hljs html-code" data-trim>
+
+&lt;script type="text/javascript"&gt;
+
+  function showPopup(){
+
+    alert("popups are annoying");
+
+  }
+
+&lt;/script&gt;
+
+          </code></pre>
+          <p>External:</p>
+          <pre style="width: 1400px;"><code class="hljs html-code html-code-single-line" data-trim>
+
+&lt;script type="text/javascript" soruce="js/main.js"&gt;&lt;/script&gt;
+
+          </code></pre>
        </section>
       </div>
     </div>
