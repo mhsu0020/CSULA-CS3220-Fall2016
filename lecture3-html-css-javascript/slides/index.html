@@ -824,6 +824,94 @@ var firstToppingName = pizza.toppings[0]["name"];
          </ul>
        </section>
      </section>
+     <section>
+       <section>
+         <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">JavaScript Arrays</a></h3>
+         <li>Very similar to how ArrayLists work in Java</li>
+         <pre><code class="hljs javascript html-code">
+
+  var toppings = ["greenPepper", "cheese", "salami"];
+
+  toppings.length; //3
+
+  toppings[100] = "spam";
+
+  toppings.length; //101
+         </code></pre>
+       </section>
+       <section>
+         <h3>Array Operations</h3>
+         <p>Looping through arrays:</p>
+         <pre><code class="hljs javascript html-code">
+
+var toppings = ["greenPepper", "cheese", "salami"];
+
+toppings.forEach(function(currentTopping, index)){
+
+  console.log(currentTopping);
+
+}
+         </code></pre>
+       </section>
+       <section>
+        <table>
+         <thead>
+          <tr>
+           <th scope="col">Method name</th>
+           <th scope="col">Description</th>
+          </tr>
+         </thead>
+         <tbody>
+          <tr>
+           <td><code>a.toString()</code></td>
+           <td>Returns a string with the <code>toString()</code> of each element separated by commas.</td>
+          </tr>
+          <tr>
+           <td><code>a.concat(item1[, item2[, ...[, itemN]]])</code></td>
+           <td>Returns a new array with the items added on to it.</td>
+          </tr>
+          <tr>
+           <td><code>a.join(sep)</code></td>
+           <td>Converts the array to a string — with values delimited by the <code>sep</code> param</td>
+          </tr>
+          <tr>
+           <td><code>a.pop()</code></td>
+           <td>Removes and returns the last item.</td>
+          </tr>
+          <tr>
+           <td><code>a.push(item1, ..., itemN)</code></td>
+           <td>Adds one or more items to the end.</td>
+          </tr>
+          <tr>
+           <td><code>a.reverse()</code></td>
+           <td>Reverses the array.</td>
+          </tr>
+          <tr>
+           <td><code>a.shift()</code></td>
+           <td>Removes and returns the first item.</td>
+          </tr>
+          <tr>
+           <td><code>a.slice(start[, end])</code></td>
+           <td>Returns a sub-array.</td>
+          </tr>
+          <tr>
+           <td><code>a.sort([cmpfn])</code></td>
+           <td>Takes an optional comparison function.</td>
+          </tr>
+          <tr>
+           <td><code>a.splice(start, delcount[, item1[, ...[, itemN]]])</code></td>
+           <td>Lets you modify an array by deleting a section and replacing it with more items.</td>
+          </tr>
+          <tr>
+           <td><code>a.unshift(item1[, item2[, ...[, itemN]]])</code></td>
+           <td>Prepends items to the start of the array.</td>
+          </tr>
+         </tbody>
+        </table>
+       </section>
+      </section>
+      <section>
+      </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
