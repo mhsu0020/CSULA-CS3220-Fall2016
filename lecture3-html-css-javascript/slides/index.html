@@ -818,7 +818,7 @@ var pizzaName = pizza[nameProperty];
 var firstToppingName = pizza.toppings[0]["name"];
              </code></pre>
            </li>
-           <li>You can dynamically assign/overwrite properties as you wish</li>
+           <li>You can dynamically assign/overwrite properties as you wish using the same notation</li>
          </ul>
        </section>
      </section>
@@ -909,37 +909,135 @@ toppings.forEach(function(currentTopping, index)){
        </section>
       </section>
       <section>
-        <h3>Functions</h3>
-        <p><strong>Functions are first class citizens in JavaScript: They are objects, and can be stored in variables and passed around</strong></p>
-        <pre class="stretch"><code class="hljs javascript html-code">
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">Functions</a></h3>
+          <p><strong>Functions are first class citizens in JavaScript: They are objects, and can be stored in variables and passed around</strong></p>
+          <pre class="stretch"><code class="hljs javascript html-code">
 
-function add(x, y){
+  function add(x, y){
 
-  var total = x + y;
+    var total = x + y;
 
-  return total;
+    return total;
+
+  }
+
+//Function Expressions
+
+  var add2 = function(x, y){
+
+    var total = x + y;
+
+    return total;
+
+  }
+
+  var addThenMutiply = function(addFunction, x, y, z){
+
+    var total = addFunction(x, y);
+
+    return total * z;
+  }
+
+  add(1, 2); //3
+
+  addThenMultiply(add2, 1, 2, 3); //9
+
+          </code></pre>
+        </section>
+        <section>
+          <h4>JavaScript functions are <strong>pass by value</strong>, just like Java. You can not modify primitive types or re-assign objects, but you can modify object properties.</h4>
+          <pre class="stretch"><code class="hljs javascript html-code">
+
+function reassignPrimitive(num){
+
+  num = 2;
 
 }
 
-var add2 = function(x, y){
 
-  var total = x + y;
+function reassignCarObject(car){
 
-  return total;
+  car = {make: "Ferrari"};
 
 }
 
-var addThenMutiply = function(addFunction, x, y, z){
+function modifyCarObject(car){
 
-  var total = addFunction(x, y);
+  car.make = "Ferrari";
 
-  return total * z;
 }
 
-add(1, 2); //3
+var number = 1;
 
-addThenMultiply(add2, 1, 2, 3); //9
-        </code></pre>
+var camry = {make: "Toyota"};
+
+reassignPrimitive(number); //number is still 1, a copy of the value of number is passed in
+
+reassignCarObject(camry); //camry.make is still "Toyota", a copy of the reference is passed in
+
+modifyCarObject(camry); //camry.make is now "Ferrari"
+
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Function Scope</h3>
+          <ul>
+            <li>JavaScript is <strong>function scoped</strong>, not block scoped.</li>
+            <li>Variables defined inside a function cannot be accessed from anywhere outside the function</li>
+            <li>However, a function can access all variables and functions defined inside the scope in which it is defined</li>
+            <li>A function defined in the <strong>global scope</strong> can access all variables defined in the global scope</li>
+            <li>A function defined inside another function can also access all variables defined in its parent function and any other variable to which the parent function has access</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Function Scope: Example</h3>
+          <pre class="stretch"><code class="hljs javascript html-code">
+
+//Global Scope Variables
+
+var num1 = 20,
+
+    num2 = 3,
+
+    name = "Chamahk";
+
+// This function is defined in the global scope
+
+function multiply() {
+
+  return num1 * num2;
+
+}
+
+multiply(); // Returns 60
+
+// A nested function example
+
+function getScore () {
+
+  var num1 = 2,
+
+      num2 = 3;
+
+
+  function add() {
+
+    return name + " scored " + (num1 + num2);
+
+  }
+
+
+  return add();
+
+}
+
+getScore(); // Returns "Chamahk scored 5"
+
+
+          </code></pre>
+        </section>
       </section>
       </div>
     </div>
