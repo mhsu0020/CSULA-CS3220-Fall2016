@@ -1078,6 +1078,138 @@ getScore(); // Returns "Chamahk scored 5"
           </code></pre>
         </section>
       </section>
+      <section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">The Document Object Model (DOM)</a></h3>
+          <ul>
+            <li>The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods.</li>
+            <li>Essentially, it connects web pages to scripts or programming languages.</li>
+            <li>Represented as a hierarchy of <strong>nodes</strong></li>
+            <img data-src="images/dom1.png" height="500px">
+          </ul>
+        </section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">Node Types</a></h3>
+          <p>There are 12 Node Types, most notabally:</p>
+          <ul>
+            <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</a></code>: The root Node type. The Node <code>document</code> provides many useful functions, such as <code>document.getElementById()</code></li>
+            <li><code>Element</code>: Most common Node Type. For example in the previous slide image, the html, head, title, body, and p elements are all Node elements</li>
+            <li><code>Text</code>: represents data literals (the "text" between the tags)</li>
+          </ul>
+          <p>Getting tag name of Node: <code>someNode.nodeName</code></p>
+        </section>
+        <section>
+          <h3>Node Relationships</h3>
+          <ul>
+            <li>Expressed in terms of "tradiional family relationships": parent/child/sibiling</li>
+            <li>Each node has a <code>childNodes</code> property containing a <code>NodeList</code>.</li>
+            <li>A <code>NodeList</code> is an array-like object used to store an ordered list of nodes that are accessible by position, similar to Arrays.</li>
+          </ul>
+          <pre><code class="hljs javascript html-code">
+
+var firstChild = someNode.childNodes[0];
+
+var secondChild = someNode.childNodes.item(1);
+
+var count = someNode.childNodes.length;
+        </code></pre>
+        <img data-src="images/dom2.png">
+        </section>
+        <section>
+          <h3>Node Manipulation</h3>
+          <ul>
+            <li>Adding Nodes: <code>appendChild()</code>: adds to end</li>
+            <li>Replacing/Removing Nodes: <code>replaceChild()</code>, <code>removeChild()</code></li>
+            <li>Creating copies of Nodes: deep copy <code>cloneNode(true)</code> vs shallow copy <code>cloneNode(false)</code></li>
+            <li>Only copies attributes and/or child nodes, not <strong>event handlers</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3>The <code>Document</code> Type</h3>
+          <p>Useful Methods:</p>
+            <p>Getting element by ID: <code>document.getElementById()</code></p>
+            <pre><code class="hljs javascript html-code">
+
+&lt;div id=&quot;myDiv&quot;&gt;Some Div&lt;/div&gt;
+
+.....
+
+var div = document.getElementById("myDiv");
+
+            </code></pre>
+            <p>Getting elements by tag name: <code>document.getElementsByTagName()</code>. This returns a <code>NodeList</code></p>
+        </section>
+        <section>
+          <h3>Useful <code>HTMLElement</code> Attributes</h3>
+          <ul>
+            <li><code>HTMLElement</code> inherits from <code>Node</code> with some special properties</li>
+            <li><code><strong>id</strong></code> — A unique identifi er for the element in the document.</li>
+            <li><code><strong>className</strong></code> — The equivalent of the class attribute, which is used to specify CSS classes on an element</li>
+          </ul>
+          <pre><code class="hljs javascript">
+
+&lt;div id=&quot;myDiv&quot; class="ugly-color-theme" myAttribute="stuff" &gt;Some Div&lt;/div&gt;
+
+.....
+
+var div = document.getElementById("myDiv");
+
+div.id = "someOtherId";
+
+div.className = "cool-color-theme";
+
+var customProp = div.getAttribute("myAttribute");
+
+div.setAttribute("myAttribute", "no more stuff");
+          </code></pre>
+        </section>
+        <section>
+          <h3>Creating Elements</h3>
+          <p>The <code>document.createElement()</code> function</p>
+          <pre><code class="hljs javascript">
+
+//Doesn't actually add it to Document yet
+  var div = document.createElement("div");
+
+  div.id = "myNewDiv";
+
+  div.className = "box";
+
+  document.body.appendChild(div);
+
+          </code></pre>
+          <p>Directly Inserting Markup: <code>innerHTML</code></p>
+        </section>
+        <section>
+          <h3><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors">Selectors API</a></h3>
+          <p>Using CSS selectors, you can find elements on the page</p>
+          <pre class="stretch"><code class="hljs javascript">
+            //get the body element
+            var body = document.querySelector("body");
+
+            //get the element with the ID "myDiv"
+            var myDiv = document.querySelector("#myDiv");
+
+            //get first element with a class of "selected"
+            var selected = document.querySelector(".selected");
+
+            //get first image with class of "button"
+            var img = document.body.querySelector("img.button");
+
+            //get all em elements in a div (similar to getElementsByTagName("em"))
+            var ems = document.getElementById("myDiv").querySelectorAll("em");
+
+            //get all elements with class of "selected"
+            var selecteds = document.querySelectorAll(".selected");
+
+            //get all strong elements inside of p elements
+            var strongs = document.querySelectorAll("p strong");
+
+          </code></pre>
+        </section>
+      </section>
+      <section>
+      </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
