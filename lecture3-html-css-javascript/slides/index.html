@@ -767,17 +767,16 @@ function testExample(num){
        </section>
        <section>
          <h3>Variable Types</h3>
-         <p>Primitive Types:</p>
+         <p>Common Primitive Types:</p>
          <ul>
            <li><strong>Boolean</strong>. <code>true</code> and <code>false</code>.</li>
-           <li><strong>null</strong>. A special keyword denoting a null value. Because JavaScript is case-sensitive, <code>null</code> is not the same as <code>Null</code>, <code>NULL</code>, or any other variant.</li>
-           <li>Note: null: In computer science, a null value represents a reference that points, generally intentionally, to a nonexistent or invalid object or address. The meaning of a null reference varies among language implementations.</li>
-           <li><strong>undefined</strong>. A top-level property whose value is undefined.</li>
+           <li><strong>undefined</strong>. A top-level property whose value is undefined. The default value of variables declared but not assigned values yet. <strong>Undefined is a type of itself</strong></li>
            <li><strong>Number</strong>(floating point). <code>42</code> or <code>3.14159</code>.</li>
            <li><strong>String</strong>. "Howdy"</li>
         </ul>
         <p>Reference Types:</p>
         <p><strong>Object</strong>. Functions, Arrays, etc are all Object types</p>
+        <p>Variables can be intentionally set to <code>null</code> to empty it.</p>
        </section>
        <section>
          <h3>Data Conversion</h3>
@@ -795,6 +794,16 @@ y = 42 + " is the answer" // "42 is the answer"
          </code></pre>
          <p><strong>String to Numbers: </strong> use <code>parseInt()</code> or <code>parseFloat</code></p>
        </section>
+       <section>
+         <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">JavaScript Comparisons</a></h3>
+         <p>Two types of comparisons:</p>
+         <ul>
+           <li><strong>Strict Comparison</strong> (preferred): <code>===</code><br> Only True if both type and content match</li>
+           <li><strong>Type-Converting Comparison</strong> (less strict): <code>==</code><br>Converts the operands to the same type before making the comparison. </li>
+           <li>Use strict comparison whenever possible to avoid confusion</li>
+         </ul>
+       </section>
+
      </section>
      <section>
        <section>
@@ -814,14 +823,6 @@ y = 42 + " is the answer" // "42 is the answer"
             </code></pre>
           </li>
           <li>Object literal syntax is very similar to <strong>JSON format</strong>, something we will be using all the time</li>
-         </ul>
-       </section>
-       <section>
-         <h3>JavaScript Comparisons</h3>
-         <p>Two types of comparisons:</p>
-         <ul>
-           <li><strong>Strict Comparison</strong> (preferred): <code>===</code></li>
-           <li><strong>Type-Converting Comparison</strong> (less strict): <code>==</code></li>
          </ul>
        </section>
        <section>
