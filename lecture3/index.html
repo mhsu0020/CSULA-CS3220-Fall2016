@@ -656,6 +656,20 @@ git pull
          <img data-src="images/ripnetscape.png">
        </section>
        <section>
+         <h3>References</h3>
+         <ul>
+           <li>JavaScript Tutorial: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript</a></li>
+           <li>DOM Intro: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction</a></li>
+           <li>The Document Type: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document">https://developer.mozilla.org/en-US/docs/Web/API/Document</a></li>
+           <li>DOM Selectors: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors">https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors</a></li>
+           <li>DOM Event Handlers: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers">https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers</a></li>
+           <li>DOM Events: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a></li>
+           <li>Comparison Operators: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators</a></li>
+           <li>Functions: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions</a></li>
+           <li>Professional JavaScript for Web Developers: <a target="_blank" href="https://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691">https://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691</a></li>
+         </ul>
+       </section>
+       <section>
          <section>
            <h3>JavaScript: Overview</h3>
            <ul>
@@ -765,6 +779,45 @@ function testExample(num){
              <li>Local vs Global: ommiting the "var" keyword creates a global variable. Avoid global variables as much as you can. Always use "var" when creating variables.</li>
            </ul>
        </section>
+       <section>
+         <h3>Variable Types</h3>
+         <p>Common Primitive Types:</p>
+         <ul>
+           <li><strong>Boolean</strong>. <code>true</code> and <code>false</code>.</li>
+           <li><strong>undefined</strong>. A top-level property whose value is undefined. The default value of variables declared but not assigned values yet. <strong>Undefined is a type of itself</strong></li>
+           <li><strong>Number</strong>(floating point). <code>42</code> or <code>3.14159</code>.</li>
+           <li><strong>String</strong>. "Howdy"</li>
+        </ul>
+        <p>Reference Types:</p>
+        <p><strong>Object</strong>. Functions, Arrays, etc are all Object types</p>
+        <p>Variables can be intentionally set to <code>null</code> to empty it.</p>
+       </section>
+       <section>
+         <h3>Data Conversion</h3>
+         <p><strong>Number to Strings: </strong><br>In expressions involving numeric and string values with the + operator, JavaScript converts numeric values to strings.<br> In statements involving other operators, JavaScript does not convert numeric values to strings.</p>
+         <pre><code class="hljs javascript html-code" data-trim>
+
+x = "The answer is " + 42 // "The answer is 42"
+
+y = 42 + " is the answer" // "42 is the answer"
+
+"37" - 7 // 30
+
+"37" + 7 // "377"
+
+         </code></pre>
+         <p><strong>String to Numbers: </strong> use <code>parseInt()</code> or <code>parseFloat</code></p>
+       </section>
+       <section>
+         <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">JavaScript Comparisons</a></h3>
+         <p>Two types of comparisons:</p>
+         <ul>
+           <li><strong>Strict Comparison</strong> (preferred): <code>===</code><br> Only True if both type and content match</li>
+           <li><strong>Type-Converting Comparison</strong> (less strict): <code>==</code><br>Converts the operands to the same type before making the comparison. </li>
+           <li>Use strict comparison whenever possible to avoid confusion</li>
+         </ul>
+       </section>
+
      </section>
      <section>
        <section>
@@ -818,7 +871,7 @@ var pizzaName = pizza[nameProperty];
 var firstToppingName = pizza.toppings[0]["name"];
              </code></pre>
            </li>
-           <li>You can dynamically assign/overwrite properties as you wish</li>
+           <li>You can dynamically assign/overwrite properties as you wish using the same notation</li>
          </ul>
        </section>
      </section>
@@ -909,37 +962,303 @@ toppings.forEach(function(currentTopping, index)){
        </section>
       </section>
       <section>
-        <h3>Functions</h3>
-        <p><strong>Functions are first class citizens in JavaScript: They are objects, and can be stored in variables and passed around</strong></p>
-        <pre class="stretch"><code class="hljs javascript html-code">
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">Functions</a></h3>
+          <p><strong>Functions are first class citizens in JavaScript: They are objects, and can be stored in variables and passed around</strong></p>
+          <pre class="stretch"><code class="hljs javascript html-code">
 
-function add(x, y){
+  function add(x, y){
 
-  var total = x + y;
+    var total = x + y;
 
-  return total;
+    return total;
+
+  }
+
+//Function Expressions
+
+  var add2 = function(x, y){
+
+    var total = x + y;
+
+    return total;
+
+  }
+
+  var addThenMutiply = function(addFunction, x, y, z){
+
+    var total = addFunction(x, y);
+
+    return total * z;
+  }
+
+  add(1, 2); //3
+
+  addThenMultiply(add2, 1, 2, 3); //9
+
+          </code></pre>
+        </section>
+        <section>
+          <h4>JavaScript functions are <strong>pass by value</strong>, just like Java. You can not modify primitive types or re-assign objects, but you can modify object properties.</h4>
+          <pre class="stretch"><code class="hljs javascript html-code">
+
+function reassignPrimitive(num){
+
+  num = 2;
 
 }
 
-var add2 = function(x, y){
 
-  var total = x + y;
+function reassignCarObject(car){
 
-  return total;
+  car = {make: "Ferrari"};
 
 }
 
-var addThenMutiply = function(addFunction, x, y, z){
+function modifyCarObject(car){
 
-  var total = addFunction(x, y);
+  car.make = "Ferrari";
 
-  return total * z;
 }
 
-add(1, 2); //3
+var number = 1;
 
-addThenMultiply(add2, 1, 2, 3); //9
+var camry = {make: "Toyota"};
+
+reassignPrimitive(number); //number is still 1, a copy of the value of number is passed in
+
+reassignCarObject(camry); //camry.make is still "Toyota", a copy of the reference is passed in
+
+modifyCarObject(camry); //camry.make is now "Ferrari"
+
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Function Scope</h3>
+          <ul>
+            <li>JavaScript is <strong>function scoped</strong>, not block scoped.</li>
+            <li>Variables defined inside a function cannot be accessed from anywhere outside the function</li>
+            <li>However, a function can access all variables and functions defined inside the scope in which it is defined</li>
+            <li>A function defined in the <strong>global scope</strong> can access all variables defined in the global scope</li>
+            <li>A function defined inside another function can also access all variables defined in its parent function and any other variable to which the parent function has access</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Function Scope: Example</h3>
+          <pre class="stretch"><code class="hljs javascript html-code">
+
+//Global Scope Variables
+
+var num1 = 20,
+
+    num2 = 3,
+
+    name = "Chamahk";
+
+// This function is defined in the global scope
+
+function multiply() {
+
+  return num1 * num2;
+
+}
+
+multiply(); // Returns 60
+
+// A nested function example
+
+function getScore () {
+
+  var num1 = 2,
+
+      num2 = 3;
+
+
+  function add() {
+
+    return name + " scored " + (num1 + num2);
+
+  }
+
+
+  return add();
+
+}
+
+getScore(); // Returns "Chamahk scored 5"
+
+
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">The Document Object Model (DOM)</a></h3>
+          <ul>
+            <li>The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods.</li>
+            <li>Essentially, it connects web pages to scripts or programming languages.</li>
+            <li>Represented as a hierarchy of <strong>nodes</strong></li>
+            <img data-src="images/dom1.png" height="500px">
+          </ul>
+        </section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">Node Types</a></h3>
+          <p>There are 12 Node Types, most notabally:</p>
+          <ul>
+            <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</a></code>: The root Node type. The Node <code>document</code> provides many useful functions, such as <code>document.getElementById()</code></li>
+            <li><code>Element</code>: Most common Node Type. For example in the previous slide image, the html, head, title, body, and p elements are all Node elements</li>
+            <li><code>Text</code>: represents data literals (the "text" between the tags)</li>
+          </ul>
+          <p>Getting tag name of Node: <code>someNode.nodeName</code></p>
+        </section>
+        <section>
+          <h3>Node Relationships</h3>
+          <ul>
+            <li>Expressed in terms of "tradiional family relationships": parent/child/sibiling</li>
+            <li>Each node has a <code>childNodes</code> property containing a <code>NodeList</code>.</li>
+            <li>A <code>NodeList</code> is an array-like object used to store an ordered list of nodes that are accessible by position, similar to Arrays.</li>
+          </ul>
+          <pre><code class="hljs javascript html-code">
+
+var firstChild = someNode.childNodes[0];
+
+var secondChild = someNode.childNodes.item(1);
+
+var count = someNode.childNodes.length;
         </code></pre>
+        <img data-src="images/dom2.png">
+        </section>
+        <section>
+          <h3>Node Manipulation</h3>
+          <ul>
+            <li>Adding Nodes: <code>appendChild()</code>: adds to end</li>
+            <li>Replacing/Removing Nodes: <code>replaceChild()</code>, <code>removeChild()</code></li>
+            <li>Creating copies of Nodes: deep copy <code>cloneNode(true)</code> vs shallow copy <code>cloneNode(false)</code></li>
+            <li>Only copies attributes and/or child nodes, not <strong>event handlers</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3>The <code>Document</code> Type</h3>
+          <p>Useful Methods:</p>
+            <p>Getting element by ID: <code>document.getElementById()</code></p>
+            <pre><code class="hljs javascript html-code">
+
+&lt;div id=&quot;myDiv&quot;&gt;Some Div&lt;/div&gt;
+
+.....
+
+var div = document.getElementById("myDiv");
+
+            </code></pre>
+            <p>Getting elements by tag name: <code>document.getElementsByTagName()</code>. This returns a <code>NodeList</code></p>
+        </section>
+        <section>
+          <h3>Useful <code>HTMLElement</code> Attributes</h3>
+          <ul>
+            <li><code>HTMLElement</code> inherits from <code>Node</code> with some special properties</li>
+            <li><code><strong>id</strong></code> — A unique identifi er for the element in the document.</li>
+            <li><code><strong>className</strong></code> — The equivalent of the class attribute, which is used to specify CSS classes on an element</li>
+          </ul>
+          <pre><code class="hljs javascript">
+
+&lt;div id=&quot;myDiv&quot; class="ugly-color-theme" myAttribute="stuff" &gt;Some Div&lt;/div&gt;
+
+.....
+
+var div = document.getElementById("myDiv");
+
+div.id = "someOtherId";
+
+div.className = "cool-color-theme";
+
+var customProp = div.getAttribute("myAttribute");
+
+div.setAttribute("myAttribute", "no more stuff");
+          </code></pre>
+        </section>
+        <section>
+          <h3>Creating Elements</h3>
+          <p>The <code>document.createElement()</code> function</p>
+          <pre><code class="hljs javascript">
+
+//Doesn't actually add it to Document yet
+  var div = document.createElement("div");
+
+  div.id = "myNewDiv";
+
+  div.className = "box";
+
+  document.body.appendChild(div);
+
+          </code></pre>
+          <p>Directly Inserting Markup: <code>innerHTML</code></p>
+        </section>
+        <section>
+          <h3><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors">Selectors API</a></h3>
+          <p>Using CSS selectors, you can find elements on the page</p>
+          <pre class="stretch"><code class="hljs javascript">
+            //get the body element
+            var body = document.querySelector("body");
+
+            //get the element with the ID "myDiv"
+            var myDiv = document.querySelector("#myDiv");
+
+            //get first element with a class of "selected"
+            var selected = document.querySelector(".selected");
+
+            //get first image with class of "button"
+            var img = document.body.querySelector("img.button");
+
+            //get all em elements in a div (similar to getElementsByTagName("em"))
+            var ems = document.getElementById("myDiv").querySelectorAll("em");
+
+            //get all elements with class of "selected"
+            var selecteds = document.querySelectorAll(".selected");
+
+            //get all strong elements inside of p elements
+            var strongs = document.querySelectorAll("p strong");
+
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Event Handling</h3>
+          <ul>
+            <li>Browser Wars: IE vs NetScape</li>
+            <li><strong>Event Bubbling</strong>: event fired at element interacted, then "bubble up"<br></li>
+            <li><strong>Event Capturing</strong>: event fired at top level document, then gradually down to be "captured"<br></li>
+            <li>Current DOM spec: Capturing -> target recieves event -> Bubbling</li>
+          </ul>
+          <div><img data-src="images/eventflow.png"></div>
+        </section>
+        <section>
+          <h3>HTML Event Handlers</h3>
+          <ul>
+            <li>Similar to JavaFX: user action triggers events, you can create and register functions to handle specific events</li>
+            <li>Many, many, different event types: <a href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a></li>
+          </ul>
+          <pre class="stretch"><code class="hljs javascript">
+            var button = document.getElementById("myBtn");
+
+            var alertIdFunction = function(){
+                alert(this.id);
+            };
+
+            var alertHaFunction = function(){
+                alert("hahah");
+            };
+            button.addEventListener("click", alertIdFunction, false);
+
+            //Second click function, both will be fired when button is clicked
+            button.addEventListener("click",alertHaFunction, false);
+
+            btn.removeEventListener(“click”, alertIdFunction, false);
+
+
+        </pre></code>
+        </section>
       </section>
       </div>
     </div>
