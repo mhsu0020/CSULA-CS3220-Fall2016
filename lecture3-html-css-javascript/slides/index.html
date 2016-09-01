@@ -656,6 +656,20 @@ git pull
          <img data-src="images/ripnetscape.png">
        </section>
        <section>
+         <h3>References</h3>
+         <ul>
+           <li>JavaScript Tutorial: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript</a></li>
+           <li>DOM Intro: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction</a></li>
+           <li>The Document Type: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document">https://developer.mozilla.org/en-US/docs/Web/API/Document</a></li>
+           <li>DOM Selectors: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors">https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors</a></li>
+           <li>DOM Event Handlers: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers">https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers</a></li>
+           <li>DOM Events: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a></li>
+           <li>Comparison Operators: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators</a></li>
+           <li>Functions: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions</a></li>
+           <li>Professional JavaScript for Web Developers: <a target="_blank" href="https://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691">https://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691</a></li>
+         </ul>
+       </section>
+       <section>
          <section>
            <h3>JavaScript: Overview</h3>
            <ul>
@@ -1209,6 +1223,42 @@ div.setAttribute("myAttribute", "no more stuff");
         </section>
       </section>
       <section>
+        <section>
+          <h3>Event Handling</h3>
+          <ul>
+            <li>Browser Wars: IE vs NetScape</li>
+            <li><strong>Event Bubbling</strong>: event fired at element interacted, then "bubble up"<br></li>
+            <li><strong>Event Capturing</strong>: event fired at top level document, then gradually down to be "captured"<br></li>
+            <li>Current DOM spec: Capturing -> target recieves event -> Bubbling</li>
+          </ul>
+          <div><img data-src="images/eventflow.png"></div>
+        </section>
+        <section>
+          <h3>HTML Event Handlers</h3>
+          <ul>
+            <li>Similar to JavaFX: user action triggers events, you can create and register functions to handle specific events</li>
+            <li>Many, many, different event types: <a href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a></li>
+          </ul>
+          <pre class="stretch"><code class="hljs javascript">
+            var button = document.getElementById("myBtn");
+
+            var alertIdFunction = function(){
+                alert(this.id);
+            };
+
+            var alertHaFunction = function(){
+                alert("hahah");
+            };
+            button.addEventListener("click", alertIdFunction, false);
+
+            //Second click function, both will be fired when button is clicked
+            button.addEventListener("click",alertHaFunction, false);
+
+            btn.removeEventListener(“click”, alertIdFunction, false);
+
+
+        </pre></code>
+        </section>
       </section>
       </div>
     </div>
