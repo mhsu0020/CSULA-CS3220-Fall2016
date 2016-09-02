@@ -1,4 +1,4 @@
-//Functional expression. It's like calling myObject.method(), except myObject is a functional expression wrapped in (function(){ })();
+//Function expression. It's like calling myObject.method(), except myObject is a function expression wrapped in (function(){ })();
 //This creates its own scope so that the variables are not global.
 (function() {
 
