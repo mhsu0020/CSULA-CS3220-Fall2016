@@ -1093,6 +1093,20 @@ getScore(); // Returns "Chamahk scored 5"
         </section>
       </section>
       <section>
+        <h3>Wrapping Your Code in a Function Expression</h3>
+        <p>This creates a local scope that wraps around your code, limiting global scope pollution</p>
+        <pre><code class='hljs'>
+//Similar to myObject.method();
+//Except in this case, myObject is a function created by the function expression: (function(){}...)
+
+(function(){
+
+ ...... your javascript code here....
+
+})();
+        </code></pre>
+      </section>
+      <section>
         <section>
           <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">The Document Object Model (DOM)</a></h3>
           <ul>
@@ -1259,6 +1273,20 @@ div.setAttribute("myAttribute", "no more stuff");
 
         </pre></code>
         </section>
+      </section>
+      <section>
+        <h3>Running DOM Access Code on Page Load Complete</h3>
+        <p>Making sure that the page is fully loaded before you access the DOM</p>
+        <pre><code class='hljs'>
+document.addEventListener('DOMContentLoaded', function() {
+
+
+     ...Your DOM access code here (document.getElementById)....
+
+
+}, false);
+
+        </code></pre>
       </section>
       </div>
     </div>
