@@ -58,7 +58,14 @@ git pull
         <section>
           <h3>Table of Contents (Click to Jump to Section)</h3>
           <ul>
-            <li><a href="#/required-readings">Required Readings</a></li>
+            <li><a href="#/backend-intro">Introduction</a></li>
+            <li><a href="#/j2ee-intro">J2EE</a></li>
+            <li><a href="#/jsp-model2">JSP Model2</a></li>
+            <li><a href="#/hello-world">HelloWorld Servlet</a></li>
+            <li><a href="#/servlet-mapping">Mapping Requests with Annotations</a></li>
+            <li><a href="#/servlet-lifecycle">Servlet Lifecycle</a></li>
+            <li><a href="#/application-scope">Application Scope: Storing and Retrieving Data During Runtime</a></li>
+            <li><a href="#/init"><code>init()</code>: configuring on application startup</a></li>
           </ul>
         </section>
         <section id="backend-intro">
@@ -84,7 +91,7 @@ git pull
             </ul>
           </section>
         </section>
-        <section id="j2ee-why">
+        <section id="j2ee-intro">
           <h3>Why J2EE?</h3>
           <ul>
             <li>We picked J2EE for this class for the following reasons:
@@ -111,7 +118,7 @@ git pull
             <li><strong><a target="_blank" href="https://docs.oracle.com/javaee/7/api/javax/el/package-summary.html">javax/el</a></strong>: defines the <strong>Expression Language</strong>, used for binding Java objects in JSPs to generate HTML content</li>
           </ul>
         </section>
-        <section>
+        <section id="jsp-model2">
           <h3><a target="_blank" href="https://en.wikipedia.org/wiki/JSP_model_2_architecture">The JSP Model 2 Architecture</a></h3>
           <div style="text-align: left; float: left; width: 50%;">
             <img src="images/JSP_Model_2.svg" width="100%">
@@ -134,7 +141,7 @@ git pull
           </ul>
         </section>
         <section>
-          <section>
+          <section id="hello-world">
             <h3>Hello World Servlet</h3>
             <p>http://localhost:8080/HelloExample/HelloWorld</p>
             <pre><code class='hljs java'>
@@ -192,7 +199,7 @@ public class HelloWorld extends HttpServlet {
             </code></pre>
           </section>
         </section>
-        <section>
+        <section id="servlet-mapping">
           <h3>Servlet Mapping</h3>
           <p><strong>@WebServlet(URL_Pattern)</strong></p>
           <p>Request URL: http://host/app/<strong>path</strong></p>
@@ -214,7 +221,7 @@ public class HelloWorld extends HttpServlet {
           <h3>Diplay the number of visitors for the Servlet</h3>
           <h3><strong>Where do we initialize the variable?</strong></h3>
         </section>
-        <section>
+        <section id="servlet-lifecycle">
           <h3>Servlet Life Cycle</h3>
           <ul>
             <li><strong><code>init()</code></strong>:<br>Similar to how constructors. <strong>Executed only once.</strong> call <code>super.init(config)</code> first. Very handy for setting up shared variables between servlets</li>
@@ -222,7 +229,7 @@ public class HelloWorld extends HttpServlet {
             <li><strong><code>destroy()</code></strong>: When the Servlet is unloaded</li>
           </ul>
         </section>
-        <section>
+        <section id="application-scope">
           <h3>Application Scope</h3>
           <ul>
             <li>A “storage area” where data can stored and accessed</li>
@@ -243,7 +250,7 @@ public class HelloWorld extends HttpServlet {
             <li>And of course, the names are case sensitive</li>
           </ul>
         </section>
-        <section>
+        <section id="init">
           <h3><code>loadOnStartup</code></h3>
           <ul>
             <li>By default, a Servlet is not created until it is accessed for the first time</li>
@@ -252,6 +259,36 @@ public class HelloWorld extends HttpServlet {
           </ul>
           <p><code>@WebServlet(urlPatterns="/HelloWorld", loadOnStartup=1)</code></p>
         </section>
+        <section>
+          <h3><code>init()</code> Example:</h3>
+          <pre><code class='hljs'>
+@Override
+public void init( ServletConfig config ) throws ServletException
+  {
+      // When you override init(), don't forget to call the super class
+      // init() first.
+      super.init( config );
+
+      // Note that Java automatically converts between int and Integer
+      // (i.e. the "Autoboxing and Unboxing" feature since JDK 1.5.
+      int counter = 0;
+      getServletContext().setAttribute( "counter", counter );
+  }
+          </code></pre>
+          <p>Full Example: Shared counter between Servlets, and Quizzes</p>
+        </section>
+        <!-- <section>
+          <h3>Introduction to JavaServer Pages(JSP)</h3>
+          <ul>
+            <li>It's a pain to generate HTML using printWriter methods</li>
+            <li>Prone to error, hard to maintain</li>
+            <li>Presentation should be seperated from processing, just like what you did in JavaFX</li>
+            <li>We can use Java Code embedded in HTML documents to dynamically create the elements using Java object data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>MyFirstPage.jsp</h3>
+        </section> -->
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
