@@ -1,0 +1,310 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CS3220 Lecture 4</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 4: Introduction to Back-End Development with J2EE</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html-code html-code-single-line" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Recall Dynamic Web Diagram from Last Week</h3>
+          <img data-src="images/clientserver4.png">
+          <p>The past two weeks we focued on client side development. The next couple of weeks we will focus on server side development (you will still use client side concepts.)</p>
+        </section>
+        <section>
+          <h3>Table of Contents (Click to Jump to Section)</h3>
+          <ul>
+            <li><a href="#/required-readings">Required Readings</a></li>
+          </ul>
+        </section>
+        <section id="backend-intro">
+          <section>
+            <h3>Introduction to Back-End Development</h3>
+            <ul>
+              <li>Three basic components: <strong>server, application, and datahbase</strong></li>
+              <li><strong>server</strong>: The remote computer that the browser talks to, can be an actual physical server or virtual</li>
+              <li><strong>application</strong>: The web application running on the server. It handles user requests, retrieves information from the database(depends on usecase), and returns a response to the client request.<br>We will be writing web applications for this class using Java</li>
+              <li><strong>database</strong>: The DBMS (database management system), or database, is an application that can run on the same server as the web application or a seperate server. It stores information, allows clients to query and update information as needed.<br>We will be using MySQL and MongoDB for this class.</li>
+            </ul>
+            <p>Common components of an dynamic web application include <strong>controllers</strong>, for controlling routing of user requests and responses; <strong>models</strong>, for data modeling (think java data objects); and <strong>views</strong>, usually some kind of <strong>templating language</strong> that allows generation of HTML code using model</p>
+          </section>
+          <section>
+            <h3>Popular Back-End Frameworks</h3>
+            <ul>
+              <li><a target="_blank" href="http://php.net/">PHP</a><br>PHP is a server-side scripting language. Powers Wordpress, used by <a target="_blank" href="https://developers.facebook.com/docs/reference/php/">Facebook</a> and many others. <a target="_blank" href="https://framework.zend.com/">Zend Framework</a> and <a target="_blank" href="https://laravel.com/">Laravel</a> are popular PHP frameworks</li>
+              <li><a target="_blank" href="http://www.asp.net/">ASP.NET</a><br>.NET Framework (C# and many other languages) based technology by Microsoft</li>
+              <li><a target="_blank" href="http://rubyonrails.org/">Ruby on Rails(Rails)</a><br>Ruby-based framework that is often used by new companies. Easy to get up and running, but rather "opinionated"</li>
+              <li><a target="_blank" href="https://www.djangoproject.com/">Django</a><br>the most popular Python web framework, requires some effort to setup. A popular lightweight alternative is Flask</li>
+              <li><a target="_blank" href="https://nodejs.org/en/">Node.js </a> with <a target="_blank" href="https://expressjs.com/">Express</a><br>hottest new kid on the block. JavaScript web framework and probably requires the least amount of code to get up and running</li>
+              <li><a target="_blank" href="https://spring.io/">Spring Framework</a><br>popular and monstrous Java framework with <a target="_blank" href="https://spring.io/projects">many modules</a>. The web modules are based on <strong>J2EE</strong></li>
+            </ul>
+          </section>
+        </section>
+        <section id="j2ee-why">
+          <h3>Why J2EE?</h3>
+          <ul>
+            <li>We picked J2EE for this class for the following reasons:
+                <ul>
+                  <li>Our department uses Java for Intro to Programming</li>
+                  <li>A standard framework that is relatively stable and documented. Many of the "bleeding edge" frameworks have major changes between newer versions.</li>
+                  <li>Still fairly popular in the enterprise sector. Chances are you will work on a Java-based web app if you work at an established company</li>
+                  <li>Large amount of legay enterprise apps are done in J2EE</li>
+                  <li>Web frameworks, concept wise, are more or less the same with the request-response model. You should able to learn other web frameworks on your own fairly quickly</li>
+                </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>J2EE Intro</h3>
+          <ul>
+            <li><a target="_blank" href="https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition">J2EE Wiki</a></li>
+            <li>Stands for <strong>Java Platform, Enterprise Edition</strong>. Also known as Java EE</li>
+            <li>Provides an API and runtime environment for writing enterprise applications</li>
+            <li>The J2EE API defines standard <strong>interfaces</strong> that application servers can implement</li>
+            <li>We will be using <strong><a target="_blank" href="http://tomcat.apache.org/">Apache Tomcat</a></strong>, a popular application server that implements several Java EE specs</li>
+            <li>APIs that we will be touching on today:</li>
+            <li><strong><a target="_blank" href="https://docs.oracle.com/javaee/7/api/javax/servlet/package-summary.html">javax/servlet</a></strong>: defines a set of APIs to handle HTTP requests. Include the <strong>JavaServer Pages(JSP)</strong> specs</li>
+            <li><strong><a target="_blank" href="https://docs.oracle.com/javaee/7/api/javax/el/package-summary.html">javax/el</a></strong>: defines the <strong>Expression Language</strong>, used for binding Java objects in JSPs to generate HTML content</li>
+          </ul>
+        </section>
+        <section>
+          <h3><a target="_blank" href="https://en.wikipedia.org/wiki/JSP_model_2_architecture">The JSP Model 2 Architecture</a></h3>
+          <div style="text-align: left; float: left; width: 50%;">
+            <img src="images/JSP_Model_2.svg" width="100%">
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <ul>
+              <li>Today we will be creating Java Servlets, JSPs, and Java data objects</li>
+              <li>The "Server" box represents the J2EE app that we create and run on Tomcat</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3>Components of a J2EE Application</h3>
+          <ul>
+            <li>Compiled Java classes (.class files) Servlets, beans, filters, ...</li>
+            <li>Addtional Java libraries (.jar files)</li>
+            <li>JavaServer Pages (JSPs)</li>
+            <li>Static resources HTML, CSS, images, ...</li>
+            <li>Metadata files web.xml, ...</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h3>Hello World Servlet</h3>
+            <p>http://localhost:8080/HelloExample/HelloWorld</p>
+            <pre><code class='hljs java'>
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+//Handles the resource path HelloWorld
+@WebServlet( “/HelloWorld” )
+public class HelloWorld extends HttpServlet {
+    public void doGet( HttpServletRequest request,
+			  HttpServletResponse response )
+        throws ServletExceptoin, IOException
+    {
+        PrintWriter out = response.getWriter();
+        out.println( “Hello World” );
+    }
+}
+            </code></pre>
+            <p>
+              Some observations:
+            </p>
+            <ul>
+              <li>Inherits from <a target="_blank" href="http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServlet.html">HttpServlet</a>. <strong>No main method</strong></li>
+              <li>The doGet method handles HTTP GET requests for this Servlet. GET requests by convention are used for retrieving information.</li>
+              <li>Other types of HTTP requests include, POST, PUT, DELETE, UPDATE, etc</li>
+              <li><a target="_blank" href="http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html">HttpServletRequest</a>: request from brower, <a target="_blank" href="http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html">HttpServletResponse</a>: response back to browser</li>
+              <li>Annotations allow us to map a resource path to a Servlet</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Outputting Valid HTML</h3>
+            <p>HTML example from <a target="_blank" href="https://mhsu0020.github.io/CSULA-CS3220-Fall2016/lecture3/index.html#/7">lecture 3</a>
+            <pre class="stretch"><code class='hljs java'>
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/HelloWorld")
+public class HelloWorld extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//Setting the Content-Type Header
+		response.setHeader("Content-Type", "text/html");
+		response.getWriter().append(
+    &quot;&lt;!DOCTYPE html&gt;&lt;html lang=\&quot;en\&quot;&gt;&lt;head&gt;&lt;meta charset=\&quot;utf-8\&quot;&gt;&lt;title&gt;CS3220 Rocks!&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;CS3220 is Awesome!!!&lt;/h1&gt;&lt;p&gt;This class is lit&lt;/p&gt;&lt;/body&gt;&quot;);
+	}
+
+}
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h3>Servlet Mapping</h3>
+          <p><strong>@WebServlet(URL_Pattern)</strong></p>
+          <p>Request URL: http://host/app/<strong>path</strong></p>
+          <ul>
+            <li>Can be specified either through XML definitions or <strong>annotations(preferred)</strong></li>
+            <li>Some other examples of annotations: @Override,@SuppressWarnings</li>
+            <li><a target="_blank" href="http://www.codejava.net/java-ee/servlet/webservlet-annotation-examples
+">@WebServlet Documentation</a></li>
+            <li>Note the list of elements in the documentation:</li>
+            <li>For mapping, specify either a single <strong>value</strong>(like the example) or a list of urlPatterns</li>
+            <li>If using additional attributes (we will use <strong><code>loadOnStartup</code></strong>), specify the urlPatterns property</li>
+            <p>Just <code>value</code>:<br><code>@WebServlet("/HelloWorld")</code></p>
+            <p>Mapping to multiple patterns:<br><code>@WebServlet(urlPatterns={"/HelloWorld", "/Example", "/hahahaha"})</code></p>
+            <p>Additional Props:<br><code>@WebServlet(urlPatterns="/HelloWorld", loadOnStartup=1)</code></p>
+          </ul>
+        </section>
+        <section>
+          <h2>Code Example: RequestCounter</h2>
+          <h3>Diplay the number of visitors for the Servlet</h3>
+          <h3><strong>Where do we initialize the variable?</strong></h3>
+        </section>
+        <section>
+          <h3>Servlet Life Cycle</h3>
+          <ul>
+            <li><strong><code>init()</code></strong>:<br>Similar to how constructors. <strong>Executed only once.</strong> call <code>super.init(config)</code> first. Very handy for setting up shared variables between servlets</li>
+            <li><strong><code>service()</code></strong>:<br>Per request, dispatches to doGet(), doPost(), etc</li>
+            <li><strong><code>destroy()</code></strong>: When the Servlet is unloaded</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Application Scope</h3>
+          <ul>
+            <li>A “storage area” where data can stored and accessed</li>
+            <li>Data in application scope will remain there as long as the application is running</li>
+            <li>Data in application scope is shared by all servlets</li>
+            <li>Data is gone after Servlet app shuts down/restarts. Using databases will allow persisting of data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Application Scope: Storing and Retrieving Data</h3>
+          <p>Frist step: retrieve the ServletContext</p>
+          <p><code>getServletContext()</code>: returns the HttpServletContext object</p>
+          <p>useful <code>HttpServletContext</code> instance methods:</p>
+          <ul>
+            <li><code>setAttribute(String name, Object value)</code>:<br>Give any object a name and save it to application scope</li>
+            <li><code>getAttribute(String name)</code>:<br>Retrieve object from application scope using the name</li>
+            <li>You can create Java objects, store them in ArrayLists, access and modify them in different Servlets</li>
+            <li>And of course, the names are case sensitive</li>
+          </ul>
+        </section>
+        <section>
+          <h3><code>loadOnStartup</code></h3>
+          <ul>
+            <li>By default, a Servlet is not created until it is accessed for the first time</li>
+            <li>If we want to make sure the Servlet that contains the init gets run first, we can use the <code>loadOnStarup</code> element of <code>@WebServlet</code> to have it created during application startup</li>
+            <li>The value for <code>loadOnStartup</code> is the order which the application will start the servlets</li>
+          </ul>
+          <p><code>@WebServlet(urlPatterns="/HelloWorld", loadOnStartup=1)</code></p>
+        </section>
+        <section>
+          <h3><code>init()</code> Example:</h3>
+          <pre><code class='hljs'>
+@Override
+public void init( ServletConfig config ) throws ServletException
+  {
+      // When you override init(), don't forget to call the super class
+      // init() first.
+      super.init( config );
+
+      // Note that Java automatically converts between int and Integer
+      // (i.e. the "Autoboxing and Unboxing" feature since JDK 1.5.
+      int counter = 0;
+      getServletContext().setAttribute( "counter", counter );
+  }
+          </code></pre>
+          <p>Full Example: Shared counter between Servlets</p>
+        </section>
+        <!-- <section>
+          <h3>Introduction to JavaServer Pages(JSP)</h3>
+          <ul>
+            <li>It's a pain to generate HTML using printWriter methods</li>
+            <li>Prone to error, hard to maintain</li>
+            <li>Presentation should be seperated from processing, just like what you did in JavaFX</li>
+            <li>We can use Java Code embedded in HTML documents to dynamically create the elements using Java object data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>MyFirstPage.jsp</h3>
+        </section> -->
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
