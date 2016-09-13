@@ -10,7 +10,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+*.class
 # Eclipse Core
 .project
 build/
