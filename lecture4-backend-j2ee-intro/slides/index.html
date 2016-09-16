@@ -66,6 +66,10 @@ git pull
             <li><a href="#/servlet-lifecycle">Servlet Lifecycle</a></li>
             <li><a href="#/application-scope">Application Scope: Storing and Retrieving Data During Runtime</a></li>
             <li><a href="#/init"><code>init()</code>: configuring on application startup</a></li>
+            <li><a href="#/jsp-intro">Introduction to JSP</a></li>
+            <li><a href="#/jstl-tags">JSTL Tags</a></li>
+            <li><a href="#/mvc-intro">MVC</a></li>
+            <li><a href="#/request-forward">Sending Data from Controller to View via <code>request.setAttribute</code></a></li>
           </ul>
         </section>
         <section id="backend-intro">
@@ -277,7 +281,7 @@ public void init( ServletConfig config ) throws ServletException
           </code></pre>
           <p>Full Example: Shared counter between Servlets, and Quizzes</p>
         </section>
-        <section>
+        <section id="jsp-intro">
           <h3>Introduction to JavaServer Pages(JSP)</h3>
           <ul>
             <li>It's a pain to generate HTML using printWriter methods</li>
@@ -382,7 +386,7 @@ public void init( ServletConfig config ) throws ServletException
             Docks: <a target="_blank" href="http://download.oracle.com/docs/cd/E17802_01/products/products/jsp/jstl/1.1/docs/tlddocs/index.html">http://download.oracle.com/docs/cd/E17802_01/products/products/jsp/jstl/1.1/docs/tlddocs/index.html</a>
           </p>
         </section>
-        <section>
+        <section id="jstl-tags">
           <h3>JSTL Core: Useful Tags</h3>
           <div style="text-align: left; float: left; width: 50%;">
             <p>
@@ -427,8 +431,8 @@ public void init( ServletConfig config ) throws ServletException
             <li>Java's answer to scripting languages</li>
             <li>Syntax: <code>${ expression }</code></li>
             <li>Use EL to access the bean properties<br><code>${bean_name.property_name}</code></li>
-            <li>You can access attributes from requestScope, set via request.setAttribute</li>
             <li>More to come in later lectures</li>
+            <li>You can access attributes from requestScope, set via request.setAttribute</li>
             <li>In-Depth Guide: <a href="http://www.ibm.com/developerworks/library/j-jstl0211/">http://www.ibm.com/developerworks/library/j-jstl0211/</a></li>
           </ul>
         </section>
@@ -519,7 +523,7 @@ public void init( ServletConfig config ) throws ServletException
             <li><strong>Metadata files</strong><br>web.xml,...</li>
           </ul>
         </section>
-        <section>
+        <section id="mvc-intro">
           <h3>Recall Model 2 Architecture</h3>
           <h3 style="float:right">MVC Architecture</h3>
           <img src="images/JSP_Model_2.svg" alt="" width="50%"/>
@@ -561,6 +565,15 @@ public void init( ServletConfig config ) throws ServletException
           </ul>
         </section>
         <section>
+          <h3>MVC: Points of Emphasis</h3>
+          <ul>
+            <li><strong>One operation, one controller</strong></li>
+            <li><strong>Requests always go to controllers first</strong>. "Hide" JSPs under /WEB-INF/</li>
+            <li><strong>Controllers do not generate HTML</strong>. No <code>out.println()</code></li>
+            <li><strong>JSPs are only used for display</strong>. No scripting elements in JSP</li>
+          </ul>
+        </section>
+        <section id="request-forward">
           <h3>Forward Request From Controller to View</h3>
           <img src="images/jsp3.png" alt="" />
           <pre><code class='hljs'>
@@ -583,15 +596,6 @@ request.setAttribute( "objName", obj );
 request.getRequestDispatcher( "/WEB-INF/yourJSP.jsp" )
 .forward( request, response );
           </code></pre>
-        </section>
-        <section>
-          <h3>MVC: Points of Emphasis</h3>
-          <ul>
-            <li><strong>One operation, one controller</strong></li>
-            <li><strong>Requests always go to controllers first</strong>. "Hide" JSPs under /WEB-INF/</li>
-            <li><strong>Controllers do not generate HTML</strong>. No <code>out.println()</code></li>
-            <li><strong>JSPs are only used for display</strong>. No scripting elements in JSP</li>
-          </ul>
         </section>
       </div>
     </div>
