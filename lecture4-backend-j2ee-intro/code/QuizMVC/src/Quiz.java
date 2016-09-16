@@ -4,11 +4,14 @@ public class Quiz {
 	String questionText;
 	String[] options;
 	int correctAnswerIndex;
+	//From 1 to 10
+	int difficultyRating;
 	
-	public Quiz(String questionText, String[] options, int correctAnswerIndex) {
+	public Quiz(String questionText, String[] options, int correctAnswerIndex, int difficultyRating) {
 		this.questionText = questionText;
 		this.options = options;
 		this.correctAnswerIndex = correctAnswerIndex;
+		this.difficultyRating = difficultyRating;
 	}
 	public String getQuestionText() {
 		return questionText;
@@ -28,6 +31,13 @@ public class Quiz {
 	public void setCorrectAnswerIndex(int correctAnswerIndex) {
 		this.correctAnswerIndex = correctAnswerIndex;
 	}
+	public int getDifficultyRating() {
+		return difficultyRating;
+	}
+	public void setDifficultyRating(int difficultyRating) {
+		this.difficultyRating = difficultyRating;
+	}
+
 	
 	
 

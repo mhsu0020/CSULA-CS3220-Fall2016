@@ -10,6 +10,15 @@
 
 </head>
 <body>
+    <%--display different html based on difficulty --%>
+    <c:choose>
+    	<c:when test="${quiz.difficultyRating >= 5}">
+    		<p>Difficult Quiz: ${quiz.difficultyRating}/10</p>
+    	</c:when>
+    	<c:otherwise>
+    		<p>Eazy Peazy: ${quiz.difficultyRating}/10</p>
+    	</c:otherwise>
+    </c:choose>
 	<p><c:out value="${quiz.questionText}" /></p>
 	<ul>
 	<c:forEach items="${quiz.options}" var="option">

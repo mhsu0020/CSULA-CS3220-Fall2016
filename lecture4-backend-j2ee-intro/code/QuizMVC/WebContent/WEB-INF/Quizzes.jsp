@@ -18,12 +18,14 @@
 	<h2>Page generated at: <fmt:formatDate value="${date}" pattern="yyyy-MM-dd hh:mm:ss a" /></h2>
 	<%-- You can still add classes to the elements, just like regular html --%>
 	<table class="quiz-table">
-	<tr><th>Question Text</th><th>Detailed Link</th></tr>
+	<tr><th>Question Text</th><th>Detailed Link</th><th>Difficulty Rating</th></tr>
 	<%-- The varStatus property gives information about the current loop. see http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/jstl/core/LoopTagStatus.html for more info. Remember getIndex translates to variable.index--%>
 	<%-- looping through the quizzes ArrayList passed from request.setAttribute, and generate table rows. quiz.qeustionText calls quiz.getQuestionText(), and so on --%>
 	<c:forEach items="${quizzes}" var="quiz" varStatus="loop">
-      <tr><td>${quiz.questionText}</td>
-		<td><a href="ViewQuiz?id=${loop.index}"><c:out value="ViewQuiz?id=${loop.index}" /></a></td>
+      <tr>
+      	<td>${quiz.questionText}</td>
+		<td><a href="ViewQuiz?id=${loop.index}">ViewQuiz?id=${loop.index}</a></td>
+		<td>${quiz.difficultyRating}/10</td>
       </tr>
 	</c:forEach>
 	</table>

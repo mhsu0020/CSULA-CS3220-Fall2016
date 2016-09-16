@@ -28,12 +28,12 @@ public class Quizzes extends HttpServlet {
 		super.init(config);
 
 		ServletContext appContext = getServletContext();
-		Quiz quiz1 = new Quiz("What is 1+1", new String[] { "1", "2", "3", "4" }, 1);
+		Quiz quiz1 = new Quiz("What is 1+1", new String[] { "1", "2", "3", "4" }, 1, 2);
 		Quiz quiz2 = new Quiz("who is the first US president",
-				new String[] { "George Washington", "Michael Hsu", "Kobe Bryant", "Tylor Durden" }, 0);
-		Quiz quiz3 = new Quiz("What is the Answer to the Ultimate Question of Life, the Universe, and Everything", new String[] { "1", "2", "3", "42" }, 3);
-		Quiz quiz4 = new Quiz("What is the average case complexity for merge sort", new String[] { "O(log(n))", "O(n^2)", "O(n log(n))", "O(n)" }, 2);
-		Quiz quiz5 = new Quiz("new quiz", new String[] { "O(log(n))", "O(n^2)", "O(n log(n))", "O(n)" }, 2);
+				new String[] { "George Washington", "Michael Hsu", "Kobe Bryant", "Tylor Durden" }, 0, 10);
+		Quiz quiz3 = new Quiz("What is the Answer to the Ultimate Question of Life, the Universe, and Everything", new String[] { "1", "2", "3", "42" }, 3, 4);
+		Quiz quiz4 = new Quiz("What is the average case complexity for merge sort", new String[] { "O(log(n))", "O(n^2)", "O(n log(n))", "O(n)" }, 2, 6);
+		Quiz quiz5 = new Quiz("new quiz", new String[] { "O(log(n))", "O(n^2)", "O(n log(n))", "O(n)" }, 2, 5);
 
 		List<Quiz> quizzes = new ArrayList<Quiz>();
 		quizzes.add(quiz1);
