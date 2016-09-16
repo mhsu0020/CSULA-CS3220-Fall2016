@@ -66,6 +66,10 @@ git pull
             <li><a href="#/servlet-lifecycle">Servlet Lifecycle</a></li>
             <li><a href="#/application-scope">Application Scope: Storing and Retrieving Data During Runtime</a></li>
             <li><a href="#/init"><code>init()</code>: configuring on application startup</a></li>
+            <li><a href="#/jsp-intro">Introduction to JSP</a></li>
+            <li><a href="#/jstl-tags">JSTL Tags</a></li>
+            <li><a href="#/mvc-intro">MVC</a></li>
+            <li><a href="#/request-forward">Sending Data from Controller to View via <code>request.setAttribute</code></a></li>
           </ul>
         </section>
         <section id="backend-intro">
@@ -150,14 +154,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 //Handles the resource path HelloWorld
-@WebServlet( “/HelloWorld” )
+@WebServlet( "/HelloWorld" )
 public class HelloWorld extends HttpServlet {
     public void doGet( HttpServletRequest request,
 			  HttpServletResponse response )
         throws ServletExceptoin, IOException
     {
         PrintWriter out = response.getWriter();
-        out.println( “Hello World” );
+        out.println( "Hello World" );
     }
 }
             </code></pre>
@@ -232,7 +236,7 @@ public class HelloWorld extends HttpServlet {
         <section id="application-scope">
           <h3>Application Scope</h3>
           <ul>
-            <li>A “storage area” where data can stored and accessed</li>
+            <li>A "storage area" where data can stored and accessed</li>
             <li>Data in application scope will remain there as long as the application is running</li>
             <li>Data in application scope is shared by all servlets</li>
             <li>Data is gone after Servlet app shuts down/restarts. Using databases will allow persisting of data</li>
@@ -277,7 +281,7 @@ public void init( ServletConfig config ) throws ServletException
           </code></pre>
           <p>Full Example: Shared counter between Servlets, and Quizzes</p>
         </section>
-        <!-- <section>
+        <section id="jsp-intro">
           <h3>Introduction to JavaServer Pages(JSP)</h3>
           <ul>
             <li>It's a pain to generate HTML using printWriter methods</li>
@@ -287,8 +291,312 @@ public void init( ServletConfig config ) throws ServletException
           </ul>
         </section>
         <section>
-          <h3>MyFirstPage.jsp</h3>
-        </section> -->
+          <h3>HelloJSP1.jsp</h3>
+          <pre><code class='hljs'>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Hello JSP 1&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;A JSP without J or S.&lt;/BODY&gt;
+&lt;/HTML&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>HelloJSP2.jsp</h3>
+          <pre><code class='hljs'>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;JSP Hello World&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;Hello World on &lt;%= new java.util.Date() %&gt;.
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>How does JSP Work?</h3>
+          <img src="images/jsp1.png" alt="" />
+        </section>
+        <section>
+          <h3>JSP Components</h3>
+          <ul>
+            <li>HTML Template Text</li>
+            <li>Code Elements of Java:
+              <ul>
+                <li>Directives: look like <code>&lt;%@ type attr=&ldquo;value&rdquo; ... %&gt;</code></li>
+                <li>Comments: <br><code>&lt;%-- Hidden Comments --%&gt;</code> and <code>&lt;!-- Output (HTML) Comments --&gt;</code></li>
+                <li>Scripting elements</li>
+                <li>Beans</li>
+                <li>Expression language</li>
+                <li>Custom tag libraries</li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Simple JSTL Example</h3>
+          <pre><code class='hljs'>
+&lt;%@ page contentType=&quot;text/html&quot; %&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+
+&lt;html&gt;&lt;head&gt;&lt;title&gt;JSTL Hello&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+
+&lt;c:out value=&quot;Hello World in JSTL.&quot; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>tablib Directive</h3>
+          <p><strong>URI</strong></p>
+          <ul>
+            <li>A unique identifier for the tag library</li>
+            <li>Not a real URL</li>
+          </ul>
+          <p><strong>Prefix</strong></p>
+          <ul>
+            <li>A short name for the tag library</li>
+            <li>Could be an arbitrary name</li>
+          </ul>
+        </section>
+        <section>
+          <h3>JSP Standard Tag Library(JSTL)</h3>
+          <table>
+            <tr>
+              <th>Library</th><th>URI</th><th>Prefix</th>
+            </tr>
+            <tr>
+              <td>Core</td><td>http://java.sun.com/jsp/jstl/core</td><td>c</td>
+            </tr>
+            <tr>
+              <td>XML Processing</td><td>http://java.sun.com/jsp/jstl/xml</td><td>xml</td>
+            </tr>
+            <tr>
+              <td>I18N Formatting</td><td>http://java.sun.com/jsp/jstl/fmt</td><td>fmt</td>
+            </tr>
+            <tr>
+              <td>Database Access</td><td>http://java.sun.com/jsp/jstl/sql</td><td>sql</td>
+            </tr>
+            <tr>
+              <td>Functions</td><td>http://java.sun.com/jsp/jstl/functions</td><td>fn</td>
+            </tr>
+          </table>
+          <p>
+            Docks: <a target="_blank" href="http://download.oracle.com/docs/cd/E17802_01/products/products/jsp/jstl/1.1/docs/tlddocs/index.html">http://download.oracle.com/docs/cd/E17802_01/products/products/jsp/jstl/1.1/docs/tlddocs/index.html</a>
+          </p>
+        </section>
+        <section id="jstl-tags">
+          <h3>JSTL Core: Useful Tags</h3>
+          <div style="text-align: left; float: left; width: 50%;">
+            <p>
+              <strong>Flow control</strong>
+            </p>
+            <ul>
+              <li>c:if</li>
+              <li>c:choose<br>
+                <ul>
+                  <li>c:when</li>
+                  <li>c:otherwise</li>
+                </ul>
+              </li>
+              <li>c:forEach</li>
+              <li>c:forToken</li>
+            </ul>
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <p>
+              <strong>URL</strong>
+              </p>
+              <ul>
+                <li>c:url</li>
+                <li>c:redirect</li>
+                <li>c:import</li>
+                <li>c:param</li>
+              </ul>
+              <p>
+                <strong>Output</strong>
+              </p>
+              <ul>
+                <li>c:out</li>
+              </ul>
+          </div>
+        </section>
+        <section>
+          <h3>EL Brief Intro</h3>
+          <p>
+            <strong>Expression Language (EL)</strong>
+          </p>
+          <ul>
+            <li>Java's answer to scripting languages</li>
+            <li>Syntax: <code>${ expression }</code></li>
+            <li>Use EL to access the bean properties<br><code>${bean_name.property_name}</code></li>
+            <li>More to come in later lectures</li>
+            <li>You can access attributes from requestScope, set via request.setAttribute</li>
+            <li>In-Depth Guide: <a href="http://www.ibm.com/developerworks/library/j-jstl0211/">http://www.ibm.com/developerworks/library/j-jstl0211/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Branch Tags</h3>
+          <pre><code data-trim class='hljs'>
+<%-- single if --%>
+<c:if test="${quizzes.size == 0}">No Quizzes.</c:if>
+
+<%-- if else branching --%>
+<c:choose>
+    <c:when test="${quizzes.size == 0}">
+        No quizzes yet.
+    </c:when>
+    <c:otherwise>
+        <%-- display the quizzes --%>
+    </c:otherwise>
+</c:choose>
+          </code></pre>
+        </section>
+        <section>
+          <h3>Loop Tags</h3>
+          <pre><code data-trim class='hljs'>
+
+<%-- The varStatus property gives information about the current loop.--%>
+<%-- remember loop.index calls getIndex --%>
+<c:forEach items="${quizzes}" var="quiz" varStatus="loop">
+    <tr><td>${quiz.questionText}</td>
+  <td><a href="ViewQuiz?id=${loop.index}"><c:out value="ViewQuiz?id=${loop.index}" /></a></td>
+    </tr>
+</c:forEach>
+          </code></pre>
+            <p>
+              see <a target="_blank" href="http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/jstl/core/LoopTagStatus.html">http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/jstl/core/LoopTagStatus.html</a>
+            </p>
+        </section>
+        <section>
+          <h3>Format Date and Time</h3>
+          <pre><code data-trim class='hljs'>
+
+&lt;fmt:formatDate value=&quot;${date}&quot; type=&quot;date&quot; /&gt;
+
+&lt;fmt:formatDate value=&quot;${date}&quot; type=&quot;time&quot; /&gt;
+
+&lt;fmt:formatDate value=&quot;${date}&quot; type=&quot;both&quot; /&gt;
+
+&lt;fmt:formatDate value=&quot;${date}&quot; pattern=&quot;yyyy-MM-dd hh:mm:ss a&quot; /&gt;
+
+          </code></pre>
+          <p>
+            see <a target="_blank" href="http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html">http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html</a>
+          </p>
+        </section>
+        <section>
+          <h3>JSTL Functions</h3>
+          <div style="text-align: left; float: left; width: 50%;">
+            <ul>
+              <li>fn:length()</li>
+              <li>fn:contains()</li>
+              <li>fn:containsIgnoreCase()</li>
+              <li>fn:startWith()</li>
+              <li>fn:endsWith()</li>
+              <li>fn:indexOf()</li>
+              <li>fn:replace()</li>
+              <li>fn:trim()</li>
+            </ul>
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <ul>
+              <li>fn:toUpperCase()</li>
+              <li>fn:toLowerCase()</li>
+              <li>fn:substring()</li>
+              <li>fn:substringAfter()</li>
+              <li>fn:substringBefore()</li>
+              <li>fn:split()</li>
+              <li>fn:join()</li>
+              <li>fn:escapeXML()</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3>Java Web Application</h3>
+          <ul>
+            <li><strong>Servlets</strong></li>
+            <li><strong>Beans</strong></li>
+            <li><strong>JSPs</strong><br>Scripting elements, EL, JSTL</li>
+            <li><strong>Static resources</strong><br>HTML,CSS,images, ...</li>
+            <li><strong>Metadata files</strong><br>web.xml,...</li>
+          </ul>
+        </section>
+        <section id="mvc-intro">
+          <h3>Recall Model 2 Architecture</h3>
+          <h3 style="float:right">MVC Architecture</h3>
+          <img src="images/JSP_Model_2.svg" alt="" width="50%"/>
+        </section>
+        <section>
+          <h3>MVC: Order of Execution</h3>
+          <div style="text-align: left; float: left; width: 50%;">
+            <img src="images/jsp2.png" alt="" />
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <ol>
+              <li>Browser sends a request to controller</li>
+              <li>Controller processes the request, updates some data</li>
+              <li>Controller forwards the request and data to view</li>
+              <li>View generates the response that is sent back to the client</li>
+            </ol>
+          </div>
+        </section>
+        <section>
+          <h3>Quiz Example Using MVC</h3>
+          <p>
+            <strong>M</strong>odel
+          </p>
+          <ul>
+            <li>Quiz.java</li>
+          </ul>
+          <p>
+            <strong>V</strong>iew
+          </p>
+          <ul>
+            <li>Quizzes.jsp, ViewQuiz.jsp</li>
+            <li>Redirect</li>
+          </ul>
+          <p>
+            <strong>C</strong>ontroller
+          </p>
+          <ul>
+            <li>ViewQuiz.java, ViewQuizzes.java</li>
+          </ul>
+        </section>
+        <section>
+          <h3>MVC: Points of Emphasis</h3>
+          <ul>
+            <li><strong>One operation, one controller</strong></li>
+            <li><strong>Requests always go to controllers first</strong>. "Hide" JSPs under /WEB-INF/</li>
+            <li><strong>Controllers do not generate HTML</strong>. No <code>out.println()</code></li>
+            <li><strong>JSPs are only used for display</strong>. No scripting elements in JSP</li>
+          </ul>
+        </section>
+        <section id="request-forward">
+          <h3>Forward Request From Controller to View</h3>
+          <img src="images/jsp3.png" alt="" />
+          <pre><code class='hljs'>
+            request.getRequestDispatcher( "/WEB-INF/myJsp.jsp" )
+	 .forward( request, response );
+          </code></pre>
+        </section>
+        <section>
+          <h3>Forward vs. Redirect</h3>
+          <img src="images/jsp4.png" alt="" />
+        </section>
+        <section>
+          <h3>Send Data From Controller to View</h3>
+          <ul>
+            <li>Objects in <em>application</em> and <em>session</em> scope are shared by all servlets and JSPs of the application</li>
+            <li>Additional data can be passed from servlet to JSP in <em>request scope</em></li>
+          </ul>
+          <pre><code class='hljs'>
+request.setAttribute( "objName", obj );
+request.getRequestDispatcher( "/WEB-INF/yourJSP.jsp" )
+.forward( request, response );
+          </code></pre>
+        </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
