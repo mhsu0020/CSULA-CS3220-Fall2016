@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -54,7 +55,9 @@ public class Quizzes extends HttpServlet {
 		
 		//Getting the list of quizzes
 		List<Quiz> quizzes = (List<Quiz>)getServletContext().getAttribute("quizzes");
+		Date date = new Date();
 		
+		request.setAttribute("date", date);
 		request.setAttribute("quizzes", quizzes);
 		request.setAttribute("pageHeader", "Quiz List");
 		request.getRequestDispatcher( "/WEB-INF/Quizzes.jsp" )

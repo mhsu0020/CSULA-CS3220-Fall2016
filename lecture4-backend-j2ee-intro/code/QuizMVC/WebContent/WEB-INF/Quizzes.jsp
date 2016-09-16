@@ -3,6 +3,8 @@
     pageEncoding="ISO-8859-1"%>
   <%-- The prefix shows up in the core tags you use --%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +15,7 @@
 </head>
 <body>
 	<h1><c:out value="${pageHeader}" /></h1>
+	<h2>Page generated at: <fmt:formatDate value="${date}" pattern="yyyy-MM-dd hh:mm:ss a" /></h2>
 	<%-- You can still add classes to the elements, just like regular html --%>
 	<table class="quiz-table">
 	<tr><th>Question Text</th><th>Detailed Link</th></tr>
