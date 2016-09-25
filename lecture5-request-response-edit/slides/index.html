@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 5</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 5: HTTP Request/Reponse in Detail and Modifying Data</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Recall JSP MVC Model2 Diagram</h3>
+          <img data-src="images/jsp2.png" style="height:600px">
+          <ul>
+            <li>Servlets (Controller) handle requests from browser (client)</li>
+            <li>JSP is rendered on the server to HTML, and is sent back to the browser client</li>
+            <li>Controller retrieves data model objects, and forwards request to JSP(View)</li>
+            <li>See <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture4-backend-j2ee-intro/code/QuizMVC">QuizMVC</a> for full example</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Table of Contents (Click to Jump to Section)</h3>
+          <ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Monitoring HTTP Requests</h3>
+          <p>
+            Using the Chrome Developer Console
+          </p>
+          <img src="images/chromemonitor.png" alt="chrome monitor" />
+          <p>
+            Open the <b>Network</b> tab and look at the request and response headers/bodies
+          </p>
+        </section>
+        <section>
+          <h3>HTTP Request Example</h3>
+          <h4>http://localhost:8080/QuizMVC/Quizzes</h4>
+          <pre><code class='hljs'>
+GET /QuizMVC/Quizzes HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-US,en;q=0.8,ja;q=0.6,zh-CN;q=0.4,zh-TW;q=0.2
+Cookie: JSESSIONID=177836307E94E9C228C91CF9E1F5B810
+          </code></pre>
+        </section>
+        <section>
+          <h3>HTTP Request</h3>
+          <div style="text-align: left; float: left; width: 50%;">
+            <ul>
+              <li><b>Request line</b> <br>Method <br>Request URI <br>Protocol</li>
+              <li>Header</li>
+              <li>[Message body]</li>
+            </ul>
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <img src="images/requestmessageexample.png" alt="request message example" style="height:400px;"/>
+          </div>
+        </section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP Request Methods</a></h3>
+          <p>Actions to be performed regarding the resource identified by the <em>Request URI</em></p>
+          <p>
+            Retrieving Data:
+            <ul>
+              <li>GET</li>
+              <li>HEAD (no response body)</li>
+            </ul>
+          </p>
+          <p>
+            Editing Data:
+            <ul>
+              <li>POST: Adding/modifiying data, usually with a request body</li>
+              <li>PUT: Updating existing data</li>
+              <li>DELETE: Deleting data</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h3>Java <code>HttpServlet</code> Methods</h3>
+          <ul>
+            <li>GET -> doGet()</li>
+            <li>POST -> doPost()</li>
+            <li>PUT -> doPut()</li>
+            <li>DELETE -> doDelete()</li>
+          </ul>
+          <br>
+          <img src="images/servletmethod.gif" alt="servlet methods" height="400px"/>
+        </section>
+        <section>
+          <h3>Request Parameters and Form Data</h3>
+          <p>
+            <b>Query String:</b>
+            <ul>
+              <li><code>?param1=value1&amp;param2=value2&amp;...</code></li>
+            </ul>
+          </p>
+          <p>
+            In our last lecture, we've learned how to retrieve display data, now we will create HTML <b>forms</b> and submit the new data via <b>HTTP POST method</b>.
+          </p>
+          <p>
+            The form data is passed to the server via query parameters
+          </p>
+        </section>
+        <section>
+          <h3>Parameter Methods</h3>
+          <p>
+            Inherited from <code>ServletRequest</code>
+          </p>
+          <ul>
+            <li><code><b>String getParameter( String p )</b></code><br>See <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/cb4efc101081bacf6ea1dc697b298a15a511b7d6/lecture4-backend-j2ee-intro/code/QuizMVC/src/ViewQuiz.java#L35">ViewQuiz.java</a></li>
+            <li><code>Enumeration getParameterNames()</code></li>
+            <li><code>String[] getParameterValues( String p )</code></li>
+            <li><code>Map getParameterMap()</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form" target="_blank">HTML Forms</a></h3>
+          <p>
+            Example: <code>form</code> in <code>AddQuiz.jsp</code>
+          </p>
+          <pre class="stretch"><code class='hljs html data-trim'>
+	<form action="AddQuiz" method="post">
+		<div>
+			<label for="question-text">Question Text:</label>
+			<textarea id="question-text" name="questionText"></textarea>
+		</div>
+		<div>
+			<label for="rating">Difficulty Rating:</label>
+			<input type="number" id="rating" name="rating" min="1" max="10">
+		</div>
+		<div>
+			<label for="option1">Option 1:</label>
+			<input type="text" id="option1" name="option1">
+		</div>
+
+              ...
+
+		<div>
+			<label for="option4">Option 4:</label>
+			<input type="text" id="option4" name="option4">
+		</div>
+		<div>
+			<label for="answer">Correct Answer:</label>
+			<input type="number" id="answer" name="answer" min="1" max="4">
+		</div>
+		<div class="button">
+			<button type="submit">Submit Question</button>
+		</div>
+	</form>
+          </code></pre>
+        </section>
+        <section>
+          <h3><code>doGet</code> and <code>doPost</code> in AddQuiz.java Servlet</h3>
+          <pre class='stretch'><code class='hljs java data-trim'>
+/* Forwards request to form view */
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+	request.getRequestDispatcher("/WEB-INF/AddQuiz.jsp").forward(request, response);
+}
+
+/* handles the form submit action */
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+
+	//The parameter names matches the name attribute in the HTML input elements
+	String questionText = request.getParameter("questionText");
+	int difficultyRating = Integer.parseInt(request.getParameter("rating"));
+	String option1 = request.getParameter("option1");
+	String option2 = request.getParameter("option2");
+	String option3 = request.getParameter("option3");
+	String option4 = request.getParameter("option4");
+	int correctAnswerIndex = Integer.parseInt(request.getParameter("answer"));
+
+	//Created quiz Object from submitted form data
+	Quiz quizFromForm = new Quiz(questionText, new String[]{option1, option2, option3, option4},
+                                correctAnswerIndex, difficultyRating);
+
+	//Adding it to the list of questions in application scope
+  List&lt;Quiz&gt; quizzes = (List&lt;Quiz&gt;)getServletContext().getAttribute(&quot;quizzes&quot;);
+	quizzes.add(quizFromForm);
+
+	/*Redirect to different url (from the client),
+   notice how this is different from request forward (server side)*/
+	response.sendRedirect("ViewQuiz?id="+(quizzes.size()-1));
+}
+
+          </code></pre>
+        </section>
+        <section>
+          <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data" target="_blank">Sending and Retrieving Form Data: Client Side</a></h3>
+          <p>
+            <ul>
+              <li>Initial request to the Servlet goes to doGet, which forwards the request to the form view</li>
+              <li>The <code>&lt;form&gt;</code> element defines how the data is sent. Many attributes are available to configure the request</li>
+              <li>The <strong>action</strong> attribute: dictates where the data gets sent</li>
+              <li>The <strong>method</strong> attribute: dictates which HTTP method to use. <br>If GET is used, the form data is appended to the URL and the user can see it in the browser. This is generally a bad idea as things like passwords shouldn't show up in browser history. <br><strong>Use the POST method for form submission.</strong></li>
+            </ul>
+            <pre><code class='hljs data-trim'>
+&lt;!-- does a HTTP POST to the AddQuiz resource
+with form data appended to request body when user presses submit button--&gt;
+&lt;form action=&quot;AddQuiz&quot; method=&quot;post&quot;&gt;
+
+...
+  &lt;button type=&quot;submit&quot;&gt;Submit Question&lt;/button&gt;
+
+&lt;form&gt;
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h3><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data" target="_blank">Sending and Retrieving Form Data: Server Side</a></h3>
+          <p>
+            <ul>
+              <li>Since in the <code>&lt;form&gt;</code> element we use POST for the method, the request is handled in <code>doPost</code>. We used <code>doGet</code> to handle the initial request where we forward the request to the form view jsp</li>
+              <li>You can retreive the form data via request.getParameter, the attribute name being the <code>name</code> attribute from the input element, and the value being the <code>value</code> attribute</li>
+            </ul>
+            <pre><code class='hljs java data-trim'>
+//The parameter names matches the name attribute in the HTML input elements
+String questionText = request.getParameter("questionText");
+int difficultyRating = Integer.parseInt(request.getParameter("rating"));
+String option1 = request.getParameter("option1");
+String option2 = request.getParameter("option2");
+String option3 = request.getParameter("option3");
+String option4 = request.getParameter("option4");
+int correctAnswerIndex = Integer.parseInt(request.getParameter("answer"));
+            </code></pre>
+          </p>
+        </section>
+        <section>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">HTML Forms: Various <code>input</code> Types</a></h3>
+          
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
