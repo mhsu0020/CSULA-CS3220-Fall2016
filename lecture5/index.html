@@ -299,12 +299,59 @@ int correctAnswerIndex = Integer.parseInt(request.getParameter("answer"));
           </p>
         </section>
         <section>
-          <h3></h3>
-
+          <h3>The <code>radio</code> input</h3>
+          <p>
+            <code>radio</code>: A radio button. You must use the <strong>value</strong> attribute to define the value submitted by this item. Use the <strong>checked</strong> attribute to indicate whether this item is selected by default. Radio buttons that have the same <strong>value</strong> for the <strong>name</strong> attribute are in the same "radio button group"; only one radio button in a group can be selected at a time.
+            <br><br>
+            <input type="radio" name="quiz-type" id="multiple-choice" value="multiple-choice"><label for="multiple-choice">Multiple Choice</label>
+            <br>
+            <input type="radio" name="quiz-type" id="free-response" value="free-response"><label for="free-response">Free Response</label>
+            <br>
+            <input type="radio" name="quiz-type" id="online" value="online"><label for="online">Online</label>
+          </p>
+          <pre class="stretch"><code class='hljs html data-trim'>
+<!-- Only one value is submitted, since only one radio button in the same group can be selected. -->
+<input type="radio" name="quiz-type" id="multiple-choice" value="multiple-choice">
+<!-- Notice how the for attribute for the label matches the id of the input element-->
+<label for="multiple-choice">Multiple Choice</label>
+<br>
+<input type="radio" name="quiz-type" id="free-response" value="free-response">
+<label for="free-response">Free Response</label>
+<br>
+<input type="radio" name="quiz-type" id="online" value="online">
+<label for="online">Online</label>
+          </code></pre>
         </section>
         <section>
-          <h3>Form Validation: Never Trust the User</h3>
+          <h3>The <code>checkbox</code> input</h3>
+          <p>
+            <code>checkbox</code>: very similar to how <code>radio</code> works. Use the <strong>checked</strong> attribute to indicate whether this item is selected.<br>
+            <strong>Use <code>request.getParameterValues("nameOfCheckbox")</code> in your servlet to get the string array of values checked.</strong>
+            <br><br>
+            <input type="checkbox" name="lang" id="java" value="java" checked="true">
+            <label for="java">Java</label>
+            <br>
+            <input type="checkbox" name="lang" id="python" value="python">
+            <label for="python">Python</label>
+            <br>
+            <input type="checkbox" name="lang" id="javascript" value="javascript">
+            <label for="javascript">JavaScript</label>
+          </p>
+          <pre class="stretch"><code class='hljs data-trim'>
+<!-- Note the checked attribute -->
+<input type="checkbox" name="lang" id="java" value="java" checked="true">
+<label for="java">Java</label>
+<br>
+<input type="checkbox" name="lang" id="python" value="python">
+<label for="python">Python</label>
+<br>
+<input type="checkbox" name="lang" id="javascript" value="javascript">
+<label for="javascript">JavaScript</label>
 
+//... later on in the doPost method in your Servlet ...
+
+String[] checkedLanguages = request.getParameterValues("lang");
+          </code></pre>
         </section>
       </div>
     </div>
