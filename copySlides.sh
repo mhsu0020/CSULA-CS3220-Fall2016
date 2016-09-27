@@ -5,4 +5,4 @@ xargs -i cp -ua {}/slides/. lecture$1
 
 git add .
 git commit -m "updated slides for lecture$1"
-git push -u origin master
+git push -u origin gh-pages
