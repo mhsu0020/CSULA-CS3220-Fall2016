@@ -60,11 +60,6 @@ git pull
           </ul>
         </section>
         <section>
-          <h3>Table of Contents (Click to Jump to Section)</h3>
-          <ul>
-          </ul>
-        </section>
-        <section>
           <h3>Monitoring HTTP Requests</h3>
           <p>
             Using the Chrome Developer Console
@@ -352,6 +347,156 @@ int correctAnswerIndex = Integer.parseInt(request.getParameter("answer"));
 
 String[] checkedLanguages = request.getParameterValues("lang");
           </code></pre>
+        </section>
+        <section>
+          <h3>The <code>select</code> element</h3>
+          <p>
+            see <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select</a><br>
+            Shows a dropdown of <code>options</code>. Use the value attribute to define value submitted by this item. Add a "selected" attribute to select an item by default.
+            <!-- The second value will be selected initially -->
+            <select name="quiz-type"  class="input-large">
+              <option value="multiple-choice">Multiple Choice</option>
+              <option value="free-response" selected>Free Response</option>
+              <option value="extra-credit">Extra Credit</option>
+            </select>
+          </p>
+          <pre><code class='hljs'>
+<!-- The second value will be selected initially -->
+<select name="quiz-type">
+  <option value="multiple-choice">Multiple Choice</option>
+  <option value="free-response" selected >Free Response</option>
+  <option value="extra-credit">Extra Credit</option>
+</select>
+          </code></pre>
+        </section>
+        <section>
+          <h3>Using <code>fieldset</code> and <code>legend</code> Elements</h3>
+          <p>
+            The <code>fieldset</code> element allows grouping of widgets that serve the same purpose, combined with the <code>legend</code> element. This not only provides a handy way to style your forms, but also allow screen readers to provide more info.
+          </p>
+          <form>
+            <fieldset>
+              <legend>Baloon Size</legend>
+              <p>
+                <input type="radio" name="size" id="size_1" value="small" />
+                <label for="size_1">Small</label>
+              </p>
+              <p>
+                <input type="radio" name="size" id="size_2" value="medium" />
+                <label for="size_2">Medium</label>
+              </p>
+              <p>
+                <input type="radio" name="size" id="size_3" value="large" />
+                <label for="size_3">Large</label>
+              </p>
+            </fieldset>
+          </form>
+          <pre class="stretch"><code class='hljs'>
+<form>
+  <fieldset>
+    <legend>Baloon Size</legend>
+    <p>
+      <input type="radio" name="size" id="size_1" value="small" />
+      <label for="size_1">Small</label>
+    </p>
+    <p>
+      <input type="radio" name="size" id="size_2" value="medium" />
+      <label for="size_2">Medium</label>
+    </p>
+    <p>
+      <input type="radio" name="size" id="size_3" value="large" />
+      <label for="size_3">Large</label>
+    </p>
+  </fieldset>
+</form>
+          </code></pre>
+        </section>
+        <section>
+          <h3>The <code>required</code> attribute</h3>
+          <p>
+            In newer browsers, by adding the <code>required</code> attribute to an input, the browser will check if the input is provided before form submission
+          </p>
+          <form action="AddQuiz" method="post">
+            <fieldset>
+              <legend>Baloon Size</legend>
+              <p>
+                <label for="quiz-text">Quiz Text: </label>
+                <input class="input-large" type="text" name="quizText" id="quiz-text" required />
+              </p>
+              <input class="input-large" type="submit" name="name" value="submit">
+            </fieldset>
+          </form>
+          <pre class="stretch"><code class='hljs'>
+<form action="AddQuiz" method="post">
+  <fieldset>
+    <legend>Baloon Size</legend>
+    <p>
+      <label for="quiz-text">Quiz Text: </label>
+      <input class="input-large" type="text" name="quizText" id="quiz-text" required />
+    </p>
+    <input class="input-large" type="submit" name="name" value="submit">
+  </fieldset>
+</form>
+          </code></pre>
+        </section>
+        <section>
+          <h3>Full Example: QuizMVC2</h3>
+          <p>
+            Under code folder in lecture5:
+            <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture5-request-response-edit/code/QuizMVC2">GitHub Code Repo</a>
+          </p>
+          <img src="images/quizzes1.png" height="400px" alt="" />
+          <div style="text-align: left; float: left; width: 50%;">
+            <img src="images/quizzes2.png" height="300px" alt="" />
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <img src="images/quizzes3.png" height="300px" alt="" />
+          </div>
+        </section>
+        <section>
+          <h3>Basic CRUD Web Applications</h3>
+          <ul>
+            <li><strong>CRUD: </strong> Create, Read, Update, Delete data</li>
+            <li>CRUD Web application = Data + Operations</li>
+            <li>Data:<br>Quizzes, wiki pages, twitter messages, CSNS assignments, facebook posts....</li>
+            <li>Operations: <br>Add/Create, search, read/display, edit, delete...</li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 Example Implementation</h3>
+          <ul>
+            <li>Data:<br> <code>Quiz</code>, <code>List&lt;Quiz&gt;</code></li>
+            <li>Operations: <br><code>AddQuiz, EditQuiz, ViewQuiz, DeleteQuiz, Quizzes</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Display</h3>
+          <ul>
+            <li>Initialize data storage in applicaiton scope</li>
+            <li>Pre-create some data</li>
+            <li>Retreive data and forward to view</li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Add</h3>
+          <ul>
+            <li>Handling web forms usually involves two operations</li>
+            <li>Display the form: <code>doGet()</code></li>
+            <li>Process the submission: <code>doPost()</code></li>
+            <li>Finally <code>response.sendRedirect()</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Edit</h3>
+          <p>
+            Embed an <em>identifier</em> of the data to be edited in generated hyperlink or form (using hidden form field)
+          </p>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Delete</h3>
+            <p>
+              Use a unique and immutable identifier instead of array index. Since removing items changes the size of the array, the index is no longer reliable.
+            </p>
         </section>
       </div>
     </div>
