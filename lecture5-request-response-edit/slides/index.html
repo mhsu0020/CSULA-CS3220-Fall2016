@@ -17,6 +17,7 @@
        .html-code-single-line { font-size: 40px !important; height: 50px !important;}
        a {text-decoration: underline !important;}
        iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
     </style>
 
     <!-- Printing and PDF exports -->
@@ -273,15 +274,175 @@ int correctAnswerIndex = Integer.parseInt(request.getParameter("answer"));
           </p>
         </section>
         <section>
-          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">HTML Forms: Various <code>input</code> Types</a></h3>
-          <ul>
-            <li><code>text</code>:  single-line text field; line-breaks are automatically removed from the input value.</li>
-            <li><code>number</code>: Control for entering number</li>
-          </ul>
+          <h3>Editing the Eclipse JSP Template for HTML5</h3>
+          <p>
+            Window -> Preferences -> Expand Web -> Expand JSP Files -> Expand Editor -> click on Templates -> select "New JavaServer Faces (JSF) Page (html)" and edit <br> <strong>Remeber to click apply.</strong>
+          </p>
+          <img src="images/editjsptemplate.png" height="700px" alt="" />
         </section>
         <section>
-          <h3>Form Validation: Never Trust the User</h3>
+          <h3><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form">HTML Forms: Various <code>input</code> Types</a></h3>
+          <p>
+            Three important attributes to the <code>input</code> element: <strong><code>name</code></strong>, <strong><code>type</code></strong>, and <strong><code>type</code></strong>
+          </p>
+          <p>
+            The <code>type</code> attribute tells the browser what type of input control to display. The <code>name</code> attribute is the key for the <code>value</code> once the form is submitted. You can set the <code>value</code> attribute to prepopulate the input content. In the case of textareas, you put the text between the tags.
+          </p>
+          <ul>
+            <li><code>text</code>:  single-line text field; line-breaks are automatically removed from the input value. <br><input class="input-large" type="text" name="example"></li>
+            <li><code>number</code>: control for entering number <br><input class="input-large" type="number" name="my-number"></li>
+            <li><code>date</code>: control for entering a date (year, month, and day, with no time) <br><input class="input-large" type="date" name="my-date"></li>
+          </ul>
+          <p>
+            The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea"><code>textarea</code></a> element: <br>
+            <textarea class="input-large" name="textarea" rows="4" cols="50">Write something here</textarea>
+          </p>
+        </section>
+        <section>
+          <h3>The <code>radio</code> input</h3>
+          <p>
+            <code>radio</code>: A radio button. You must use the <strong>value</strong> attribute to define the value submitted by this item. Use the <strong>checked</strong> attribute to indicate whether this item is selected by default. Radio buttons that have the same <strong>value</strong> for the <strong>name</strong> attribute are in the same "radio button group"; only one radio button in a group can be selected at a time.
+            <br><br>
+            <input type="radio" name="quiz-type" id="multiple-choice" value="multiple-choice"><label for="multiple-choice">Multiple Choice</label>
+            <br>
+            <input type="radio" name="quiz-type" id="free-response" value="free-response"><label for="free-response">Free Response</label>
+            <br>
+            <input type="radio" name="quiz-type" id="online" value="online"><label for="online">Online</label>
+          </p>
+          <pre class="stretch"><code class='hljs html data-trim'>
+<!-- Only one value is submitted, since only one radio button in the same group can be selected. -->
+<input type="radio" name="quiz-type" id="multiple-choice" value="multiple-choice">
+<!-- Notice how the for attribute for the label matches the id of the input element-->
+<label for="multiple-choice">Multiple Choice</label>
+<br>
+<input type="radio" name="quiz-type" id="free-response" value="free-response">
+<label for="free-response">Free Response</label>
+<br>
+<input type="radio" name="quiz-type" id="online" value="online">
+<label for="online">Online</label>
+          </code></pre>
+        </section>
+        <section>
+          <h3>The <code>checkbox</code> input</h3>
+          <p>
+            <code>checkbox</code>: very similar to how <code>radio</code> works. Use the <strong>checked</strong> attribute to indicate whether this item is selected.<br>
+            <strong>Use <code>request.getParameterValues("nameOfCheckbox")</code> in your servlet to get the string array of values checked.</strong>
+            <br><br>
+            <input type="checkbox" name="lang" id="java" value="java" checked="true">
+            <label for="java">Java</label>
+            <br>
+            <input type="checkbox" name="lang" id="python" value="python">
+            <label for="python">Python</label>
+            <br>
+            <input type="checkbox" name="lang" id="javascript" value="javascript">
+            <label for="javascript">JavaScript</label>
+          </p>
+          <pre class="stretch"><code class='hljs data-trim'>
+<!-- Note the checked attribute -->
+<input type="checkbox" name="lang" id="java" value="java" checked="true">
+<label for="java">Java</label>
+<br>
+<input type="checkbox" name="lang" id="python" value="python">
+<label for="python">Python</label>
+<br>
+<input type="checkbox" name="lang" id="javascript" value="javascript">
+<label for="javascript">JavaScript</label>
 
+//... later on in the doPost method in your Servlet ...
+
+String[] checkedLanguages = request.getParameterValues("lang");
+          </code></pre>
+        </section>
+        <section>
+          <h3>The <code>select</code> element</h3>
+          <p>
+            see <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select</a><br>
+            Shows a dropdown of <code>options</code>. Use the value attribute to define value submitted by this item. Add a "selected" attribute to select an item by default.
+            <!-- The second value will be selected initially -->
+            <select name="quiz-type"  class="input-large">
+              <option value="multiple-choice">Multiple Choice</option>
+              <option value="free-response" selected>Free Response</option>
+              <option value="extra-credit">Extra Credit</option>
+            </select>
+          </p>
+          <pre><code class='hljs'>
+<!-- The second value will be selected initially -->
+<select name="quiz-type">
+  <option value="multiple-choice">Multiple Choice</option>
+  <option value="free-response" selected >Free Response</option>
+  <option value="extra-credit">Extra Credit</option>
+</select>
+          </code></pre>
+        </section>
+        <section>
+          <h3>Using <code>fieldset</code> and <code>legend</code> Elements</h3>
+          <p>
+            The <code>fieldset</code> element allows grouping of widgets that serve the same purpose, combined with the <code>legend</code> element. This not only provides a handy way to style your forms, but also allow screen readers to provide more info.
+          </p>
+          <form>
+            <fieldset>
+              <legend>Baloon Size</legend>
+              <p>
+                <input type="radio" name="size" id="size_1" value="small" />
+                <label for="size_1">Small</label>
+              </p>
+              <p>
+                <input type="radio" name="size" id="size_2" value="medium" />
+                <label for="size_2">Medium</label>
+              </p>
+              <p>
+                <input type="radio" name="size" id="size_3" value="large" />
+                <label for="size_3">Large</label>
+              </p>
+            </fieldset>
+          </form>
+          <pre class="stretch"><code class='hljs'>
+<form>
+  <fieldset>
+    <legend>Baloon Size</legend>
+    <p>
+      <input type="radio" name="size" id="size_1" value="small" />
+      <label for="size_1">Small</label>
+    </p>
+    <p>
+      <input type="radio" name="size" id="size_2" value="medium" />
+      <label for="size_2">Medium</label>
+    </p>
+    <p>
+      <input type="radio" name="size" id="size_3" value="large" />
+      <label for="size_3">Large</label>
+    </p>
+  </fieldset>
+</form>
+          </code></pre>
+        </section>
+        <section>
+          <h3>The <code>required</code> attribute</h3>
+          <p>
+            In newer browsers, by adding the <code>required</code> attribute to an input, the browser will check if the input is provided before form submission
+          </p>
+          <form action="AddQuiz" method="post">
+            <fieldset>
+              <legend>Baloon Size</legend>
+              <p>
+                <label for="quiz-text">Quiz Text: </label>
+                <input class="input-large" type="text" name="quizText" id="quiz-text" required />
+              </p>
+              <input class="input-large" type="submit" name="name" value="submit">
+            </fieldset>
+          </form>
+          <pre class="stretch"><code class='hljs'>
+<form action="AddQuiz" method="post">
+  <fieldset>
+    <legend>Baloon Size</legend>
+    <p>
+      <label for="quiz-text">Quiz Text: </label>
+      <input class="input-large" type="text" name="quizText" id="quiz-text" required />
+    </p>
+    <input class="input-large" type="submit" name="name" value="submit">
+  </fieldset>
+</form>
+          </code></pre>
         </section>
       </div>
     </div>
