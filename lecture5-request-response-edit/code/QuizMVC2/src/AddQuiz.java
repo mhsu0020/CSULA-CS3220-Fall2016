@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -42,8 +43,8 @@ public class AddQuiz extends HttpServlet {
 		//Retrieve list of Quizzes from application scope
 	     List<Quiz> quizzes = (List<Quiz>)getServletContext().getAttribute("quizzes");
 		
-	     //New id is the last id of the quiz + 1
-	     int newId = quizzes.size();
+	     //make sure new id is unique
+	     int newId = getNewId(quizzes);
 	     
 	     //Created quiz Object from submitted form data
 		Quiz quizFromForm = new Quiz(newId, questionText, new String[]{option1, option2, option3, option4}, correctAnswerIndex, difficultyRating, category);
@@ -53,6 +54,20 @@ public class AddQuiz extends HttpServlet {
 		
 		//Redirect to different url (from the client), notice how this is different from request forward (server side)
 		response.sendRedirect("ViewQuiz?id="+newId);
+	}
+	
+	//Make sure the new id is unique among existing quizzes
+	public int getNewId(List<Quiz> existingQuizzes){
+		
+		int newId = existingQuizzes.size();
+		HashSet<Integer> existingIds = new HashSet<>();
+		for(Quiz quiz : existingQuizzes){
+			existingIds.add(quiz.id);
+		}
+		while(!existingIds.contains(newId)){
+			newId++;
+		}
+		return newId;
 	}
 
 }

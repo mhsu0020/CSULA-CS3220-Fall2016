@@ -60,11 +60,6 @@ git pull
           </ul>
         </section>
         <section>
-          <h3>Table of Contents (Click to Jump to Section)</h3>
-          <ul>
-          </ul>
-        </section>
-        <section>
           <h3>Monitoring HTTP Requests</h3>
           <p>
             Using the Chrome Developer Console
@@ -443,6 +438,65 @@ String[] checkedLanguages = request.getParameterValues("lang");
   </fieldset>
 </form>
           </code></pre>
+        </section>
+        <section>
+          <h3>Full Example: QuizMVC2</h3>
+          <p>
+            Under code folder in lecture5:
+            <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture5-request-response-edit/code/QuizMVC2">GitHub Code Repo</a>
+          </p>
+          <img src="images/quizzes1.png" height="400px" alt="" />
+          <div style="text-align: left; float: left; width: 50%;">
+            <img src="images/quizzes2.png" height="300px" alt="" />
+          </div>
+          <div style="text-align: left; float: right; width: 50%">
+            <img src="images/quizzes3.png" height="300px" alt="" />
+          </div>
+        </section>
+        <section>
+          <h3>Basic CRUD Web Applications</h3>
+          <ul>
+            <li><strong>CRUD: </strong> Create, Read, Update, Delete data</li>
+            <li>CRUD Web application = Data + Operations</li>
+            <li>Data:<br>Quizzes, wiki pages, twitter messages, CSNS assignments, facebook posts....</li>
+            <li>Operations: <br>Add/Create, search, read/display, edit, delete...</li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 Example Implementation</h3>
+          <ul>
+            <li>Data:<br> <code>Quiz</code>, <code>List&lt;Quiz&gt;</code></li>
+            <li>Operations: <br><code>AddQuiz, EditQuiz, ViewQuiz, DeleteQuiz, Quizzes</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Display</h3>
+          <ul>
+            <li>Initialize data storage in applicaiton scope</li>
+            <li>Pre-create some data</li>
+            <li>Retreive data and forward to view</li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Add</h3>
+          <ul>
+            <li>Handling web forms usually involves two operations</li>
+            <li>Display the form: <code>doGet()</code></li>
+            <li>Process the submission: <code>doPost()</code></li>
+            <li>Finally <code>response.sendRedirect()</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Edit</h3>
+          <p>
+            Embed an <em>identifier</em> of the data to be edited in generated hyperlink or form (using hidden form field)
+          </p>
+        </section>
+        <section>
+          <h3>QuizMVC2 - Delete</h3>
+            <p>
+              Use a unique and immutable identifier instead of array index. Since removing items changes the size of the array, the index is no longer reliable.
+            </p>
         </section>
       </div>
     </div>
