@@ -34,7 +34,7 @@
       <div class="slides">
         <section>
 					<h3>CS3220: Web and Internet Programming</h3>
-					<h3>Lecture 6: Cookie and Session Tracking, Using third-party front-end libraries</h3>
+					<h3>Lecture 6: Cookie and Session Tracking</h3>
 					<hr>
 					<h4>Michael Hsu</h4>
 					<h4>CSULA</h4>
@@ -98,6 +98,7 @@ git pull
             <li><a href="http://download.oracle.com/javaee/6/api/javax/servlet/http/Cookie.html">http://download.oracle.com/javaee/6/api/javax/servlet/http/Cookie.html</a></li>
             <li><code>HttpServletResponse</code>: <br><code>addCookie(Cookie)</code></li>
             <li><code>HttpServletRequest</code>: <br><code>Cookie[] getCookies()</code></li>
+            <li>Full example: <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture6-session-cookies-third/code/CookieExample">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture6-session-cookies-third/code/CookieExample</a></li>
           </ul>
         </section>
         <section>
@@ -137,22 +138,24 @@ git pull
           </ul>
         </section>
         <section>
-          <h3>Example: QuizMVC With Login/Logout</h3>
+          <h3>Example: QuizMVC3 With Login/Logout</h3>
           <ul>
+            <li>Full Example: <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture6-session-cookies-third/code/QuizMVC3">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture6-session-cookies-third/code/QuizMVC3</a></li>
             <li>Session is shared among servlets. In additional to application scope, we can use <strong>session scope</strong> to store data. Data in session scope is gone after it invalidates.</li>
             <li>Login:<br>
               <ul>
                 <li>Validate username/password</li>
-                <li>Failed: redirect to error page</li>
-                <li>Succeed: set a session attribute "userid" and redirect to page</li>
+                <li>Failed: redirect back to login page with message</li>
+                <li>Succeed: set session attributes and redirect to page</li>
               </ul>
             </li>
             <li>Quizzes:<br>
               <ul>
-                <li>Use userid to get user object. Check if user is logged in, and if user is admin</li>
+                <li>Use userid to check if user is logged in, and if user is admin</li>
                 <li>null: redirect to Login, otherwise if user is admin show edit/delete links</li>
               </ul>
             </li>
+            <li>In JSP, we can use <code>${sessionScope.ATTRIBUTE_NAME}</code> to get session attributes. For example <code>${sessionScope.isAdmin}</code></li>
           </ul>
         </section>
         <section>
@@ -163,7 +166,6 @@ git pull
             <li>The timeout value must be an integer</li>
             <li>Session never timeout if value <= 0</li>
           </ul>
-
         </section>
       </div>
     </div>
