@@ -64,7 +64,7 @@ public class AddQuiz extends HttpServlet {
 		for(Quiz quiz : existingQuizzes){
 			existingIds.add(quiz.id);
 		}
-		while(!existingIds.contains(newId)){
+		while(existingIds.contains(newId)){
 			newId++;
 		}
 		return newId;
