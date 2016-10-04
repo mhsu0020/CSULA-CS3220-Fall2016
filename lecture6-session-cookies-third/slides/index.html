@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 6</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 6: Cookie and Session Tracking, Using third-party front-end libraries</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Recall JSP MVC Model2 Diagram</h3>
+          <img data-src="images/jsp2.png" style="height:600px">
+          <ul>
+            <li>Servlets (Controller) handle requests from browser (client)</li>
+            <li>JSP is rendered on the server to HTML, and is sent back to the browser client</li>
+            <li>Controller retrieves data model objects, and forwards request to JSP(View)</li>
+            <li>See <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture4-backend-j2ee-intro/code/QuizMVC2">QuizMVC2</a> for full example</li>
+          </ul>
+        </section>
+		    <section>
+		      <h3>Session Tracking</h3>
+          <ul>
+            <li><p>
+              Why Session tracking?<br>
+              User login/logout, shopping carts, personalization
+            </p></li>
+            <li>Difficulty: HTTP is <b>stateless</b></li>
+            <li>Each connection only lasts seconds</li>
+            <li>We can use session cookies to keep track of user session, by either storing the session id or more data</li>
+          </ul>
+		    </section>
+        <section>
+          <h3>Cookies</h3>
+          <ul>
+            <li>Wikipedia Article: <a href="https://en.wikipedia.org/wiki/HTTP_cookie">https://en.wikipedia.org/wiki/HTTP_cookie</a></li>
+            <li>A small piece of data sent from the server and stored in the browser while the user is browsing</li>
+            <li>Set by the server as a response header <code>Set-Cookie</code></li>
+            <li><b>The cookie is sent back on future requests</b>. This can lead to slower page loads</li>
+            <li>case study: <a href="http://yuiblog.com/blog/2007/03/01/performance-research-part-3/">http://yuiblog.com/blog/2007/03/01/performance-research-part-3/</a></li>
+            <li><b>cannot</b> be accessed by JavaScript. It is sent and read by the server only.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Cookie Attributes</h3>
+          <ul>
+            <li>Name, Value</li>
+            <li>Host/Domain, Path <br>Cookie is sent back if request matches cookie host/domain</li>
+            <li>Require secure connection</li>
+            <li>Max age</li>
+            <li>Comment</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Servlet Cookie API</h3>
+          <ul>
+            <li><a href="http://download.oracle.com/javaee/6/api/javax/servlet/http/Cookie.html">http://download.oracle.com/javaee/6/api/javax/servlet/http/Cookie.html</a></li>
+            <li><code>HttpServletResponse</code>: <br><code>addCookie(Cookie)</code></li>
+            <li><code>HttpServletRequest</code>: <br><code>Cookie[] getCookies()</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Problems with Cookies</h3>
+          <ul>
+            <li>Cookies have a size limit. It also affects page performance as it is sent back on each request</li>
+            <li>"Malicious" users can fake cookie data :))))<br><a href="https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en">EditThisCookie extension</a></li>
+            <li><strong>In general, any data sent from the User is considered insecure and must be verified on the server.</strong></li>
+            <li>Cookies are disabled in some browsers</li>
+            <li>Cookie API is a pain to use</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Servlet Session Tracking API</h3>
+          <ul>
+            <li>Instead of storing data in cookies, we store only the JSESSIONID</li>
+            <li>Data is stored server-side via the session API</li>
+            <li><code>HttpServletRequest</code>: <br><code>HttpSession getSession()</code></li>
+            <li><code>HttpSession</code><br>
+              <ul>
+                <li><a target="_blank" href="http://download.oracle.com/javaee/6/api/javax/servlet/http/HttpSession.html">http://download.oracle.com/javaee/6/api/javax/servlet/http/HttpSession.html</a></li>
+                <li><code>setAttribute( String, Object )</code></li>
+                <li><code>getAttribute( String )</code></li>
+                <li><code>invalidate()</code></li>
+            </li>
+          </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>More on Servlet Session API</h3>
+          <ul>
+            <li>Data is stored on the server (no size limit)</li>
+            <li>Each session is assigned a unique session id, which is used to access data associated with the session</li>
+            <li>Session id is randomly generated and hard to fake</li>
+            <li>Session tracking use cookie by default, but can automatically switch to URL rewriting if cookie is disabled</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example: QuizMVC With Login/Logout</h3>
+          <ul>
+            <li>Session is shared among servlets. In additional to application scope, we can use <strong>session scope</strong> to store data. Data in session scope is gone after it invalidates.</li>
+            <li>Login:<br>
+              <ul>
+                <li>Validate username/password</li>
+                <li>Failed: redirect to error page</li>
+                <li>Succeed: set a session attribute "userid" and redirect to page</li>
+              </ul>
+            </li>
+            <li>Quizzes:<br>
+              <ul>
+                <li>Use userid to get user object. Check if user is logged in, and if user is admin</li>
+                <li>null: redirect to Login, otherwise if user is admin show edit/delete links</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Session Configuration in web.xml</h3>
+          <ul>
+            <li>Default session timeout in Tomcat is 30 minutes</li>
+            <li>Session timeout can be changed in web.xml or in Java code</li>
+            <li>The timeout value must be an integer</li>
+            <li>Session never timeout if value <= 0</li>
+          </ul>
+
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
