@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 7</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 7: Using Relatiional Databases with MySQL and JDBC</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Why Databases</h3>
+          <ul>
+            <li>The need to persist data</li>
+            <li>Access data effectively and safely</li>
+            <li>We can of course store all data in text files, and read from them as needed. But this will be very inefficient.</li>
+            <li>A whole branch of computer science:
+              <ul>
+                <li>How do we scale databases for billions of users around the globe?</li>
+                <li>In financial transactions, how do we make handle multiple concurrent transactions and what value to use for the final result?</li>
+                <li>What happens if my database server crashes, how do I recover from ongoing operations?</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>A Relational DB Example</h3>
+          <div>
+           <img src="images/sql1.png" alt="" />
+          </div>
+        </section>
+        <section>
+          <h3>Terminology</h3>
+          <img src="images/sql2.png">
+        </section>
+        <section>
+          <h3>DBMS</h3>
+          <ul>
+            <li>Database Management System (DBMS) is a software that manages databases</li>
+            <li>Common Relational DBMS:
+              <ul>
+                <li>Commercial – Oracle, IBM DB2, MS SQL Server, Access</li>
+                <li>Open source – MySQL (MariaDB), PostgreSQL</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Database and Schema</h3>
+          <ul>
+            <li>A database is a collection of data managed by a DBMS</li>
+            <li>A database contains a number of schema elements, such as tables, indexes, stored procedures, and so on</li>
+          </ul>
+          <img src="images/sql3.png" alt="" />
+        </section>
+        <section>
+          <h3>SQL</h3>
+          <ul>
+            <li>Strucutred Query Language</li>
+            <li>Standard query language of relational databases</li>
+            <li>Supported by all major relational databases with some variations</li>
+          </ul>
+          <br><br>
+          <h4>SQL Scripts</h4>
+          <ul>
+            <li>A text file contains SQL statements and comments<br>
+                <ul>
+                  <li>Statements: select, insert, create …</li>
+                  <li>Comments<br>
+                  lines started with --<br>
+                  MySQL also supports C-style comment syntax, i.e. /* */
+                  </li>
+                  <li>Usually uses the .sql suffix</li>
+                </ul>
+              </li>
+          </ul>
+        </section>
+        <section>
+          <h3>MySQL</h3>
+          <ul>
+            <li>Very popular in web development</li>
+            <li>Bought by Oracle, many people switched to <a target="_blank" href="https://mariadb.org/">MariaDB</a></li>
+            <li><a href="https://github.com/mysql/mysql-server">Open source</a></li>
+            <li>Mature tools/plugins/libraries for almost all languages</li>
+          </ul>
+          <img src="images/mysql.png" alt="" / width="500px">
+        </section>
+        <section>
+          <h3>MySQL on CS3 Server</h3>
+          <ul>
+            <li>Version 5.5</li>
+            <li>One database per account</li>
+<li>DB name is the same as the server account username. E.g. <code>cs3220stu31</code></li>
+<li>Username and password are the same as the ones for the server account</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Client-Server Architecture of MySQL</h3>
+          <img src="images/sql4.png" alt="" />
+        </section>
+        <section>
+          <h3>Connect to a MySQL Database</h3>
+          <ul>
+            <li>Use either command line or MySQL Workbench</li>
+            <li>Create a connection with the information about the server:
+              <ul>
+  Host<br>
+  Port (default 3306)<br>
+  Username<br>
+  Password<br>
+  Database/Schema<br>
+              </ul>
+</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Creating Tables</h3>
+          <pre><code class='hljs'>
+-- example syntax:
+create table table_name (
+    field_name field_type [NOT NULL] [UNIQUE] [DEFAULT value],
+    field_name field_type [NOT NULL] [UNIQUE] [DEFAULT value],
+    …
+    [PRIMARY KEY(field_name, …)]
+);
+
+
+create table employees (
+    id		   integer auto_increment primary key,
+    first_name	   varchar(255) not null,
+    last_name	   varchar(255) not null,
+    address	   varchar(255),
+    supervisor_id	   integer references employees(id)
+);
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Naming Conventions</h3>
+          <ul>
+            <li>Use plural form for table names</li>
+            <li>Use singular form for column names</li>
+            <li>Use underscore to concatenate multiple words, e.g. employee_id.<br>
+<strong>Do not use mixed cases in names (e.g. ArtistName) because many DBMS treat names as case-insensitive </strong></li>
+          </ul>
+
+        </section>
+        <section>
+          <h3>More on <code>CREATE TABLE</code></h3>
+          <p>
+            Field types
+          </p>
+          <ul>
+            <li>integer, real, char(n), varchar(n)</li>
+            <li>date, time, datetime, timestamp</li>
+          </ul>
+<p>
+  Auto ID generation:
+</p>
+<ul>
+  <li>auto_increment</li>
+</ul>
+<p>
+  Integrity constraints
+</p>
+<ul>
+  <li>unique, not null, primary key</li>
+  <li>foreign key</li>
+</ul>
+
+</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Populate Tables</h3>
+          <pre><code class='hljs'>
+insert into table values (value1, value2, …);
+
+insert into table (field, …) values (value, …);
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Search for Records</h3>
+<pre><code class='hljs'>
+  select field(s) from table(s) where condition(s);
+</code></pre>
+<p>
+  Practice problems:
+</p>
+<ul>
+<li>Find the name and address of employee with id=1</li>
+<li>Find the name of employee who leads the project Firestone</li>
+<li>Find the number of projects led by John Doe</li>
+<li>List the number of members of each project</li>
+</ul>
+        </section>
+        <section>
+          <h3>Update Records</h3>
+          <pre><code class='hljs'>
+            update table set field=value [, …]
+            	where condition(s);
+          </code></pre>
+          <p>
+            Practice problems:
+          </p>
+          <ul>
+            <li>Change John Doe’s address to 123 Main St.</li>
+            <li>Change John Doe’s name to Tom Smith</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Delete Records</h3>
+          <pre><code class='hljs'>
+            delete from table where condition(s);
+          </code></pre>
+          <p>
+            Practice problems:
+          </p>
+          <ul>
+            <li>Delete all the projects led by John Doe</li>
+            <li>Delete all the projects</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Delete Tables and Databases</h3>
+          <p>
+            <strong>Be very, very careful when deleting data.</strong>
+          </p>
+          <ul>
+            <li>Delete a database: <br>
+drop database cs3220stu31; <strong>-- don’t do this!</strong></li>
+<li>Delete a table:<br>
+drop table projects;
+</li>
+          </ul>
+
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
