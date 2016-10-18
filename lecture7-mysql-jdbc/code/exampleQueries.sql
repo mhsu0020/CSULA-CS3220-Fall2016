@@ -1,4 +1,12 @@
 
+select * from projects;
+
+select * from employees;
+
+select * from project_members;
+
+select first_name, last_name from employees;
+
 -- show leader info of project Blue
 select p.name as 'project name', e.first_name as 'leader first name', e.last_name as 'leader last name' from projects p, employees e where p.leader_id = e.id and p.name = 'Blue';
 
