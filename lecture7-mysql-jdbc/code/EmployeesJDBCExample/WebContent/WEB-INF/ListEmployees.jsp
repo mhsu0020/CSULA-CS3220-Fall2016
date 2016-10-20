@@ -24,5 +24,6 @@
 	</c:forEach>
 	</table>
 	<br><br>
+	<a href="AddEmployee">Add Employee</a>
 </body>
 </html>

@@ -15,7 +15,6 @@ public class ConnectionUtils {
 
 	    conn = DriverManager.getConnection(
 	                   "jdbc:mysql://" + serverName + ":" + portNumber + "/" + database, connectionProps);
-	    System.out.println("Connected to database ");
 	    return conn;
 	}
 
