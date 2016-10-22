@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseAcessObject {
+public class DatabaseAccessor {
 
 	public static final String LIST_COUNTRIES_QUERY = "select * from countries";
 	
@@ -42,7 +42,7 @@ public class DatabaseAcessObject {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("employee_id");
 				String firstName = rs.getString("first_name");
 				String lastName = rs.getString("last_name");
 				String address = rs.getString("address");

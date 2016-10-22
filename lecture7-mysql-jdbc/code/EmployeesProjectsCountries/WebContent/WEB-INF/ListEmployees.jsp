@@ -14,12 +14,13 @@
 <body>
 	<h1>Employees From Database</h1>
 	<table>
-	<tr><th>id</th><th>name</th><th>address</th></tr>
+	<tr><th>id</th><th>name</th><th>address</th><th>country</th></tr>
 	<c:forEach items="${employees}" var="employee" varStatus="loop">
       <tr>
       	<td>${employee.id}</td>
 		<td>${employee.firstName} ${employee.lastName}</td>
 		<td>${employee.address}</td>
+		<td>${employee.country.name}</td>
       </tr>
 	</c:forEach>
 	</table>
