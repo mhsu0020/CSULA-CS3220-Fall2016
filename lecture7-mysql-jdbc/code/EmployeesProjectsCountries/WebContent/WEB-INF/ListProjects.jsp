@@ -14,13 +14,20 @@
 <body>
 	<h1>Projects</h1>
 	<table>
-	<tr><th>id</th><th>project name</th><th>leader</th><th>members</th></tr>
+	<tr><th>id</th><th>project name</th><th>leader</th><th>team members and ratings</th></tr>
 	<c:forEach items="${projects}" var="project" varStatus="loop">
       <tr>
       	<td>${project.id}</td>
 		<td>${project.name}</td>
 		<td>${project.leader.firstName} ${project.leader.lastName}</td>
-		<td>TBH</td>
+		<td>
+			<ul>
+			<%-- Key: Employee, Value: rating of employee as project member --%>
+			<c:forEach var="projectMemberRating" items="${project.projectMembersRatings}">
+				<li>${projectMemberRating.key.firstName} ${projectMemberRating.key.lastName}: ${projectMemberRating.value}</li>
+			</c:forEach>
+			</ul>
+		</td>
       </tr>
 	</c:forEach>
 	</table>

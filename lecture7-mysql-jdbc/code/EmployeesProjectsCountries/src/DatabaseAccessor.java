@@ -3,7 +3,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseAccessor {
 
@@ -17,9 +19,55 @@ public class DatabaseAccessor {
 	public static final String LIST_PROJECTS_QUERY =  "select p.id as 'project_id', p.name as 'project_name', p.leader_id as 'leader_id', e.first_name as 'first_name', e.last_name as 'last_name', e.address as 'address', c.id as 'country_id', c.name as 'country_name' from projects p, employees e, countries c where p.leader_id = e.id and e.country_id = c.id";
 
 	//Retrieve member info and ratings for specific project
-	public static final String LIST_PROJECTS_MEMBERS_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name' from employees e, countries c where e.country_id = c.id and ";
+	public static final String LIST_PROJECTS_MEMBERS_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name', pm.member_team_rating from employees e, countries c, project_members pm where e.country_id = c.id and pm.member_id = e.id and pm.project_id = ?";
 
-	
+	/**
+	 * get project members and their ratings for a specific project
+	 * 
+	 * */
+	public static Map<Employee, Integer> getProjectMembersRatings(int projectId) throws SQLException {
+		
+		Map<Employee, Integer> projectMemberRatings = new HashMap<>();
+		Connection c = null;
+		try {
+
+			c = ConnectionUtils.getMySQLConnection(DatabaseConfig.MYSQL_USERNAME, DatabaseConfig.MYSQL_PASSWORD,
+					DatabaseConfig.MYSQL_HOST, DatabaseConfig.MYSQL_PORT, DatabaseConfig.MYSQL_DATABASE_TO_USE);
+
+			PreparedStatement stmt = c.prepareStatement(LIST_PROJECTS_MEMBERS_QUERY);
+			stmt.setInt(1, projectId);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int employeeId = rs.getInt("employee_id");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				String address = rs.getString("address");
+				int countryId = rs.getInt("country_id");
+				String countryName = rs.getString("country_name");
+				int rating = rs.getInt("member_team_rating");
+				Country country = new Country(countryId, countryName);
+
+				Employee employee = new Employee(employeeId, firstName, lastName, address, country);
+				projectMemberRatings.put(employee, rating);
+			}
+
+		} catch (SQLException e) {
+			// Escalate to Server error
+			throw e;
+		}
+		// Always close connections, no matter what happened
+		finally {
+			try {
+				if (c != null)
+					c.close();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return projectMemberRatings;
+		
+	}
 	
 	public static List<Project> getProjects() throws SQLException {
 		List<Project> projects = new ArrayList<>();
@@ -44,7 +92,7 @@ public class DatabaseAccessor {
 				
 				Country country = new Country(countryId, countryName);
 				Employee leader = new Employee(leaderId, leaderFirstName, leaderLastName, address, country);
-				Project project = new Project(projectId, projectName, leader, null);
+				Project project = new Project(projectId, projectName, leader, getProjectMembersRatings(projectId));
 				projects.add(project);
 			}
 
