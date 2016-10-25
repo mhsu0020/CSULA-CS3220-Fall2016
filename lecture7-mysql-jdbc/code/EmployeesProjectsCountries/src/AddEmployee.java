@@ -1,7 +1,6 @@
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,51 +17,36 @@ public class AddEmployee extends HttpServlet {
 	/* Forwards request to form view */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
 			List<Country> countries = DatabaseAccessor.getCountries();
 			request.setAttribute("countries", countries);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		request.getRequestDispatcher("/WEB-INF/AddEmployee.jsp").forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String address = request.getParameter("address");
-		
-        Connection c = null;
-        try {
-            String sql = "insert into employees (first_name, last_name, address) values (?, ?, ?)";
+		int countryId = Integer.valueOf(request.getParameter("country"));
+		Connection c = null;
+		try {
+			//we are just using a dummy employee object to hold data. 
+			//Because the id will be auto-generated and the country via a foreign key, we are using placeholder values.
+			DatabaseAccessor.insertEmployees(new Employee(-1, firstName, lastName, address, null), countryId);
+		} catch (SQLException e) {
+			throw new ServletException(e);
+		}
 
-    		c = ConnectionUtils.getMySQLConnection(DatabaseConfig.MYSQL_USERNAME, DatabaseConfig.MYSQL_PASSWORD,
-					DatabaseConfig.MYSQL_HOST, DatabaseConfig.MYSQL_PORT, DatabaseConfig.MYSQL_DATABASE_TO_USE);           
-    		PreparedStatement pstmt = c.prepareStatement( sql );
-            pstmt.setString( 1, firstName);
-            pstmt.setString( 2, lastName);
-            pstmt.setString( 3, address);
-
-            pstmt.executeUpdate();
-        }
-        catch( SQLException e ) {
-            throw new ServletException( e );
-        }
-        finally {
-            try {
-                if( c != null ) c.close();
-            }
-            catch( SQLException e ) {
-                throw new ServletException( e );
-            }
-        }
-		
-		//Redirect to different url (from the client), notice how this is different from request forward (server side)
+		// Redirect to different url (from the client), notice how this is
+		// different from request forward (server side)
 		response.sendRedirect("ListEmployees");
 	}
 

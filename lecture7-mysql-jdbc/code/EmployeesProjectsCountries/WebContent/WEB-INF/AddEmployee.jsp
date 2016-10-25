@@ -22,6 +22,12 @@
 			</div>
 			<div>
 				<label for="country">Country:</label>
+				<select id="country" name="country" required>
+				<!-- each option value is the  country id -->
+				<c:forEach items="${countries}" var="country">
+					<option value="${country.id}">${country.name}</option>
+				</c:forEach>
+			</select>
 			</div>
 			<div>
 				<label for="address">Address:</label>

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.ServletException;
+
 public class DatabaseAccessor {
 
 	public static final String LIST_COUNTRIES_QUERY = "select * from countries";
@@ -23,6 +25,8 @@ public class DatabaseAccessor {
 	public static final String LIST_PROJECTS_MEMBERS_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name', pm.member_team_rating from employees e, countries c, project_members pm where e.country_id = c.id and pm.member_id = e.id and pm.project_id = ?";
 
 	public static final String UPDATE_PROJECTS_MEMBERS_RATINGs = "update project_members set member_team_rating = ? where project_id = ? and member_id = ?";
+	
+	public static final String ADD_EMPLOYEES = "insert into employees (first_name, last_name, address, country_id) values (?, ?, ?, ?)";
 	
 	//Batch processing: call addBatch for each query creation, then call executeBatch to run all update queries
 	public static void updateProjectMembersRatings(int projectId, Map<Integer, Integer> employeeIdNewRatings) throws SQLException {
@@ -62,7 +66,33 @@ public class DatabaseAccessor {
 		
 	}
 	
-	
+	public static void insertEmployees(Employee employeeToAdd, int countryId) throws SQLException{
+		
+	    Connection c = null;
+        try {
+    		c = ConnectionUtils.getMySQLConnection(DatabaseConfig.MYSQL_USERNAME, DatabaseConfig.MYSQL_PASSWORD,
+					DatabaseConfig.MYSQL_HOST, DatabaseConfig.MYSQL_PORT, DatabaseConfig.MYSQL_DATABASE_TO_USE);           
+    		PreparedStatement pstmt = c.prepareStatement(ADD_EMPLOYEES);
+            pstmt.setString( 1, employeeToAdd.firstName);
+            pstmt.setString( 2, employeeToAdd.lastName);
+            pstmt.setString( 3, employeeToAdd.address);
+            pstmt.setInt(4, countryId);
+            pstmt.executeUpdate();
+        }
+        catch( SQLException e ) {
+        	throw e;
+        }
+        finally {
+            try {
+                if( c != null ) c.close();
+            }
+            catch( SQLException e ) {
+            	throw e;
+            }
+        }
+		
+		
+	}
 	
 	/**
 	 * get project members and their ratings for a specific project
