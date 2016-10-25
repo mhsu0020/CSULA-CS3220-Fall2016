@@ -27,6 +27,8 @@
 				<li>${projectMemberRating.key.firstName} ${projectMemberRating.key.lastName}: ${projectMemberRating.value}</li>
 			</c:forEach>
 			</ul>
+			<hr>
+			<a href="ChangeRating?projectId=${project.id}">Change Ratings</a>
 		</td>
       </tr>
 	</c:forEach>

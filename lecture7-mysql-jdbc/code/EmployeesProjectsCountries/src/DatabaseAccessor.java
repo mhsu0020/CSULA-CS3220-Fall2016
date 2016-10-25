@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class DatabaseAccessor {
 
@@ -21,6 +22,48 @@ public class DatabaseAccessor {
 	//Retrieve member info and ratings for specific project
 	public static final String LIST_PROJECTS_MEMBERS_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name', pm.member_team_rating from employees e, countries c, project_members pm where e.country_id = c.id and pm.member_id = e.id and pm.project_id = ?";
 
+	public static final String UPDATE_PROJECTS_MEMBERS_RATINGs = "update project_members set member_team_rating = ? where project_id = ? and member_id = ?";
+	
+	//Batch processing: call addBatch for each query creation, then call executeBatch to run all update queries
+	public static void updateProjectMembersRatings(int projectId, Map<Integer, Integer> employeeIdNewRatings) throws SQLException {
+		
+		Connection c = null;
+		try {
+
+			c = ConnectionUtils.getMySQLConnection(DatabaseConfig.MYSQL_USERNAME, DatabaseConfig.MYSQL_PASSWORD,
+					DatabaseConfig.MYSQL_HOST, DatabaseConfig.MYSQL_PORT, DatabaseConfig.MYSQL_DATABASE_TO_USE);
+
+			PreparedStatement stmt = c.prepareStatement(UPDATE_PROJECTS_MEMBERS_RATINGs);
+			
+			for(Entry<Integer, Integer> employeeIdNewRating : employeeIdNewRatings.entrySet()){
+				//new value, project_id, member_id, in order
+				stmt.setInt(1, employeeIdNewRating.getValue());
+				stmt.setInt(2, projectId);
+				stmt.setInt(3, employeeIdNewRating.getKey());
+				//adds to query batch, not executed yet
+				stmt.addBatch();
+			}
+
+			//run all updates
+	        stmt.executeBatch();
+	        
+		} catch (SQLException e) {
+			throw e;
+		}
+		// Always close connections, no matter what happened
+		finally {
+			try {
+				if (c != null)
+					c.close();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		
+	}
+	
+	
+	
 	/**
 	 * get project members and their ratings for a specific project
 	 * 
