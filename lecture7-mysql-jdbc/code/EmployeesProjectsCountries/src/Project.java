@@ -1,7 +1,7 @@
 import java.util.Map;
 
 public class Project {
-
+	int id;
 	String name;
 	Employee leader;
 	Map<Employee, Integer> projectMembersRatings;
@@ -9,10 +9,20 @@ public class Project {
 	public Project() {
 	}
 
-	public Project(String name, Employee leader, Map<Employee, Integer> projectMembersRatings) {
+	public Project(int id, String name, Employee leader, Map<Employee, Integer> projectMembersRatings) {
+		this.id = id;
 		this.name = name;
 		this.leader = leader;
 		this.projectMembersRatings = projectMembersRatings;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

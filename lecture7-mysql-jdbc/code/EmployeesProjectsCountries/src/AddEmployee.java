@@ -1,9 +1,9 @@
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +18,14 @@ public class AddEmployee extends HttpServlet {
 	/* Forwards request to form view */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		try {
+			List<Country> countries = DatabaseAccessor.getCountries();
+			request.setAttribute("countries", countries);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher("/WEB-INF/AddEmployee.jsp").forward(request, response);
 	}
@@ -42,18 +50,14 @@ public class AddEmployee extends HttpServlet {
 
             pstmt.executeUpdate();
         }
-        catch( SQLException e )
-        {
+        catch( SQLException e ) {
             throw new ServletException( e );
         }
-        finally
-        {
-            try
-            {
+        finally {
+            try {
                 if( c != null ) c.close();
             }
-            catch( SQLException e )
-            {
+            catch( SQLException e ) {
                 throw new ServletException( e );
             }
         }

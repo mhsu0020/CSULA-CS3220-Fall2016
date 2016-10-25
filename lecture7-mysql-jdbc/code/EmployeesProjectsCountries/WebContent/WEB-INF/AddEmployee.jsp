@@ -21,6 +21,9 @@
 				<input type="text" id="lastName" name="lastName" required>
 			</div>
 			<div>
+				<label for="country">Country:</label>
+			</div>
+			<div>
 				<label for="address">Address:</label>
 				<input type="text" id="address" name="address" required>
 			</div>
