@@ -119,7 +119,7 @@ git pull
         <section>
           <h3>MySQL</h3>
           <ul>
-            <li>Very popular in web development</li>
+            <li>Very popular in web development: <a href="http://db-engines.com/en/ranking">http://db-engines.com/en/ranking</a></li>
             <li>Bought by Oracle, many people switched to <a target="_blank" href="https://mariadb.org/">MariaDB</a></li>
             <li><a href="https://github.com/mysql/mysql-server">Open source</a></li>
             <li>Mature tools/plugins/libraries for almost all languages</li>
@@ -213,6 +213,10 @@ create table employees (
           </ul>
         </section>
         <section>
+          <h3>Example Database:</h3>
+          <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture7-mysql-jdbc/code/employees.sql">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture7-mysql-jdbc/code/employees.sql</a>
+        </section>
+        <section>
           <h3>Populate Tables</h3>
           <pre><code class='hljs'>
 insert into table values (value1, value2, …);
@@ -276,6 +280,205 @@ drop table projects;
 </li>
           </ul>
 
+        </section>
+        <section>
+          <h3>Basic Schema Design</h3>
+          <ul>
+            <li>Classes -> Tables</li>
+            <li>Attribute in classes -> columns in tables</li>
+            <li>Collection attributes in classes -> either foreign key (one to many), or a seperate table if many to many.</li>
+          </ul>
+
+        </section>
+        <section>
+          <h3>JDBC: An Abstraction Layer for Connecting to Different Databases</h3>
+          <img src="images/sql6.png">
+          <p>DB Server can be MySQL, PostgreSQL, Oracle, Microsoft SQL Server, as long as there is a JDBC Driver available.</p>
+          <p><strong>When using JDBC, make sure to import <code>java.sql.*</code> packages to maintain compatibility with other databases</strong></p>
+        </section>
+        <section>
+          <h3>About JDBC</h3>
+          <ul>
+            <li>Java DataBase Connectivity</li>
+            <li>JDBC API is DBMS independent</li>
+            <li>JDBC Driver implements JDBC API for a particular DBMS</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example: <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture7-mysql-jdbc/code/EmployeesJDBCExample">EmployeesJDBCExample</a></h3>
+          <ul>
+            <li>Load JDBC driver: Only need to be done once per application</li>
+            <li>Make connections</li>
+            <li>Execute queries</li>
+            <li>Process results</li>
+            <li>Handle exceptions (and close connections)</li>
+          </ul>
+          <p>tips</p>
+          <ul>
+            <li>Group/Externalize your configuration settings so they can be easily changed</li>
+            <li>Don't be afraid to create new non-servlet classes to help organize your code</li>
+          </ul>
+        </section>
+        <section>
+          <h3>JDBC Basics</h3>
+          <ul>
+            <li><code>import java.sql.*;</code></li>
+            <li>Initialize driver once in init(): <br><code>Class.forName("com.mysql.jdbc.Driver")</code></li>
+            <li>Create Connection:
+              <ul>
+                <li><code>jdbc:mysql://[host:port]/[database][?user=cs320stu31&password=abcd]
+</code>, or use properties for username and password</li>
+<li>DriverManager.getConnection</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>JDBC Basic Cont.</h3>
+          <ul>
+            <li>Create Statement: <br><code>Statement stmt = c.createStatement();
+</code></li>
+            <li>Execute Statement: <br><code>stmt.executeQuery(String sql)</code> or <code>stmt.executeUpdate(String sql)</code></li>
+            <li>Get Result back<br>ResultSet rs</li>
+          </ul>
+          <strong><p>
+            tutorial: <a target="_blank" href="http://docs.oracle.com/javase/tutorial/jdbc/index.html
+">http://docs.oracle.com/javase/tutorial/jdbc/index.html
+</a>
+          </p></strong>
+        </section>
+        <section>
+          <h3>Database Query Results</h3>
+          <p>
+            In a program, we want to:
+          </p>
+          <ul>
+            <li>Access each record</li>
+            <li>Access each attribute in a record</li>
+            <li>Access the name of each attribute</li>
+          </ul>
+          <img src="images/sql7.png" alt="" />
+        </section>
+        <section>
+          <h3>JDBC ResultSet – Row Access</h3>
+          <img src="images/sql8.png" alt="" />
+          <ul>
+            <li><code>next()</code>- move cursor down one row</li>
+            <li>Cursor starts <strong>before the 1st record</strong></li>
+            <li><code>true</code> if the current record is valid</li>
+            <li><code>false</code> if no more records</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Common Code for Processing ResultSet</h3>
+          <ul>
+            <li>Process each row: <br><code>while(rs.next()) {…}</code></li>
+            <li>Check whether a result set is empty: <br> <code>if(rs.next()) {…}</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>JDBC ResultSet – Column Access</h3>
+          <ul>
+            <li>Access the columns of current row</li>
+            <li>getXxx( String columnName )<br>For example, getString("user")</li>
+            <li>getXxx( int columnIndex )<br>columnIndex starts from 1. <br>getString(1)</li>
+          </ul>
+          <strong><p>
+            documentation: <a target="_blank" href="http://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html
+">http://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html
+</a>
+          </p></strong>
+        </section>
+        <section>
+          <h3>JDBC ResultSet – Access Column Names</h3>
+          <pre><code class='hljs'>
+ResultSetMetaData meta = rs.getMetaData();
+          </code></pre>
+          <ul>
+            <li>ResultSetMetaData:<br>getColumnName( columnIndex )
+<br>getColumnLabel( columnIndex )
+</li>
+          </ul>
+        </section>
+        <section>
+          <h3>JDBC ResultSet – Size</h3>
+          <ul>
+            <li>Since ResultSet is a cursor, we don't all results at once.</li>
+            <li>The <code>getFetchSize()</code> method returns how many rows are fetched per roundtrip.</li>
+            <li>You can use <code>setFetchSize(int nrows)</code> to change the value</li>
+            <li>To get the number of results, do a COUNT query</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Handling Exceptions</h3>
+          <p>
+            Always remember to close your resources no matter what happened to prevent resource leaks.
+          </p>
+          <pre><code class='hljs'>
+            catch( SQLException e ) {
+                throw new ServletException( e );
+            }
+            finally {
+                try {
+                    if( c != null ) c.close();
+                }
+                catch( SQLException e ) {
+                    throw new ServletException( e );
+                }
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Example: <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture7-mysql-jdbc/code/EmployeesJDBCExample/src/ListEmployees.java">ListEmployees</a></h3>
+          <ul>
+            <li>Create a employees table in your MySQL database</li>
+            <li>Retrieve the data, build your data objects in your servlet</li>
+            <li>Display the data objects in JSP</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example: addEmployee</h3>
+          <ul>
+            <li>Save new employees in database: executeQuery() vs executeUpdate()</li>
+            <li><strong>Problems with user input: special characters and SQL injection attack</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example: SQL Injection Attack</h3>
+          <ul>
+            <li>User input should NOT be trusted</li>
+            <li>Regular user input: <br>Username: <code>mike</code>
+<br>Password: abcd
+</li>
+<li>Malicious user input: <br>Username: <code>someuser</code>
+<br>Password: <code>something' or '1</code>
+</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Prepared Statements</h3>
+          <p>Statement with parameters</p>
+<pre><code class='hljs'>
+String sql = “insert into items values (? ? ?)”;
+
+PreparedStatement pstmt =c.prepareStatement(sql);
+
+pstmt.setString(1, “orange”);
+pstmt.setBigDecimal(2, 0.59);
+pstmt.setInt(3, 4);
+
+pstmt.executeUpdate();
+
+</code></pre>
+        </section>
+        <section>
+          <h3>Benefits of Prepared Statements</h3>
+          <ul>
+            <li>Special characters are properly handled</li>
+            <li>Secure if the SQL statement is constructed from user input</li>
+            <li>The SQL statement is more readable</li>
+            <li>Better performance (maybe)</li>
+          </ul>
         </section>
       </div>
     </div>
