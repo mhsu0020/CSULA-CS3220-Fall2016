@@ -1,5 +1,7 @@
 # Example Maven Servlet Project
 
+Note: Remember to change the database config in src/main/java/DatabaseConfig.java
+
 Cleaning and Packaging
 
 ```
