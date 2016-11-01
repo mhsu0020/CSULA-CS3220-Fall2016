@@ -56,7 +56,190 @@ git pull
             <li><strong>Building and Packaging</strong><br><p>How do I create something that other people can run on Tomcat? How can I automate the process? What if the other person doesn't have eclipse and a local tomcat installation?</p></li>
             <li><strong>Testing</strong><br><p>How do I run automatic tests whenever I change my code and build the project?</p></li>
           </ul>
+        </section>
+        <section>
+          <h3>Maven</h3>
+          <ul>
+            <li><a href="https://maven.apache.org/">https://maven.apache.org/</a></li>
+            <li>Is a "Project Management and Comprehension Tool"</li>
+            <li>Depedency System</li>
+            <li>Consistent project structure<br>Maven is very opiniated what you put in what folders</li>
+            <li>Allows static definition on how a project is compiled/packaged/tested via a <strong>pom.xml</strong> file. POM stands for project object model.</li>
+            <li>In pom.xml, you can define dependencies, what extra jars your project needs, how the project is built, enable unit tests, and run the packaged application in a tomcat server via the tomcat7 plugin.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Maven POM</h3>
+          <ul>
+            <li><strong>Project Object Model</strong></li>
+            <li>We treat the project itself as an object, just like in object-oriented programming</li>
+            <li>A project can have the following data fields:
+                <ul>
+                  <li>Name and Version</li>
+                  <li>Artifact Id</li>
+                  <li>Package Type (for example war or jar)</li>
+                  <li>Dependencies (MySQL Conncetor, Java Servlet API, JSTL, etc)</li>
+                  <li>Plugins<br>extra modules. For example, the maven tomcat7 runs the packaged war in a tomcat server</li>
+                </ul>
+            </li>
+            <li>pom.xml is a xml file that defines the project object model</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Project Identity with GAV</h3>
+          <ul>
+            <li>Maven uniquely identifies a project using the <strong>groupID</strong> , <strong>artifactID</strong> and <strong>version</strong></li>
+            <li>The abbreviation GAV is commonly used</li>
+            <li><strong>groupID</strong>: usually based on java package name, reverse domain name of company. For example: edu.calstatela</li>
+            <li><strong>artifactId</strong>: Name of project. Words usually seperated by hyphens. For example: employee-countries-jdbc-example</li>
+            <li><strong>version</strong>: Format is MAJOR.MINOR.MAINTANENCE<br>Add '-SNAPSHOT' to identify in development</li>
+          </ul>
+          <pre><code class='hljs data-trim'>
+.....
 
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.calstatela</groupId>
+    <artifactId>example-maven-servlet-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</project>
+
+.....
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Packaging</h3>
+          <ul>
+            <li>The type of file to build is identified using the "packaging" element</li>
+            <li>Tells Maven and plugins how to build the project</li>
+            <li>Examples: jar, war, pom (you can have parent poms with inheritance, just like objects)</li>
+            <li>Default is jar</li>
+            <li>For our "vanilla" Java Web Servlet Apps, we use war</li>
+          </ul>
+          <pre><code class='hljs data-trim'>
+  .....
+
+  <project>
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>edu.calstatela</groupId>
+      <artifactId>example-maven-servlet-project</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <packaging>war</packaging>
+  </project>
+
+  .....
+          </code></pre>
+        </section>
+        <section>
+          <h3>Maven Conventions</h3>
+          <ul>
+            <li>"Convention over configuration": <a href="https://en.wikipedia.org/wiki/Convention_over_configuration">https://en.wikipedia.org/wiki/Convention_over_configuration</a></li>
+            <li>Life is a lot easier if we all agree to do things the same way. Maven is opinionated about the project folder/file structure to simplfy the config process.</li>
+            <li>src: All project source files go in this directory</li>
+            <li>src/test: All sources contributing to testing project</li>
+            <li>src/main: All sources that go into primary artifact</li>
+            <li>src/main/java: All java source files. Everything under your <strong>src</strong> folder should go there</li>
+            <li>src/main/webapp: All web source files. Everything under your <strong>WebContent</strong> folder should go there</li>
+            <li>src/main/resources: All non compiled source files</li>
+            <li>src/test/java: All java test source files</li>
+            <li>src/test/resources: All non compiled test source files</li>
+            <li>target: generated/compiled files. Should not be commited to Git Repo</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Maven Build Licecycle</h3>
+          <ul>
+            <li>A Maven build follows a <strong>lifecycle</strong></li>
+            <li>
+              Commonly used Default lifecycles
+              <ul>
+                <li>test</li>
+                <li>package</li>
+                <li>Install</li>
+                <li>deploy</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            The <strong>clean</strong> lifecycle deletes generated resources and restarts the build from scratch. Very useful for sanity check.
+          </p>
+        </section>
+        <section>
+          <h3>The Maven Wrapper</h3>
+          <ul>
+            <li>Usually to use Maven, you have to download/install it. Students almost never get it to work</li>
+            <li>Maven Wrapper: <a href="https://github.com/takari/maven-wrapper">https://github.com/takari/maven-wrapper</a></li>
+            <li>Packages maven binaries with your project, the user has everything they need to run maven builds</li>
+            <li>Copy the <strong>.mvn</strong> directory and the <strong>mvnw</strong>(for linux/OSX) and <strong>mvnw.cmd</strong>(for Windows) files to your project root directory.</li>
+            <li>See <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture8-maven-spring-boot/code/ExampleMavenServletProject">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture8-maven-spring-boot/code/ExampleMavenServletProject</a> for project structure</li>
+            <li>Substitute mvn commands you find online with ./mvnw or mvnw (Windows)</li>
+            <li>You might have to set the <code>JAVA_HOME</code> variable. See <a target="_blank" href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example Maven Goals</h3>
+          <li>To invoke a Maven build you pass in a lifecycle "goal"</li>
+          <li><code>./mvnw clean</code>:<br>clears the target directory of generated files</li>
+          <li><code>./mvnw clean test</code>:<br>clears the target directory of generated files, then run test defined in src/test/java</li>
+          <li><code>./mvnw clean package</code>:<br>clears the target directory of generated files, run tests, and packages the project by creating a war/jar in the target directory</li>
+        </section>
+        <section>
+          <h3>Maven Plugins</h3>
+          <li>Through plugins, we can enhance the capabilities of Maven</li>
+          <li>The Maven Eclipse Plugin:<br> <a href="http://maven.apache.org/plugins/maven-eclipse-plugin/usage.html">http://maven.apache.org/plugins/maven-eclipse-plugin/usage.html</a><br>Generates Eclipse project files and classpath settings.<br><code>./mvnw eclipse:eclipse</code></li>
+          <li>The Maven Tomcat7 Plugin: <br><a href="http://tomcat.apache.org/maven-plugin-2.0/tomcat7-maven-plugin/">http://tomcat.apache.org/maven-plugin-2.0/tomcat7-maven-plugin/</a><br>Runs packaged WAR on spawned Tomcat. Saves the hassle of setting up Eclipse Tomcat. Can be used to quickly set up a dev server.<br><code>./mvnw tomcat7:run-war</code></li>
+        </section>
+        <section>
+          <h3>Maven and Dependencies</h3>
+          <ul>
+            <li>Before Maven, there was Ant, which required users to write lots of configuration commands. And no dependency management. </li>
+            <li>With Maven, you no longer check in any libraries in source control (Git). That is, you don't check in the Mysql Connector/JSTL jars</li>
+            <li>The <strong>Maven Repository</strong>: a central website called Maven Central: <a href="http://search.maven.org/">http://search.maven.org/</a></li>
+            <li>People can release their projects/libraries and upload them to Maven Central</li>
+            <li>To use other people's projects, all you need to do is add their GAV info in the pom.xml as a dependency, and during the build Maven will download them for you</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Adding a Dependency</h3>
+          <ul>
+            <li>Example: Java Servlet API, JSTL, MySQL Connector</li>
+            <li><code>scope provided</code>: library provided by tomcat (in tomcat/lib)</li>
+          </ul>
+          <pre class="stretch"><code class='hljs data-trim'>
+...
+
+<dependencies>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.1.0</version>
+    <scope>provided</scope>
+</dependency>
+<dependency>
+  <groupId>javax.servlet</groupId>
+  <artifactId>jstl</artifactId>
+  <version>1.2</version>
+</dependency>
+<dependency>
+  <groupId>mysql</groupId>
+  <artifactId>mysql-connector-java</artifactId>
+  <version>5.1.40</version>
+</dependency>
+</dependencies>
+
+...
+          </code></pre>
+        </section>
+        <section>
+          <h3>Maven Repositories</h3>
+          <ul>
+            <li>Dependencies are downloaded from Respositories</li>
+            <li>Downloaded dependencies are cached locally in the local repository</li>
+            <li>Located in USER_HOME_FOLDER/.m2/repository</li>
+            <li>Repository follows a directory structure for easy resolution</li>
+            <li>Maven Central Repository: <a href="http://repo1.maven.org/maven2">http://repo1.maven.org/maven2</a></li>
+          </ul>
         </section>
       </div>
     </div>
