@@ -4,7 +4,7 @@ Cleaning and Packaging
 ./mvnw clean package
 ```
 
-Cleaning/Packahing and Running
+Cleaning/Packaging and Running
 
 ```
 ./mvnw clean package tomcat7:run-war
