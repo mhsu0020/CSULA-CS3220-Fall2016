@@ -14,4 +14,13 @@ Cleaning/Packaging and Running
 
 ```
 ./mvnw clean package tomcat7:run-war
+
 ```
+
+Running Selenium Integration Tests
+
+```
+./mvnw clean verify
+```
+
+Integration tests are located under src/test/java, with class/filenames ending with IT (for example ServletIT.java)
