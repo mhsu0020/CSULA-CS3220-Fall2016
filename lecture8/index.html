@@ -257,6 +257,99 @@ git pull
             <li>Artifactory: A maven repository/artifact manager that you can deploy yourself at your company for dependency management<br><a target="_blank" href="https://www.jfrog.com/artifactory/">https://www.jfrog.com/artifactory/</a></li>
           </ul>
         </section>
+        <section>
+          <h3>Testing</h3>
+          <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Software_testing">https://en.wikipedia.org/wiki/Software_testing</a></li>
+            <li>Testing is very important for professional quality software</li>
+            <li>In many companies testing is a full time job: <a href="http://www.indeed.com/jobs?q=qa+engineer&l=Los+Angeles%2C+CA">QA Engineer</a></li>
+            <li>In additional to manual tests (clicking on webpage and see if it's working), automated tests allow automatic testing on project build</li>
+            <li>There are many different levels of testing you can perform:
+              <ul>
+                <li><b>Unit Testing</b>: testing indivisual methods/components. Very low level.</li>
+                <li><b>Integration testing</b>: testing integration between different components. For example, if the web application works with the database.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Integration Testing With Selenium WebDriver</h3>
+          <ul>
+            <li>Documentation: <a href="http://www.seleniumhq.org/docs/03_webdriver.jsp">http://www.seleniumhq.org/docs/03_webdriver.jsp</a></li>
+            <li>Using Selenium WebDriver, you can write Java code simulating a user clicking and typing on a webpage, performing automatic integration testing</li>
+          </ul>
+          <img src="images/selenium.jpg" alt="" />
+        </section>
+        <section>
+          <h3>Setting Up Selenium WebDriver with Maven</h3>
+          <ol>
+            <li>Install browser you want to test with (Google Chrome)</li>
+            <li>Download Chromedriver: <a href="http://chromedriver.storage.googleapis.com/index.html?path=2.25/">http://chromedriver.storage.googleapis.com/index.html?path=2.25/</a></li>
+            <li>Extract the folder, and add it to your PATH environment variables. To see if it's working, run <code>chromedriver</code> in your terminal.</li>
+            <li>Configure your pom.xml with the following changes: <br>
+              <ul>
+                <li>configure tomcat to run at integration test phases</li>
+                <li>add and configure the maven failsafe plugin, used for integration tests</li>
+              </ul>
+            </li>
+            <li>Create an integration test under src/test/java, with a name suffix *IT. For example, <code>ServletIT.java</code></li>
+            <li>Run <code>./mvnw clean verify</code> to run the integration tests</li>
+          </ol>
+        </section>
+        <section>
+          <h3>Selenium WebDriver Example: ServletIT.java</h3>
+          <p>
+            Source: <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture8-maven-spring-boot/code/ExampleMavenServletProject/src/test/java/ServletIT.java">ServletIT.java</a>
+          </p>
+          <pre class="stretch"><code class='hljs data-trim'>
+            baseUrl = "http://localhost:8080/example-maven-servlet-project";
+            driver = new ChromeDriver();
+
+            ...
+            //Navigates page to ListProjects
+             driver.get(baseUrl+"/ListProjects");
+
+            ...
+
+            //Closes Browser
+            driver.quit();
+          </code></pre>
+        </section>
+        <section>
+          <h3>Selenium WebDriver Example: Simulating Form Submission</h3>
+          <pre class="stretch"><code class='hljs data-trim'>
+            currentTestCase = "testChangeRating";
+              driver.get(baseUrl+"/ChangeRating?projectId=1");
+
+              //Get the value input WebElement. You can get by id/class/attribute, just like in javascript
+              WebElement ratingInput = driver.findElement(By.id("rating-4"));
+
+              //Simulates select all text of the field, then type in 10000
+              ratingInput.sendKeys(Keys.chord(Keys.CONTROL, "a"),"10000");
+
+              //From javadocs: If this current element is a form,
+              //or an element within a form, then this will be submitted to the remote server.
+              ratingInput.submit();
+
+              //Wait for page title to change back to Projects, timeout in 10 seconds
+              (new WebDriverWait(driver, 10)).until(new ExpectedCondition&lt;Boolean&gt;() {
+                  public Boolean apply(WebDriver driver) {
+                      return driver.getTitle().startsWith("Projects");
+                  }
+              });
+
+              assertEquals("Justin Beiber: 10000", driver.findElement(By.id("4-1")).getText());
+
+          </code></pre>
+        </section>
+        <section>
+          <h3>Further Reading</h3>
+          <ul>
+            <li>Selenium WebDriver Documentation: <a href="http://docs.seleniumhq.org/docs/03_webdriver.jsp">http://docs.seleniumhq.org/docs/03_webdriver.jsp</a></li>
+            <li>Selenium WebDriver JavaDocs: <a href="https://seleniumhq.github.io/selenium/docs/api/java/">https://seleniumhq.github.io/selenium/docs/api/java/</a></li>
+            <li>Maven failsafe plugin: <a href="https://maven.apache.org/surefire/maven-failsafe-plugin/">https://maven.apache.org/surefire/maven-failsafe-plugin/</a></li>
+          </ul>
+        </section>
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>
