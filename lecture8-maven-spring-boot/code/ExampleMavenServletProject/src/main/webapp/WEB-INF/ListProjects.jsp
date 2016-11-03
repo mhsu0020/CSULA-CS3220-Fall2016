@@ -24,7 +24,7 @@
 			<ul>
 			<%-- Key: Employee, Value: rating of employee as project member --%>
 			<c:forEach var="projectMemberRating" items="${project.projectMembersRatings}">
-				<li>${projectMemberRating.key.firstName} ${projectMemberRating.key.lastName}: ${projectMemberRating.value}</li>
+				<li id="${projectMemberRating.key.id}-${project.id}">${projectMemberRating.key.firstName} ${projectMemberRating.key.lastName}: ${projectMemberRating.value}</li>
 			</c:forEach>
 			</ul>
 			<hr>
