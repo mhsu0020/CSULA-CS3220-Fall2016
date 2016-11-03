@@ -42,11 +42,14 @@ public class ServletIT {
     driver.quit();
   }
 
-  //A single test, this just tests if the page loads
+  //A single test
   @Test
   public void listProjects() throws IOException {
 	currentTestCase = "testListProjectsPage";
     driver.get(baseUrl+"/ListProjects");
+    
+    //Verify that page title is indeed Projects
+    assertEquals("Projects", driver.getTitle());
     
   }
 
