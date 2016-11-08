@@ -47,34 +47,35 @@ public class ServletIT {
   public void listProjects() throws IOException {
 	currentTestCase = "testListProjectsPage";
     driver.get(baseUrl+"/ListProjects");
-    
+
     //Verify that page title is indeed Projects
     assertEquals("Projects", driver.getTitle());
-    
+
   }
 
   //Opens change project rating form, modifies value, submits form, then confirms the output
   @Test
   public void changeProjectRating() throws IOException {
-	currentTestCase = "testChangeRating";
+
+	  currentTestCase = "testChangeRating";
     driver.get(baseUrl+"/ChangeRating?projectId=1");
-    
+
     //Get the value input WebElement
     WebElement ratingInput = driver.findElement(By.id("rating-4"));
-    
+
     //Simulates select all text of the field, then type in 10000
     ratingInput.sendKeys(Keys.chord(Keys.CONTROL, "a"),"10000");
-    
+
     //From javadocs: If this current element is a form, or an element within a form, then this will be submitted to the remote server.
     ratingInput.submit();
-    
+
     //Wait for page title to change back to Projects, timeout in 10 seconds
     (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
             return driver.getTitle().startsWith("Projects");
         }
     });
-    
+
     assertEquals("Justin Beiber: 10000", driver.findElement(By.id("4-1")).getText());
 
   }
