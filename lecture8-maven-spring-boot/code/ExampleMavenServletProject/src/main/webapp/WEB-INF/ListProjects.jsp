@@ -28,7 +28,7 @@
 			</c:forEach>
 			</ul>
 			<hr>
-			<a href="ChangeRating?projectId=${project.id}">Change Ratings</a>
+			<a id="ChangeRating-${project.id}" href="ChangeRating?projectId=${project.id}">Change Ratings</a>
 		</td>
       </tr>
 	</c:forEach>

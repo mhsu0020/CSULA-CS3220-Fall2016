@@ -52,6 +52,18 @@ public class ServletIT {
     assertEquals("Projects", driver.getTitle());
 
   }
+  
+  @Test
+  public void listProjectstoChangeRating() throws IOException {
+	currentTestCase = "testListProjectsPageToRating";
+    driver.get(baseUrl+"/ListProjects");
+    
+    driver.findElement(By.id("ChangeRating-1")).click();
+
+    //Verify that page title is indeed Projects
+    assertEquals("Change Rating", driver.getTitle());
+
+  }
 
   //Opens change project rating form, modifies value, submits form, then confirms the output
   @Test
