@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 9</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 9: Usiing RESTful (Representational State Transfer) Web Services</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Review: HTTP (Hypertext Transfer Protocol)</h3>
+          <ul>
+            <li>What we've been using all along in the background for our web apps</li>
+            <li>client sends HTTP GET request to server for ListProjects, server returns ListProjects HTML</li>
+            <li>client sends HTTP POST request to server to submit form data, server returns status OK and redirects client to other page</li>
+            <li><p>
+              Common HTTP Verbs
+            </p>
+            <ul>
+              <li><strong>GET</strong></li>
+              <li><strong>POST</strong></li>
+              <li>PUT</li>
+              <li>DELETE</li>
+              <li>Full list: <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html</a>
+              </li>
+            </ul>
+          </li>
+          </ul>
+          <img src="images/http.png" alt="" style="float:right"/>
+        </section>
+        <section>
+          <h3>Why Representational State Transfer (REST)</h3>
+          <ul>
+            <li>The need for <strong>strong decoupling between client logic and server logic</strong></li>
+            <li>In practice, we have mutiple types of clients accessing the same data and performing the same data operations</li>
+            <li>For example: you can purchase items from Amazon using your web browser, the native Amazon phone/tablet apps, Echo, and many more.</li>
+            <li>The approach that we have so far, we would have to write a different webApp for each client, including all the Servlet processing code. What if we can seperate the client/jsp code from the Java Servlets?</li>
+            <li>Scaling distributed web applicaitons is very difficult, especially with a tightly coupled server and client. Usually you have to scale each component sepeartely</li>
+          </ul>
+        </section>
+        <section>
+          <h3>The Netflix Web Service Architecture</h3>
+          <a target="_blank" href="http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html">Netflix Tech Blog Writeup</a><br>
+          <img src="images/netflix.jpg" alt="" />
+        </section>
+        <section>
+          <h3>What is REST</h3>
+          <ul>
+            <li>Introduced in <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+            <li>An architecture style of how resources are defined and addressed. In other words, how do we transfer data between applications.</li>
+            <li>Most commonly uses the standard HTTP protocol</li>
+            <li>URI resource addresses (think URLs to retrieve/create data)</li>
+            <li>client makes request to REST resource -> server processes/sends <strong>representation</strong> of data (response)-> client recieves response</li>
+            <li>You already know how HTTP GET (used to retrieve data), and how HTTP POST (used to submit new data, for example form data) works</li>
+            <li>REST itself is not a formal standard, but it uses many standard protocols and specifications:
+              <ul>
+                <li>HTTP</li>
+                <li>URL</li>
+                <li>Content types: text/xml, application/json, text/html, etc</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>RESTful Architecture Best Practices</h3>
+          <ul>
+            <li><strong>Addressability</strong>: resources can be described using URIs</li>
+            <li><strong>Uniform interface</strong>: uses a standard uniform interface, such as HTTP</li>
+            <li><strong>Decoupled client-server architecture</strong>: Separates clients and servers into different requirements by defining the interface requirements (aka <strong>REST API</strong>)</li>
+            <li><strong>Stateless inteaction: Using a stateless protocol</strong>, such as HTTP, all requests should contain all information required for that request without relying on server side states (aka session variables)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Resources</h3>
+          <ul>
+            <li>A conceptual mapping to a set of data</li>
+            <li>For example: a <code>projects</code> resource should return a list of projects</li>
+            <li>Represented with a URI: http://localhost:8080/projects</li>
+            <li>Can you guess what kind of data the following resources represent?</li>
+            <li>http://localhost:8080/project/4</li>
+            <li>http://localhost:8080/employees</li>
+            <li>http://localhost:8080/employee/2</li>
+            <li>http://localhost:8080/project/2/memebers</li>
+            <li>As you traverse the path, you a navigating through data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Verbs</h3>
+          <ul>
+            <li>Represents actions on the resources</li>
+            <li>HTTP GET</li>
+            <li>HTTP POST</li>
+            <li>HTTP PUT</li>
+            <li>HTTP DELETE</li>
+          </ul>
+        </section>
+        <section>
+          <h3>HTTP GET</h3>
+          <ul>
+            <li>Action used for retrieving information</li>
+            <li>Transfers some data from the server to the client in some representation</li>
+            <li><code>GET http://localhost:8080/projects</code><br>retrieve all projects</li>
+            <li><code>GET http://localhost:8080/project/2</code><br>retrieve project with id 2</li>
+            <li><code>GET http://localhost:8080/project/2/memebers</code><br>retrieve all members of project with id 2</li>
+          </ul>
+        </section>
+        <section>
+          <h3>HTTP PUT/POST/DELETE</h3>
+          <ul>
+            <li>Used for modifying data on the server</li>
+            <li>POST is usually used for creating new data, PUT for updating data. DELETE deletes data.</li>
+            <li><code>POST http://localhost:8080/project</code><br>
+              <ul>
+                <li>Body: <code>{"name": "projectx", "members": [{"name": "john", "gender": "male"...}...]}</code></li>
+                <li>Creates a new project with the given properties</li>
+              </ul>
+            </li>
+            <li><code>PUT http://localhost:8080/project/2</code><br>
+              <ul>
+                <li>Body: <code>{"name": "project2", "members": [{"name": "john", "gender": "male"...}...]}</code></li>
+                <li>Updates project with id 2 using the given properties</li>
+              </ul>
+            </li>
+            <li><code>DELETE http://localhost:8080/project/2</code><br>
+              <ul>
+                <li>Delete project with id 2</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Data Representation: XML and JSON</h3>
+            <ul>
+              <li>How data is represented between client-server interactions</li>
+              <li>Most popular: JSON (JavaScript Object Notation): <br>
+                <ul>
+                  <li>Documentation: <a href="http://json.org/">http://json.org/</a></li>
+                  <li>Built-in parsing provided in JavaScript/Python/etc</li>
+                  <li>Borrows syntax from JavaScript Objects. Review <a href="https://mhsu0020.github.io/CSULA-CS3220-Fall2016/lecture3/index.html#/32/1">lecture 3 notes</a></li>
+                  <li>Human readable, easy to save to file and reused</li>
+                </ul>
+              </li>
+              <li>Legacy: XML</li>
+            </ul>
+        </section>
+        <section>
+          <h3>JSON Example</h3>
+          <pre><code class='hljs'>
+{
+  "projectName": "projectX",
+  "members": [
+      {
+        "name": "mike",
+        "age": 40
+      } ,
+      {
+        "name": "john",
+        "age": 25
+      } ,
+      {
+        "name": "kevin",
+        "age": 10
+      }
+  ]
+}
+          </code></pre>
+        </section>
+        <section>
+          <h3>Architecture Style</h3>
+          <p>
+            The most important thing here is understand the architecture. Once that is engraved in your head, everything follows.
+          </p>
+          <img src="images/interface.png" alt="" />
+        </section>
+        <section>
+          <h3>Public/Commercial RESTful APIs</h3>
+          <ul>
+            <li>Many free and commerical APIs are available for your use</li>
+            <li>Most require a signup and some kind of authentication via <strong>API</strong> tokens for access control and rate limiting</li>
+            <li>The master list: <a href="https://github.com/toddmotto/public-apis">https://github.com/toddmotto/public-apis</a></li>
+            <li>reddit api: <a href="https://www.reddit.com/dev/api/">https://www.reddit.com/dev/api/</a></li>
+            <li>Google maps api: <a href="https://developers.google.com/maps/web-services/">https://developers.google.com/maps/web-services/</a></li>
+            <li>Yelp api: <a href="https://www.yelp.com/developers/documentation/v2/overview">https://www.yelp.com/developers/documentation/v2/overview</a></li>
+            <li>US Government Data APIs: <a href="https://api.data.gov/docs/">https://api.data.gov/docs/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Using Public REST APIs</h3>
+          <ol>
+            <li>Obtain an API Key/Token:<br>
+              <p>
+                Usually you have to sign up for an account and cretae/generate an API key. This is a String token generated by the provider that is used to authenticate your requests. Think of it as a way of logging in.
+              </p>
+            </li>
+            <li>Accessing the API<br>
+              <ol>
+                <li>Read the documentation. How do you pass in the API key? What does the resource URL look like?</li>
+                <li>Try out the APIs without writing code:<br>
+                  <ul>
+                    <li>If the token is passed in the URL itself (a parameter after the ?), simply use one of the example resource URLs and access it in your browser. The browser makes a HTTP GET request and displays the results.<br>I recommend installing the Chrome <a href="https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en">JSON Formatter Plugin</a>, as it will make the response in the browser easier to read.</li>
+                    <li>If it is passed in the header, see the <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/wiki/Trying-out-REST-APIs-with-Postman">Postman wiki post</a></li>
+                  </ul>
+                </li>
+                <li>Writing API Code: see <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/wiki/Accessing-REST-APIs-with-JavaScript-and-JQuery">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/wiki/Accessing-REST-APIs-with-JavaScript-and-JQuery</a></li>
+              </ol>
+            </li>
+          </ol>
+
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
