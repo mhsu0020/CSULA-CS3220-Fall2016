@@ -21,7 +21,7 @@ Cleaning/Packaging and Running
 
 ```
 
-RESTful Resource endpoint:
+RESTful Resource endpoint (try them out in Postman after running the project):
 
 ```
 GET http://localhost:8080/employee-project-service-jackson/employees
@@ -29,8 +29,7 @@ GET http://localhost:8080/employee-project-service-jackson/employees
 returns list of employees in the following format:
 
 ```
-{
-   "employees":[
+[
       {
          "id":1,
          "firstName":"John",
@@ -54,9 +53,34 @@ returns list of employees in the following format:
             "name":"USA"
          }
       }
-   ]
-}
+]
+
 ```
+
+```
+GET http://localhost:8080/employee-project-service-jackson/countries
+```
+
+returns list of countries in the following format:
+
+```
+[
+   {
+      "id":1,
+      "name":"USA"
+   },
+   {
+      "id":2,
+      "name":"Canada"
+   },
+   {
+      "id":3,
+      "name":"China"
+   }
+]
+```
+
+
 
 ```
 POST http://localhost:8080/employee-project-service-jackson/employee
