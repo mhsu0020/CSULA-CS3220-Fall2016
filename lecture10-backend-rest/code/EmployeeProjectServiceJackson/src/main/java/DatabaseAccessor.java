@@ -17,6 +17,8 @@ public class DatabaseAccessor {
 	//Selecting both employees and their country at the same time. That way we only need to do one query.
 	public static final String LIST_EMPLOYEES_COUNTRIES_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name' from employees e, countries c where e.country_id = c.id";
 
+	public static final String GET_EMPLOYEE_COUNTRY_QUERY = "select e.id as 'employee_id', e.first_name, e.last_name, e.address, c.id as 'country_id', c.name as 'country_name' from employees e, countries c where e.id = ? and e.country_id = c.id";
+
 	//Retrieve project and leader info
 	public static final String LIST_PROJECTS_QUERY =  "select p.id as 'project_id', p.name as 'project_name', p.leader_id as 'leader_id', e.first_name as 'first_name', e.last_name as 'last_name', e.address as 'address', c.id as 'country_id', c.name as 'country_name' from projects p, employees e, countries c where p.leader_id = e.id and e.country_id = c.id";
 
@@ -258,7 +260,47 @@ public class DatabaseAccessor {
 		return countries;
 		
 	}
-	
+
+	public static Employee getEmployee(int id) throws SQLException {
+		Connection c = null;
+		Employee employee = null;
+		try {
+
+			c = ConnectionUtils.getMySQLConnection(DatabaseConfig.MYSQL_USERNAME, DatabaseConfig.MYSQL_PASSWORD,
+					DatabaseConfig.MYSQL_HOST, DatabaseConfig.MYSQL_PORT, DatabaseConfig.MYSQL_DATABASE_TO_USE);
+
+			PreparedStatement stmt = c.prepareStatement(GET_EMPLOYEE_COUNTRY_QUERY);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int employeeId = rs.getInt("employee_id");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				String address = rs.getString("address");
+
+				int countryId = rs.getInt("country_id");
+				String countryName = rs.getString("country_name");
+				employee = new Employee(id, firstName, lastName, address, new Country(countryId, countryName));
+			}
+
+		} catch (SQLException e) {
+			// Escalate to Server error
+			throw e;
+		}
+		// Always close connections, no matter what happened
+		finally {
+			try {
+				if (c != null)
+					c.close();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return employee;
+
+	}
 	public static List<Employee> getEmployees() throws SQLException {
 		Connection c = null;
 		List<Employee> employees = new ArrayList<>();

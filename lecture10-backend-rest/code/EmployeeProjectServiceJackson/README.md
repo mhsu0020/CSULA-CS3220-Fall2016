@@ -24,6 +24,25 @@ Cleaning/Packaging and Running
 RESTful Resource endpoint (try them out in Postman after running the project):
 
 ```
+GET http://localhost:8080/employee-project-service-jackson/employee?id=1
+```
+
+returns a single employee with the id in the following format:
+
+```
+{
+   "id":1,
+   "firstName":"John",
+   "lastName":"Doe",
+   "address":"Street #215",
+   "country":{
+      "id":1,
+      "name":"USA"
+   }
+}
+```
+
+```
 GET http://localhost:8080/employee-project-service-jackson/employees
 ```
 returns list of employees in the following format:

@@ -14,8 +14,45 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet(urlPatterns = "/employee")
-public class AddEmployeeResource extends HttpServlet {
+public class EmployeeResource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	//handles GET employee
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Connection c = null;
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		Employee employee = null;
+
+		try {
+
+			employee = DatabaseAccessor.getEmployee(id);
+
+		} catch (SQLException e) {
+			// Escalate to Server error
+			throw new ServletException(e);
+		}
+		// Always close connections, no matter what happened
+		finally {
+			try {
+				if (c != null)
+					c.close();
+			} catch (SQLException e) {
+				throw new ServletException(e);
+			}
+		}
+		
+		//jackson object mapper, no need for manual JSON string manipulation
+		ObjectMapper mapper = new ObjectMapper();
+	
+		//write result to response output stream
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.print(mapper.writeValueAsString(employee));
+		out.flush();
+		
+	}	
 
 	/**
 	 * Handles HTTP POST /employee request. 
