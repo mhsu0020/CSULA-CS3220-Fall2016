@@ -1,5 +1,8 @@
-# Employee Project Web Service Barebone
-## Don't use this as a basis for your lab. This is just to show how it can be done without any extra libraries.
+# Employee Project Web Service With Jackson
+
+Uses Jackson for JSON Marshalling/Unmarshalling, no manual JSON String creation required.
+
+See the [mkyong tutorial](https://www.mkyong.com/java/jackson-2-convert-java-object-to-from-json/)
 
 Note: Remember to change the database config in src/main/java/DatabaseConfig.java
 
@@ -21,7 +24,7 @@ Cleaning/Packaging and Running
 RESTful Resource endpoint:
 
 ```
-GET http://localhost:8080/employee-project-service-barebone/employees
+GET http://localhost:8080/employee-project-service-jackson/employees
 ```
 returns list of employees in the following format:
 
@@ -55,8 +58,29 @@ returns list of employees in the following format:
 }
 ```
 
+```
+POST http://localhost:8080/employee-project-service-jackson/employee
+
+body:
+
+{
+   "firstName":"test3first",
+   "lastName":"test3last",
+   "address":"testAddress",
+   "country":{
+      "id":1,
+      "name":"USA"
+   }
+}
+
+```
+
+returns created employee id in following format:
+```
+{"id": 15}
+```
 
 Example webpage client:
 ```
-http://localhost:8080/employee-project-service-barebone/ListEmployees
+http://localhost:8080/employee-project-service-jackson/ListEmployees
 ```

@@ -73,6 +73,7 @@ git pull
         <section>
           <h3>Attempt #1: Using What We Know So Far</h3>
           <ul>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/EmployeeProjectServiceBarebone">Employee Project Service Barebone</a></li>
             <li>Use <code>urlPatterns</code> for mapping resources</li>
             <li>Manually create JSON String representation of data model objects, while making sure it's valid JSON</li>
           </ul>
@@ -84,7 +85,26 @@ git pull
             <li>What if I change the field names of the Employee class?</li>
             <li>What if I have an object within another object?</li>
             <li>What if I made a typo?</li>
+            <li>What if I have to do this for hundreds of classes?</li>
           </ul>
+        </section>
+        <section>
+          <h3>Attempt #2: Using Jackson for JSON/Java Object Conversion</h3>
+          <ul>
+            <li>Use Jackson for JSON marshalling/unmarshalling, no manual String manipulation. We don't have to write String generation code for hundreds of classes</li>
+          </ul>
+            <p>
+              Problems with using plain Java Servlet API for implementing REST services
+            </p>
+            <ul>
+              <li>No built-in support for path variables (like /employee/3 ), only parameters (/employee?id=3) </li>
+              <li>Limited mapping capabilities, what if we want to do multiple mappings per Servlet?</li>
+              <li>Still requires code to create objet mapper. Since we're doing this for every web resource, why write it everytime?</li>
+            </ul>
+        </section>
+        <section>
+          <h3>Attempt #3: Using Spring Boot</h3>
+
         </section>
       </div>
     </div>
