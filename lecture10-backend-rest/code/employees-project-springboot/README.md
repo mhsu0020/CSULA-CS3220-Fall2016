@@ -2,11 +2,11 @@
 
 Spring Boot bundles many useful Spring and third-party libraries together in the form of a parent POM. For example, Jackson is included by default.
 
-Compare this with the other two examples, you will see that the code size is significantly shorter.
+Compare this with the other two examples, you will see that it requires significantly less code and very little repetition.
 
 Note: Remember to change the Spring Data Source database config in src/main/resources/application.properties
 
-You can based your lab off this project or use the Spring Boot Initializer to generate the project:
+You can base your lab off this project or use the Spring Boot Initializer to generate the project:
 [http://start.spring.io/](http://start.spring.io/)
 
 Documentation:
