@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employees RESTful Web Service Spring Boot</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<h1>Employees</h1>
+	<table>
+		<thead>
+			<tr><th>id</th><th>name</th><th>address</th><th>country</th></tr>
+		</thead>
+		<tbody id="employees-table-body">
+			
+		</tbody>
+	</table>
+	<br><br>
+	<button id="get-employees">Refresh Employees List (No Page Refresh)</button>
+	<hr>
+	<form id="add-employee">
+	  <h1>Add Employee (AJAX HTTP POST)</h1>
+		<fieldset>
+			<legend>Employee Info</legend>
+			<div>
+				<label for="firstName">First Name:</label>
+				<input type="text" id="firstName" name="firstName" required>
+			</div>
+			<div>
+				<label for="lastName">Last Name:</label>
+				<input type="text" id="lastName" name="lastName" required>
+			</div>
+			<div>
+				<label for="country">Country:</label>
+				<select id="country" name="country" required></select>
+			</div>
+			<div>
+				<label for="address">Address:</label>
+				<input type="text" id="address" name="address" required>
+			</div>
+		</fieldset>
+		<div class="button">
+			<button id="add-employee-button" type="button">POST Info</button>
+		</div>
+	</form>
+	
+	
+	<!-- Using JQuery CDN, downloads jquery javascript file from their CDN server -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="js/employees.js"></script>
+</body>
+</html>
