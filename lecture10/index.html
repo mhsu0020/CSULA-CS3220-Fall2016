@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 10</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 10: Implementing RESTful (Representational State Transfer) Web Services</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Note: Study the Code Examples</h3>
+          <p>
+            This lecture is very heavy on code examples. Please study the following and clone/run the locally.
+          </p>
+          <ul>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/EmployeeProjectServiceBarebone">Employee Web Service Barebone Example</a></li>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/EmployeeProjectServiceJackson">Employee Web Service With Jackson</a></li>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/employees-project-springboot">Employee Web Service With Spring Boot</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Recall from Lecture 9</h3>
+          <ul>
+            <li>You learned what REST architecture is, and how to use public REST APIs</li>
+            <li><a href="https://mhsu0020.github.io/CSULA-CS3220-Fall2016/lecture9/index.html#/5">https://mhsu0020.github.io/CSULA-CS3220-Fall2016/lecture9/index.html#/5</a></li>
+            <li>REST is an architecture style that describes how resources can be provided in the form of URI/URLs</li>
+            <li>Common formats for representation of the tranferred include XML and JSON</li>
+            <li>Uses HTTP verbs: GET (retrieve information), POST (submit new information), DELETE (delete information), etc</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example System Diagram</h3>
+          <img src="images/rest-system.png" alt="" />
+        </section>
+        <section>
+          <h3>Implementing RESTful Web Services</h3>
+          <p>
+            Basic Components
+          </p>
+          <ul>
+            <li><b>Resource/Request Mapping</b>: what is the path/url to get a project with a specific id? How do we extract the id from the path/parameter?</li>
+            <li><b>Data Models:</b> your java data object classes. How we represent data to be transferred.</li>
+            <li><b>Data Model to JSON mapping (and vice versa)</b>: how do we convert a Java Object to a JSON string that clients can use?</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Attempt #1: Using What We Know So Far</h3>
+          <ul>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/EmployeeProjectServiceBarebone">Employee Project Service Barebone</a></li>
+            <li>Use <code>urlPatterns</code> for mapping resources</li>
+            <li>Manually create JSON String representation of data model objects, while making sure it's valid JSON</li>
+          </ul>
+          <p>
+            Problems with manual JSON generation
+          </p>
+          <ul>
+            <li>What if I want to return an Array of Employees?</li>
+            <li>What if I change the field names of the Employee class?</li>
+            <li>What if I have an object within another object?</li>
+            <li>What if I made a typo?</li>
+            <li>What if I have to do this for hundreds of classes?</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Attempt #2: Using Jackson for JSON/Java Object Conversion</h3>
+          <ul>
+            <li><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/EmployeeProjectServiceJackson">Employee Project Service With Jackson</a></li>
+            <li>Use Jackson for JSON marshalling/unmarshalling, no manual String manipulation. We don't have to write String generation code for hundreds of classes</li>
+            <li>Use JQuery Ajax to retrieve and submit information</li>
+          </ul>
+            <p>
+              Problems with using plain Java Servlet API for implementing REST services
+            </p>
+            <ul>
+              <li>No built-in support for path variables (like /employee/3 ), only parameters (/employee?id=3) </li>
+              <li>Limited mapping capabilities, what if we want to do multiple mappings per Servlet?</li>
+              <li>Still requires code to create object mapper. Since we're doing this for every web resource, why write it everytime?</li>
+              <li>Manually reading the request body through BufferedReader and outputting to PrintWriter seems too low level to be done for every single web resource.</li>
+            </ul>
+        </section>
+        <section>
+          <h3>Introducing Spring Boot</h3>
+          <ul>
+            <li>Reference: <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/">http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/</a></li>
+            <li>Combines multiple Spring and third-party libraries by providing a parent POM for easy setup</li>
+            <li>Useful libraries like Jackson is included by default</li>
+            <li>Take advantage of Spring's depedency injection features and inversion of control</li>
+            <li>Many useful Spring frameworks configured, including the Spring web framework (REST mapping/routing), Spring data (for database access)</li>
+            <li>Builds to a runnable jar/war file with embedded server for easy scalable deployment</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Basic Spring Concept: Dependency Injection (DI)/Inversion of Control (IoC)</h3>
+          <ul>
+            <li>Basic Intuition: Classes define their dependencies to other classes only through constructor arguments or properties, <b>and do not instantiate the dependency objects themselves.</b></li>
+            <li>The <b>container</b> then looks at the class, see what it needs, and injects the correct object (referred to as <b>beans</b> in Spring).</li>
+            <li>The classes themselves no longer control depedency instantiations but rather the container, inverse of what you usually do, hence the name Inversion of Control</li>
+            <li>The Spring ApplicationContext class is a container that injects the properties marked with <code>@Autowired</code></li>
+            <img src="images/container-magic.png" alt="" />
+          </ul>
+        </section>
+        <section>
+          <h3>Spring <code>DispatcherServlet</code></h3>
+          <ul>
+            <li>Instead of writing a separate Servlet for each resource, Spring provides a special Servlet called <code>DispatcherServlet</code> that handles all the background http request/response details</li>
+            <li>Developers write Controllers that handle specific request mappings, Spring takes care of how the background routing works.</li>
+            <li>You don't have to worry about this, but it's good to know how it works</li>
+            <img src="images/dispatcherservlet.png" alt="" />
+          </ul>
+        </section>
+        <section>
+          <h3>Switching to Spring Boot</h3>
+          <p>
+            You can use the Spring Boot Initializer <a target="_blank" href="http://start.spring.io/">http://start.spring.io/</a> to generate a starter project
+          </p>
+          <ul>
+            <li>Add Spring Boot dependencies and properties to pom.xml</li>
+            <li>Add @SpringBootApplication main class</li>
+            <li>Add application.properties to src/main/resources</li>
+            <li>Move webpages to src/main/resources/static</li>
+          </ul>
+          <p>
+            Full Example: <a target="_blank" href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/employees-project-springboot">https://github.com/mhsu0020/CSULA-CS3220-Fall2016/tree/master/lecture10-backend-rest/code/employees-project-springboot</a>
+          </p>
+        </section>
+        <section>
+          <h3>Spring Boot <code>@SpringBootApplication</code></h3>
+          <ul>
+            <li>Example: <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture10-backend-rest/code/employees-project-springboot/src/main/java/edu/calstatela/EmployeesProjectSpringbootApplication.java">EmployeesProjectSpringbootApplication.java</a></li>
+            <li>Very basic class containing the main method</li>
+            <li>Has the <code>@SpringBootApplication</code> annotation, which actually includes many Spring configuration annotations</li>
+            <li>See <a href="http://docs.spring.io/autorepo/docs/spring-boot/current/reference/html/using-boot-using-springbootapplication-annotation.html">http://docs.spring.io/autorepo/docs/spring-boot/current/reference/html/using-boot-using-springbootapplication-annotation.html</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Spring Web <code>@RestController @RequestMapping, @RequestParam, @PathVariable, @RequestBody</code></h3>
+          <ul>
+            <li>Example: <a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture10-backend-rest/code/employees-project-springboot/src/main/java/edu/calstatela/EmployeeController.java">EmployeeController.java</a></li>
+            <li>Spring Web Framework (artifact spring-boot-starter-web) provides many useful annotations for url/request parsing</li>
+            <li><code>@RestController</code>: tells Spring that this class is a RestController bean</li>
+            <li><code>@RequestMapping</code>: maps a method to a url path, you can specify the urlPattern and HTTP verbs</li>
+            <li><code>@RequestParam</code>: parses url parameters and passes to the method, saves you from doing request.getParameter</li>
+            <li><code>@PathVariable</code>: extracts path url and passes to the method, saves you from manually doing substrings</li>
+            <li><code>@RequestBody</code>: automatically parses request body (for example a JSON String) to a Java Object and passes to the method, saves you from creating a mapper yourself.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Spring Data</h3>
+          <ul>
+            <li>Tutorial: <a href="https://spring.io/guides/gs/relational-data-access/">https://spring.io/guides/gs/relational-data-access/ </a></li>
+            <li>JDBCTemplate Reference: <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html">http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html</a></li>
+            <li>Drastically simplifies JDBC code by handling all the connection creation/closing behind the scenes</li>
+          </ul>
+          <ol>
+            <li>Add dependency spring-boot-starter-jdbc to pom.xml</li>
+            <li>Define data source properties (database name, username, password) in src/main/resources/application.properties</li>
+            <li>Create data model objects</li>
+            <li>Create DatabaseBean that contains JdbcTemplate (for quick query/updates), and SimpleJdbcInsert (for retrieving keys after insert)<br><a href="https://github.com/mhsu0020/CSULA-CS3220-Fall2016/blob/master/lecture10-backend-rest/code/employees-project-springboot/src/main/java/edu/calstatela/DatabaseBean.java">DatabaseBean.java</a></li>
+          </ol>
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
