@@ -33,7 +33,7 @@ public class EmployeeController {
 	}
 	
 	//return single employee using RequestParam variable. For example /employee?id=2
-	@RequestMapping(value="/employee/", method=RequestMethod.GET)
+	@RequestMapping(value="/employee", method=RequestMethod.GET)
 	public Employee getEmployeeByParam(@RequestParam("id") int id) {
 		return databaseBean.getEmployee(id);
 	}
