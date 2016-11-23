@@ -35,13 +35,20 @@
 	    	console.log(employeeObject);
 	    	
 	    	//posts to AddEmployeeResource doPost method
-	    	$.post("employee", JSON.stringify(employeeObject), function( data ) {
-	    		  console.log( data);
-	    		  
-	    		  //Refresh employees list on complete
-	    		  makeEmployeesRequest(EMPLOYEES_RESOURCE);
-
-	    		}, "json");
+	    	$.ajax({
+	    	    type: "POST",
+	    	    url: "employee",
+	    	    data: JSON.stringify(employeeObject),
+	    	    contentType: "application/json; charset=utf-8",
+	    	    dataType: "json",
+	    	    success: function(data){
+	    	    	 console.log(data);
+		    		 makeEmployeesRequest(EMPLOYEES_RESOURCE);
+	    	    },
+	    	    failure: function(errMsg) {
+	    	        alert(errMsg);
+	    	    }
+	    	});
 	    	initializeAddEmployeeForm();
 	    };
 	});

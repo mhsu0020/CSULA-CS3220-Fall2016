@@ -39,7 +39,7 @@ public class EmployeeController {
 	}
 	
 	//@RequestBody parses request body to Java object automatically
-	@RequestMapping(value="/employee/", method = RequestMethod.POST)
+	@RequestMapping(value="/employee", method = RequestMethod.POST)
 	public Map<String, String> AddEmployee(@RequestBody Employee employeeToAdd) {
 		
 		int id = databaseBean.insertEmployees(employeeToAdd);
