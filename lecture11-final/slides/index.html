@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CS3220 Lecture 11</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <style type="text/css">
+       section { text-align: left; }
+       .html-code { font-size: 40px !important;}
+       .html-code-single-line { font-size: 40px !important; height: 50px !important;}
+       a {text-decoration: underline !important;}
+       iframe {border: 5px solid grey !important; opacity: 1 !important;}
+       .input-large {font-size: 24px}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+					<h3>CS3220: Web and Internet Programming</h3>
+					<h3>Lecture 11: Retrospective and Further Learning</h3>
+					<hr>
+					<h4>Michael Hsu</h4>
+					<h4>CSULA</h4>
+				</section>
+        <section id="clone">
+          <h3>Reminder: getting the Lecture Slides and Code Examples: </h3>
+            <pre><code class="hljs html" data-trim>
+git clone https://github.com/mhsu0020/CSULA-CS3220-Fall2016.git
+            </code></pre>
+          <h3>Getting Subsequent Updates: </h3>
+            <pre><code class="hljs html" data-trim>
+git pull
+            </code></pre>
+        </section>
+        <section>
+          <h3>Final Exam and Last Class</h3>
+          <ul>
+            <li>Final Exam Schedule: <a href="http://web.calstatela.edu/classschedule/pdf/fall_book/27FinalexamscheduleFall2016.pdf">http://web.calstatela.edu/classschedule/pdf/fall_book/27FinalexamscheduleFall2016.pdf</a></li>
+            <li>Wednesday 12/7/2016, 5:50pm to 7:50pm, <strong>attendance is required</strong></li>
+            <li><strong>Final Exam will be published 1 week prior 11/30/2016</strong>. You can start working on it right away.</li>
+            <li>Final will be on implementing a RESTful backend server API using Spring, along with a front end JavaScript application that uses your server API. Review lecture 10 and code examples before you start working on it.</li>
+            <li>You can work on the final during class on 11/30/2016 and ask me questions</li>
+            <li>During class 11/30/2016, I will be walking around and asking you to show me your Labs 4, 5 and 6. Be prepared to explain what you did/didn't finish and how you did each part.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>What We Learned This Semester</h3>
+          <ul>
+            <li>How the web works, request-response diagram, HTTP verbs</li>
+            <li>Basics of source control and how to use Git</li>
+            <li>Some basic command line operations (Git-Bash, deploy to CS3)</li>
+            <li>HTML/CSS basics</li>
+            <li>JavaScript basics, how to use third party JavaScript libraries (JQuery), AJAX</li>
+            <li>MySQL Database Design</li>
+            <li>Web Architectures: MVC and RESTful</li>
+            <li>Java Specifics:<br>
+              <ul>
+                <li>Java Servlets/JSP/JSTL/EL</li>
+                <li>JDBC</li>
+                <li>Maven</li>
+                <li>Jackson</li>
+                <li>Spring Framework</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Further Learning: More on Web Development</h3>
+          <p>Practical Operations</p>
+          <ul>
+            <li>Get familiar with linux, how to use the command-line and bash scripting. Learn advanced Git commands.</li>
+            <li>Learn how to deploy a web application and expose it to the public</li>
+            <li>Learn how modern public web applications are deployed and maintained</li>
+            <li>Virtual Machines, Containers, etc.</li>
+            <li>Learn how to secure RESTful services using protocols such as OAuth2</li>
+          </ul>
+          <p>Back-End</p>
+          <ul>
+            <li>Learn a Web Framework in another language</li>
+            <li>Lean a NoSQL database (MongoDB)</li>
+            <li>Learn basics of distributed systems (CAP theorem, message queues)</li>
+          </ul>
+          <p>Front-End</p>
+          <ul>
+            <li>Learn how to write SPA (Single Page Applications)</li>
+            <li>Learn how to write hybrid applications: a HTML/CSS/JavaScript app that builds to native Android/ios/Desktop apps</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Getting Familiar with Linux/Command-Line/Bash Scripting/Server Administration</h3>
+          <ul>
+            <li>Linux has <a href="https://en.wikipedia.org/wiki/Usage_share_of_operating_systems#Public_servers_on_the_Internet">substantial marketshare</a> and is used by many major tech companies (Google, Amazon, etc)</li>
+            <li>Most flavors of Linux are <strong>free/open-source</strong>: anyone can download and use the free Linux distros</li>
+            <li>The Git-Bash that I asked you to install emulates the Linux command line environment. You can run most Linux commands/scripts directly in Git Bash. Likewise for OSX terminals. Deploying to CS3 was also practice.</li>
+            <li>There are many free resources and vidoes online to learn on this topic. In addition to online resources, I recommend the following two books (my personal favorites)</li>
+            <li>The Linux Command Line: <a href="https://www.amazon.com/Linux-Command-Line-Complete-Introduction/dp/1593273894">https://www.amazon.com/Linux-Command-Line-Complete-Introduction/dp/1593273894</a></li>
+            <li>UNIX and Linux System Administration Handbook: <a href="https://www.amazon.com/UNIX-Linux-System-Administration-Handbook/dp/0131480057">https://www.amazon.com/UNIX-Linux-System-Administration-Handbook/dp/0131480057</a></li>
+            <li>The best way to practice this is to try deploying a web application to a Linux Server on a public hosting service. Often times learning new technology is driven by the need to do so.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Deploying Your Web Application for the Public</h3>
+          <ol>
+            <li>Address security issues:<br>Assume everything in the browser can be comporised and automated by malicious bots. Be careful on how you handle authentication and make sure to validate user input on the server side before anyt interaction with the database. If the server host charges by usage, make sure you limit public usage by using some sort of authentication.</li>
+            <li>Find a public host: <br>I recommend <a href="https://www.digitalocean.com/">DigitalOcean</a> as a good starting point. The <a href="https://education.github.com/pack">GitHub student pack</a> gives you 50 dollar credit for DigitalOcean. Some other choices are Heroku and AWS</li>
+            <li>Read the documentation provided by the public host on how to deploy, and deploy the applicaiton. It might just be a vanilla linux server so you would google "how to run java app in linux" etc.</li>
+            <li>Access your deployed public web app, probably using the server ip address plus whatever resource path/port your defined. You might have to open ports.</li>
+            <li>Optional: register a domain (website address) using <a href="https://domains.google/#/">Google Domains</a>, <a href="https://www.godaddy.com/">GoDaddy</a>, etc. Read the domain provide and public host documentation on how to set up the Host Name.</li>
+          </ol>
+        </section>
+        <section>
+          <h3>Modern Web Application Deployment/Integration</h3>
+          <ul>
+            <li><a href="https://insights.sei.cmu.edu/devops/2014/03/an-introduction-to-devops.html">Introduction to DevOps</a></li>
+            <li>Deployments architecutres are increasingly more complicated. There is a need to automate everything in the deployment process.</li>
+            <li>Example of production deployment: <a href="http://media.amazonwebservices.com/architecturecenter/AWS_ac_ra_web_01.pdf">http://media.amazonwebservices.com/architecturecenter/AWS_ac_ra_web_01.pdf</a></li>
+            <li>Continuous Deployment/Integration: deploy to server every time someone commits to master branch on Git. Make sure code never breaks.</li>
+            <li>Jenkins is a very popular CI/CD software: <a href="http://www.vogella.com/tutorials/Jenkins/article.html">http://www.vogella.com/tutorials/Jenkins/article.html</a></li>
+            <li>Learn what VMs and containers are: <a href="https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.pmqnuhiyj">https://medium.freecodecamp.com/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b#.pmqnuhiyj</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Learning About Distributed Systems</h3>
+          <ul>
+            <li>Many web applications (Google, Amazon, Uber, etc.) have global presence and requirements on reiliability and fault-tolerance. This is a very important interview topic for full-time positions</li>
+            <li>They also have many, many users and many, many servers.</li>
+            <li>How do you handle server failures? How do you handle traffic spikes (cybermonday shopping)? How do you handle latency between servers that are in different locations around the globe? How do you write code that accounts for those factors?</li>
+            <li>Distributed Systems Reading List: <a href="https://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html">https://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html</a></li>
+            <li>Distributed Systems for Young Bloods: <a href="https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/">https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/</a></li>
+            <li><a href="https://www.youtube.com/watch?v=PE4gwstWhmc">How We Scaled Dropbox</a></li>
+            <li>CS436 Distributed Computer Systems (Univeristy of Waterloo): <a href="https://cs.uwaterloo.ca/~rtholmes/teaching/2011winter/cs436/">https://cs.uwaterloo.ca/~rtholmes/teaching/2011winter/cs436/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Learning Another Server-Side Web Framework</h3>
+          <ul>
+            <li>JavaScript: <a href="https://nodejs.org/en/">Node.JS</a> is a JavaScript Web Framework (runs in server side). A more complete web framework is <a href="http://expressjs.com/">Express</a>, which allows both REST and MVC architectures.</li>
+            <li><a href="https://www.sitepoint.com/overview-JavaScript-templating-engines/">List of JavaScript Template Frameworks</a>. The primary advantage is that you can use this both server-side (like JSP) or client side.</li>
+            <li>Ruby: <a href="http://rubyonrails.org/">Ruby on Rails</a>. Ruby is a very useful language to learn since it is also a popular scripting language for server scripts. Rails is a full web framework with many 3rd party libraries</li>
+            <li>Python: <a href="https://www.djangoproject.com/">Django</a> (heavy-weight, more complete) and <a href="http://flask.pocoo.org/">Flask</a> (light-weight)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>NoSQL Databases</h3>
+          <ul>
+            <li>Developed out of need for better performance and easier scalability (horizontal scaling), usually at the expense of <a href="https://en.wikipedia.org/wiki/ACID">ACID</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/NoSQL">Wikipedia Article on NoSQL</a></li>
+            <li>Popular NoSQL Databases (you can install them locally or run on DigitalOcean): <a target="_blank" href="https://www.mongodb.com/">MongoDB</a>, <a target="_blank" href="http://cassandra.apache.org/">Cassandra</a>, <a href="https://redis.io/">Redis (In memory datastore)</a></li>
+            <li>Spring Data with MongoDB: <a href="https://spring.io/guides/gs/accessing-data-mongodb/">https://spring.io/guides/gs/accessing-data-mongodb/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Learning Front-End JavaScript Frameworks and Hybrid Applications</h3>
+          <ul>
+            <li>Very volatile, "bleeding edge" changes frequently</li>
+            <li>Utility Frameworks: <a href="https://jquery.com/">JQuery</a>, <a href="https://lodash.com/">Lodash</a></li>
+            <li>Front-End MVC/MV Frameworks: <a href="https://angularjs.org/">AngularJS</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="http://emberjs.com/">Ember</a></li>
+            <li>JavaScript Tools: too many to list (lol), see a list as of 2015 <a href="https://www.sitepoint.com/essential-tools-libraries-modern-javascript-developers/">here</a></li>
+            <li>Hybrid Apps: JavaScript apps that essentially run as a web view in a mini Chrome browser. <a href="https://ionicframework.com/">Ionic</a>, <a href="http://electron.atom.io/">Electron</a></li>
+            <li>Hybrid App Example: <a href="https://github.com/really-lazy-bone/PartyVR">PartyVR</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Broadening Your Technical Skills (Other than Web Development)</h3>
+          <ul>
+            <li><a href="https://www.google.com/about/careers/students/guide-to-technical-development.html">Google Technical Development Guide</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Internship/Full-Time Interview Preparation</h3>
+          <ul>
+            <li>Understand the type of interview the company does. Do some research online via glassdoor/quora/careercup</li>
+            <li>Don't forget to study for behavorial questions (projects you worked on / problem you faced/solved)</li>
+            <li><a target="_blank" href="https://www.quora.com/Which-of-the-big-four-Google-Microsoft-Amazon-Facebook-tech-companies-have-the-most-selective-hiring-process-for-software-engineers">"Big 4"</a> type companies technical interview: <br>
+              <ul>
+                <li>Heavy on data structures and algorithms</li>
+                <li>Pre-screening: Solve problems online or over the phone</li>
+                <li>On-site: Solve problems on the whiteboard. Internship usually one or two. Full time can be four or more in a day.</li>
+              </ul>
+            </li>
+            <li>Startups Technical Interview: <br>
+              <ul>
+                <li>Can require hands-on coding challenges in addition to data structures/algorithms</li>
+                <li>Take-home or onsite programming assignments</li>
+                <li>For example: design and implement a basic shopping website with the following requirements</li>
+                <li>They want to see that you are immediately useful when you start. Coding school graduates have the edge on this one.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Interview Study Materials</h3>
+          <ul>
+            <li>Textbooks to review: <a target="_blank" href="https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844">Introduction to Algorithms</a> and <a href="https://www.amazon.com/Algorithm-Design-Manual-Steven-Skiena/dp/1848000693/ref=pd_sbs_14_t_2?_encoding=UTF8&psc=1&refRID=RGXCR6D3XW1RYNZNGMNC">The Algorithm Design Manual</a></li>
+            <li>Interview prep books: <a href="https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=pd_sbs_14_t_0?_encoding=UTF8&psc=1&refRID=91KQV9QVC098KB16RQ5D">Cracking the Coding Interview</a> (incredibly useful)</li>
+            <li>Someone's daily plan to studying for Google internship: <a href="https://github.com/jwasham/google-interview-university">https://github.com/jwasham/google-interview-university</a></li>
+            <li>My favorite online lecture for reviewing: CS 61B from UC Berkely: <a href="https://www.youtube.com/playlist?list=PLBB2FC97598A3B254">https://www.youtube.com/playlist?list=PLBB2FC97598A3B254</a></li>
+            <li>Websites for practicing interview problem solving: <a href="https://leetcode.com/">leetcode</a>(many interviewers copy problems from here), <a href="https://www.topcoder.com/">topcoder</a></li>
+            <li>Example technical interview: <a href="https://www.youtube.com/watch?v=2cf9xo1S134&t=82s">https://www.youtube.com/watch?v=2cf9xo1S134&t=82s</a></li>
+            <li>Google technical interview prep: <a href="https://www.youtube.com/watch?v=XKu_SEDAykw">https://www.youtube.com/watch?v=XKu_SEDAykw</a></li>
+            <li><a href="http://webcache.googleusercontent.com/search?sourceid=chrome-psyapi2&ion=1&ie=UTF-8&q=cache%3Ahttps%3A%2F%2Fcareers.microsoft.com%2Fhelp%2Fstudentinterview&oq=cache%3Ahttps%3A%2F%2Fcareers.microsoft.com%2Fhelp%2Fstudentinterview&aqs=chrome..69i57j69i58.796j0j4&bav=on.2,or.r_cp.&biw=1280&bih=614&dpr=2&ech=1&psi=mO08WN_0HKqJ0wKOz76QDg.1480388008399.3&ei=mO08WN_0HKqJ0wKOz76QDg&emsg=NCSR&noj=1">Microsoft Interview Guide</a></li>
+            <li><a href="https://www.facebook.com/careers/life/preparing-for-your-software-engineering-interview-at-facebook">Facebook Interview Preparation</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+				width: 1280,
+				height: 1000,
+				margin: 0.01,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/search/search.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
