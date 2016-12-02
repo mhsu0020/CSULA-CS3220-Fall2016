@@ -34,7 +34,7 @@
 	    	
 	    	console.log(employeeObject);
 	    	
-	    	//posts to AddEmployeeResource doPost method
+	    	//posts to EmployeeController handled by AddEmployee
 	    	$.ajax({
 	    	    type: "POST",
 	    	    url: "employee",
